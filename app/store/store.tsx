@@ -12,7 +12,7 @@ import {
 } from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import reducer from './reducers';
-import {firestoreApi} from './modules/api/userData/userDataSlice';
+import {userDataApi} from './modules/api/userData/userDataSlice';
 
 const persistConfig = {
   key: 'root',
@@ -40,7 +40,7 @@ const store = configureStore({
         ],
         ignoredPaths: ['authSlice.user'],
       },
-    }).concat(firestoreApi.middleware),
+    }).concat(userDataApi.middleware),
 });
 
 const persistor = persistStore(store);
