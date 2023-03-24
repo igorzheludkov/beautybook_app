@@ -29,18 +29,18 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   headerLeftElement: {
-    width: '33,33%',
+    width: '33.33%',
     fontSize: 16,
     padding: 10,
   },
   headerTitle: {
     textAlign: 'center',
-    width: '33,33%',
+    width: '33.33%',
     fontSize: 30,
   },
   headerRightElement: {
     alignItems: 'flex-end',
-    width: '33,33%',
+    width: '33.33%',
     fontSize: 16,
   },
 });

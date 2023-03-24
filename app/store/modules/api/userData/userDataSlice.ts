@@ -2,7 +2,6 @@ import { createApi, fetchBaseQuery, FetchBaseQueryError } from '@reduxjs/toolkit
 import firestore from '@react-native-firebase/firestore'
 import { AuthState } from '../../auth/slice'
 import { IPersonalData } from './types'
-import { RootState } from '../../../store'
 
 interface IQuery {
   data?: IPersonalData
@@ -62,5 +61,7 @@ export const userDataApi = createApi({
     })
   })
 })
+
+export default userDataApi
 
 export const { useProfileDataQuery, useUpdateProfileDataMutation } = userDataApi

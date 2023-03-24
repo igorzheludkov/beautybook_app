@@ -9,8 +9,11 @@ import {
   useProfileDataQuery,
   useUpdateProfileDataMutation
 } from '../../../store/modules/api/userData/userDataSlice'
+import { useAppDispatch } from '../../../store/hooks'
+import userDataApi from '../../../store/modules/api/userData/userDataSlice'
 
 export default function ProfileForm() {
+  const dispatch = useAppDispatch()
   const { data, error, isLoading } = useProfileDataQuery({})
 
   const [updateProfileData, { isLoading: isLoadingUpdate, error: updateError, isSuccess }] =
