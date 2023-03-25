@@ -1,7 +1,8 @@
 import authSlice from './modules/auth/slice'
-import { userDataApi } from './modules/api/userData/userDataSlice'
+import { apiSlice } from './modules/api/apiSlice'
+
 
 export default {
   authSlice,
-  [userDataApi.reducerPath]: userDataApi.reducer
+  [apiSlice.reducerPath]: apiSlice.reducer,
 }
