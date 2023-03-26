@@ -23,8 +23,6 @@ export const userDataApi = apiSlice.injectEndpoints({
         const data = await firestore()
           .collection(collectionName)
           .doc(authSlice.user?.uid)
-          .collection(currentUserSubcategory)
-          .doc(profileCategory)
           .get()
 
         if (data.exists) {
@@ -45,9 +43,7 @@ export const userDataApi = apiSlice.injectEndpoints({
             await firestore()
               .collection(collectionName)
               .doc(authSlice.user?.uid)
-              .collection(currentUserSubcategory)
-              .doc(profileCategory)
-              .update(data)
+              .set(data)
 
             return { data: 'profile updated' }
           } catch (error: any) {

@@ -17,7 +17,7 @@ import apiSlice from './modules/api/apiSlice'
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  // blacklist: [apiSlice.reducerPath]
+  blacklist: [apiSlice.reducerPath]
   // whitelist: ['apiSlice.authSlice', 'apiSlice.userDataApi']
 }
 

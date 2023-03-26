@@ -24,7 +24,6 @@ import CheckboxesGroup from '../../../components/blocks/CheckboxesGroup'
 export default function ProfileForm() {
   const dispatch = useAppDispatch()
   const [snackToggle, setSnackToggle] = useState(false)
-  // dispatch(userDataApi.util.resetApiState())
 
   const { data, error, isLoading, refetch: fetchProfile } = useProfileDataQuery({})
   const { data: avaPic, error: avaError, isLoading: avaLoading } = useGetAvatarQuery({})
@@ -38,7 +37,6 @@ export default function ProfileForm() {
   const [images, handlePickImageFromCamera, handlePickImagesFromGallery] = useImagePicker()
 
   const [categoriesCheck, setCategoriesCheck] = useState({})
-  const [subCategoriesCheck_1, setSubCategoriesCheck_1] = useState({})
 
   const {
     control,
@@ -72,7 +70,7 @@ export default function ProfileForm() {
   if (isLoading) return <ActivityIndicator />
 
   return (
-    // <ScrollView>
+    <ScrollView>
       <View style={styles.container}>
         <AdminHeader
           title='Profile'
@@ -144,6 +142,6 @@ export default function ProfileForm() {
           Successefully saved
         </Snackbar>
       </View>
-    // </ScrollView>
+    </ScrollView>
   )
 }

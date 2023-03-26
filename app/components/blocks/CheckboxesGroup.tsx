@@ -20,13 +20,14 @@ interface Category {
   subcategories: Category[]
 }
 
-const CheckboxesGroup = ({ data, onCheckedChange, checkedItems }: IProps) => {
+const CheckboxesGroup = ({ data, onCheckedChange, checkedItems = ['hair'] }: IProps) => {
   const [checkedIds, setCheckedIds] = useState<string[]>([])
-
+  
   useEffect(() => {
-    setCheckedIds(checkedItems)
+    checkedItems.length && setCheckedIds(checkedItems)
   }, [checkedItems])
-
+  
+  console.log('2 ~~~~~~~~~~~~~~ checkedIds', checkedIds)
   const handleCheckedChange = (id: string) => {
     const newCheckedIds = [...checkedIds]
     const index = newCheckedIds.indexOf(id)
@@ -36,6 +37,7 @@ const CheckboxesGroup = ({ data, onCheckedChange, checkedItems }: IProps) => {
       newCheckedIds.splice(index, 1)
     }
     setCheckedIds(newCheckedIds)
+    console.log('3 ~~~~~~~~~~~~~~ newCheckedIds', newCheckedIds)
     onCheckedChange({ skills: newCheckedIds })
   }
   return (

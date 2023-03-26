@@ -1,5 +1,6 @@
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import auth from '@react-native-firebase/auth';
+import userDataApi from '../api/userData/userDataSlice';
 
 interface IUserCredential {
   email: string;
@@ -37,9 +38,10 @@ export const login = createAsyncThunk(
   },
 );
 
-export const logout = createAsyncThunk('auth/logout', async () => {
+export const logout = createAsyncThunk('auth/logout', async (_,{dispatch}) => {
   try {
     await auth().signOut();
+    dispatch(userDataApi.util.resetApiState())
   } catch (error) {
     throw error;
   }
