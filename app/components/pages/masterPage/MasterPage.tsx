@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
-import Bio from './components/Bio'
+import Bio from './blocks/Bio'
 import { IProfileForm } from '../../../models/IProfileForm'
 
 interface IProps {

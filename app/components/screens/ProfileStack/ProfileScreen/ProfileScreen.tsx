@@ -1,26 +1,30 @@
 import React, { useEffect, useState, useMemo } from 'react'
-import { View, Text, Button, ActivityIndicator, Image, ScrollView } from 'react-native'
+import { View, Text, Button, ActivityIndicator, Image, ScrollView, SafeAreaView } from 'react-native'
 import { useForm, Controller } from 'react-hook-form'
 import { Snackbar, Avatar } from 'react-native-paper'
-import { logout } from '../../../store/modules/auth/thunks'
+import { logout } from '../../../../store/modules/auth/thunks'
 
 import styles from './styles'
-import { IProfileForm } from '../../../models/IProfileForm'
-import InputCustom from '../../atoms/TextInputCustom'
+import { IProfileForm } from '../../../../models/IProfileForm'
+import InputCustom from '../../../atoms/TextInputCustom'
 import {
   useProfileDataQuery,
   useUpdateProfileDataMutation,
   useUpdateAvatarMutation
-} from '../../../store/modules/api/userData/userDataSlice'
+} from '../../../../store/modules/api/userData/userDataSlice'
 
-import { useGetServiceCategoriesQuery } from '../../../store/modules/api/servicesCategories/servicesCategoriesSlice'
+import { useGetServiceCategoriesQuery } from '../../../../store/modules/api/servicesCategories/servicesCategoriesSlice'
 
-import useImagePicker from '../../../hooks/useImagesPicker'
-import AdminHeader from '../../atoms/AdminHeader'
-import { useAppDispatch } from '../../../store/hooks'
-import CheckboxesGroup from '../../blocks/CheckboxesGroup'
+import useImagePicker from '../../../../hooks/useImagesPicker'
+import AdminHeader from '../../../atoms/AdminHeader'
+import { useAppDispatch } from '../../../../store/hooks'
+import CheckboxesGroup from '../../../blocks/CheckboxesGroup'
+import { ProfileStackTypes } from '../../../../models/INavigationStack'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
 
-export default function ProfileForm() {
+type Props = NativeStackScreenProps<ProfileStackTypes, 'ProfileScreen'>
+
+export default function ProfileScreen({ navigation }: Props) {
   const dispatch = useAppDispatch()
   const [snackToggle, setSnackToggle] = useState(false)
 
@@ -68,14 +72,15 @@ export default function ProfileForm() {
   if (isLoading) return <ActivityIndicator />
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.wrapper}>
+      <SafeAreaView />
       <View style={styles.container}>
         <AdminHeader
           title='Profile'
           rightTitle={isLoadingUpdate ? 'Saving ...' : 'Save'}
           onPressRight={handleSubmit(onSubmit)}
-          leftTitle='Logout'
-          onPressLeft={() => dispatch(logout())}
+          leftTitle='Go back'
+          onPressLeft={() => navigation.goBack()}
         />
         <Avatar.Image size={150} source={{ uri: data?.avatar }} />
         <Button title='Select avatar' onPress={() => handlePickImagesFromGallery(1)} />

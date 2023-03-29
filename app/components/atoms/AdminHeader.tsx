@@ -44,13 +44,13 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   headerLeftElement: {
-    width: '33.33%',
+    width: '27.33%',
     alignItems: 'flex-start'
   },
   headerTitle: {
     textAlign: 'center',
-    width: '33.33%',
-    fontSize: 30
+    width: '43.33%',
+    fontSize: 24
   },
   leftTitle: {
     fontSize: 18,
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   },
   headerRightElement: {
     alignItems: 'flex-end',
-    width: '33.33%'
+    width: '27.33%'
   }
 })
 

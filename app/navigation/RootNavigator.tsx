@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import ProfileStack from './ProfileStack'
 import CatalogStack from './CatalogStack'
 import { MainBottomTabs } from '../models/INavigationStack'
-import FavoritesScreen from '../components/screens/FavoritesScreen/FavoritesScreen'
+import FavoritesScreen from '../components/screens/FavoritesStack/FavoritesScreen'
 
 const Tab = createBottomTabNavigator<MainBottomTabs>()
 

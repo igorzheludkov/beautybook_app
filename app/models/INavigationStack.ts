@@ -11,3 +11,9 @@ export interface CatalogStackTypes extends ParamListBase {
   CategoryScreen: string[];
   MasterScreen: {id: string};
 }
+export interface ProfileStackTypes extends ParamListBase {
+  AdminPanelScreen: undefined;
+  AuthScreen: undefined;
+  PhotoGalleryScreen: undefined;
+  ProfileScreen: undefined;
+}
