@@ -5,21 +5,20 @@ import colors from '../../config/colors'
 import { IProfileForm } from '../../models/IProfileForm'
 
 interface IProps {
-  onPress: () => void
+  onPress: (arg0: string) => void
   data: IProfileForm[]
 }
 
 const FilteredUsersBlock = ({ data, onPress }: IProps) => {
   return (
     <View style={styles.wrapper}>
-      {data?.map(({ name, phone, city, street, avatar }: IProfileForm) => (
+      {data?.map(({ name, phone, city, street, avatar, id }: IProfileForm) => (
         <View key={phone} style={styles.cardContainer}>
           <Avatar.Image size={100} source={{ uri: avatar }} />
           <View style={styles.cardContent}>
-            <Pressable onPress={() => onPress()}>
+            <Pressable onPress={() => onPress(id)}>
               <Text style={styles.title}>{name}</Text>
             </Pressable>
-            <Text>{phone}</Text>
             <Text>{city}</Text>
             <Text>{street}</Text>
           </View>

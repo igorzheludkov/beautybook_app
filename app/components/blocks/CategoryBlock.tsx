@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Text, Pressable } from 'react-native'
-import Checkbox from '../elements/Checkbox'
+import Checkbox from '../atoms/Checkbox'
 import { IServicesCategories } from '../../models/IServicesCategories'
 import { Avatar, Button } from 'react-native-paper'
 import colors from '../../config/colors'
@@ -25,7 +25,6 @@ const CategoryBlock = ({ data, onPress }: IProps) => {
                 <Button
                   style={styles.subCatBtn}
                   labelStyle={styles.subCatBtnLabel}
-                  compact
                   key={subCat.id}
                   onPress={() => onPress([id, subCat.id])}
                   mode='outlined'
@@ -47,8 +46,8 @@ const styles = StyleSheet.create({
   cardContent: { marginLeft: 10, flex: 1 },
   title: { fontSize: 20, paddingBottom: 10 },
   subCat: { flexDirection: 'row', flexWrap: 'wrap' },
-  subCatBtn: { marginRight: 4, marginVertical: 3, borderColor: '#ECEDC0', borderWidth: 2 },
-  subCatBtnLabel: { paddingVertical: 0, marginVertical: 0, color: colors.palette.black }
+  subCatBtn: { marginRight: 4, marginVertical: 3, borderColor: colors.palette.yellow, borderWidth: 2 },
+  subCatBtnLabel: { paddingVertical: 2, marginVertical: 0, color: colors.palette.black }
 })
 
 export default CategoryBlock

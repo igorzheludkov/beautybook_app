@@ -1,8 +1,8 @@
 import React from 'react'
-import StartScreen from '../screens/CatalogStack/StartScreen'
+import StartScreen from '../components/screens/CatalogStack/StartScreen'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import CategoryScreen from '../screens/CatalogStack/CategoryScreen'
-import MasterScreen from '../screens/CatalogStack/MasterScreen'
+import CategoryScreen from '../components/screens/CatalogStack/CategoryScreen'
+import MasterScreen from '../components/screens/CatalogStack/MasterScreen'
 
 import { CatalogStackTypes } from '../models/INavigationStack'
 

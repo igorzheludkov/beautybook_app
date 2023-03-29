@@ -1,10 +1,9 @@
 import React from 'react'
 import { View, Text, StyleSheet, Button } from 'react-native'
-import colors from '../../config/colors'
-import ProfileForm from '../../features/adminPage/ProfilePage/ProfileForm'
+import colors from '../../../config/colors'
+import ProfileForm from '../../pages/profilePage/ProfileForm'
 
 export default function ProfileScreen() {
-
   return (
     <View style={style.wrapper}>
       <ProfileForm />

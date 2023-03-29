@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
-import Checkbox from '../elements/Checkbox'
+import Checkbox from '../atoms/Checkbox'
 
 interface IProps {
   data: any
@@ -22,12 +22,11 @@ interface Category {
 
 const CheckboxesGroup = ({ data, onCheckedChange, checkedItems = ['hair'] }: IProps) => {
   const [checkedIds, setCheckedIds] = useState<string[]>([])
-  
+
   useEffect(() => {
     checkedItems.length && setCheckedIds(checkedItems)
   }, [checkedItems])
-  
-  console.log('2 ~~~~~~~~~~~~~~ checkedIds', checkedIds)
+
   const handleCheckedChange = (id: string) => {
     const newCheckedIds = [...checkedIds]
     const index = newCheckedIds.indexOf(id)
@@ -37,7 +36,6 @@ const CheckboxesGroup = ({ data, onCheckedChange, checkedItems = ['hair'] }: IPr
       newCheckedIds.splice(index, 1)
     }
     setCheckedIds(newCheckedIds)
-    console.log('3 ~~~~~~~~~~~~~~ newCheckedIds', newCheckedIds)
     onCheckedChange({ skills: newCheckedIds })
   }
   return (

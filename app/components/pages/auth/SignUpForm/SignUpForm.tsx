@@ -1,35 +1,35 @@
 import React from 'react'
 import { View, Text, Button, ActivityIndicator } from 'react-native'
 import { useForm, Controller } from 'react-hook-form'
-import { useAppDispatch } from '../../../store/hooks'
-import { actions as authActions } from '../../../store/modules/auth/slice'
-import { login } from '../../../store/modules/auth/thunks'
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks'
+import { actions as authActions } from '../../../../store/modules/auth/slice'
+import { signUp } from '../../../../store/modules/auth/thunks'
 
 import styles from './styles'
-import { ILoginForm } from './types'
-import InputCustom from '../../../components/elements/TextInputCustom'
-import AdminHeader from '../../../components/elements/AdminHeader'
-import { useAppSelector } from '../../../store/hooks'
+import { ISignUpForm } from './types'
+import InputCustom from '../../../atoms/TextInputCustom'
+import AdminHeader from '../../../atoms/AdminHeader'
 
-export default function LoginForm() {
+export default function SignUpForm() {
   const dispatch = useAppDispatch()
   const isLoading = useAppSelector((state) => state.authSlice.isLoggingIn)
+
   const {
     control,
     handleSubmit,
     formState: { errors }
-  } = useForm<ILoginForm>()
+  } = useForm<ISignUpForm>()
 
-  const onSubmit = (data: ILoginForm) => {
+  const onSubmit = (data: ISignUpForm) => {
     console.log(data)
-    dispatch(login(data))
+    dispatch(signUp(data))
   }
   return (
     <View style={styles.container}>
       <AdminHeader
-        title='Login'
-        rightTitle='Sign up'
-        onPressRight={() => dispatch(authActions.isNewUser(true))}
+        title='Sing up'
+        rightTitle='Login'
+        onPressRight={() => dispatch(authActions.isNewUser(false))}
         leftTitle='X'
         onPressLeft={() => {}}
       />
@@ -37,25 +37,24 @@ export default function LoginForm() {
         control={control}
         name='email'
         rules={{ required: true }}
-        defaultValue='500griven@gmail.com'
+        defaultValue=''
         render={({ field: { onChange, value } }) => (
           <InputCustom onChangeText={onChange} value={value} placeholder='Email' />
         )}
       />
       {errors.email && <Text>This field is required.</Text>}
-
       <Controller
         control={control}
         name='password'
         rules={{ required: true }}
-        defaultValue='energystar'
+        defaultValue=''
         render={({ field: { onChange, value } }) => (
           <InputCustom onChangeText={onChange} value={value} placeholder='Password' secureTextEntry={true} />
         )}
       />
       {errors.password && <Text>This field is required.</Text>}
       <View style={styles.buttonContainer}>
-        {isLoading ? <ActivityIndicator /> : <Button title='Login' onPress={handleSubmit(onSubmit)} />}
+        {isLoading ? <ActivityIndicator /> : <Button title='Sign up' onPress={handleSubmit(onSubmit)} />}
       </View>
     </View>
   )

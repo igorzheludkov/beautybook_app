@@ -6,27 +6,25 @@ import { logout } from '../../../store/modules/auth/thunks'
 
 import styles from './styles'
 import { IProfileForm } from '../../../models/IProfileForm'
-import InputCustom from '../../../components/elements/TextInputCustom'
+import InputCustom from '../../atoms/TextInputCustom'
 import {
   useProfileDataQuery,
   useUpdateProfileDataMutation,
-  useUpdateAvatarMutation,
-  useGetAvatarQuery
+  useUpdateAvatarMutation
 } from '../../../store/modules/api/userData/userDataSlice'
 
 import { useGetServiceCategoriesQuery } from '../../../store/modules/api/servicesCategories/servicesCategoriesSlice'
 
 import useImagePicker from '../../../hooks/useImagesPicker'
-import AdminHeader from '../../../components/elements/AdminHeader'
+import AdminHeader from '../../atoms/AdminHeader'
 import { useAppDispatch } from '../../../store/hooks'
-import CheckboxesGroup from '../../../components/blocks/CheckboxesGroup'
+import CheckboxesGroup from '../../blocks/CheckboxesGroup'
 
 export default function ProfileForm() {
   const dispatch = useAppDispatch()
   const [snackToggle, setSnackToggle] = useState(false)
 
   const { data, error, isLoading, refetch: fetchProfile } = useProfileDataQuery({})
-  const { data: avaPic, error: avaError, isLoading: avaLoading } = useGetAvatarQuery({})
   const { data: categoryData } = useGetServiceCategoriesQuery({})
 
   const [updateProfileData, { isLoading: isLoadingUpdate, error: updateError, isSuccess: isProfileUpdated }] =
@@ -36,7 +34,7 @@ export default function ProfileForm() {
 
   const [images, handlePickImageFromCamera, handlePickImagesFromGallery] = useImagePicker()
 
-  const [categoriesCheck, setCategoriesCheck] = useState({})
+  const [categoriesCheck, setCategoriesCheck] = useState<{ skills: string[] }>()
 
   const {
     control,
@@ -46,7 +44,7 @@ export default function ProfileForm() {
 
   function onSubmit(form: IProfileForm) {
     console.log('form ', form)
-    updateProfileData({ data: { ...form, ...categoriesCheck } })
+    updateProfileData({ data: { ...form, skills: categoriesCheck?.skills || data?.skills || [] } })
   }
 
   useEffect(() => {
@@ -79,7 +77,7 @@ export default function ProfileForm() {
           leftTitle='Logout'
           onPressLeft={() => dispatch(logout())}
         />
-        <Avatar.Image size={150} source={{ uri: avaPic }} />
+        <Avatar.Image size={150} source={{ uri: data?.avatar }} />
         <Button title='Select avatar' onPress={() => handlePickImagesFromGallery(1)} />
         <Controller
           control={control}
@@ -121,6 +119,16 @@ export default function ProfileForm() {
           )}
         />
         {errors.street && <Text>This field is required.</Text>}
+        <Controller
+          control={control}
+          name='aboutMe'
+          rules={{ required: false }}
+          defaultValue={data?.aboutMe || ''}
+          render={({ field: { onChange, value } }) => (
+            <InputCustom onChangeText={onChange} value={value} placeholder='Кілька слів про себе' />
+          )}
+        />
+        {errors.aboutMe && <Text>This field is required.</Text>}
         <Text style={styles.skillsTitle}>Виділіть ваші спеціальності</Text>
         <ScrollView horizontal>
           <CheckboxesGroup

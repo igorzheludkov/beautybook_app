@@ -5,4 +5,6 @@ export interface IProfileForm {
   street: string
   skills: string[]
   avatar?: string
+  aboutMe: string
+  id: string
 }

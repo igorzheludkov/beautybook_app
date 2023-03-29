@@ -26,7 +26,10 @@ const useImagePicker = (): ImagePickerHookReturnType => {
     launchImageLibrary(
       {
         mediaType: 'photo',
-        selectionLimit: selectionLimit ?? 0 // set to 0 for no limit
+        selectionLimit: selectionLimit ?? 0, // set to 0 for no limit
+        maxWidth: 500,
+        maxHeight: 500,
+
       },
       (response) => {
         if (response.didCancel) {
