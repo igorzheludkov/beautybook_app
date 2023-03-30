@@ -15,6 +15,13 @@ type Props = NativeStackScreenProps<ProfileStackTypes, 'AdminPaneScreen'>
 export default function AdminPanelScreen({ navigation }: Props) {
   const dispatch = useAppDispatch()
   const { data, error, isLoading, refetch: fetchProfile } = useProfileDataQuery({})
+  
+  if (isLoading)
+    return (
+      <View style={{ justifyContent: 'center' }}>
+        <ActivityIndicator />
+      </View>
+    )
 
   if (!data) {
     navigation.navigate('ProfileScreen')
@@ -35,12 +42,7 @@ export default function AdminPanelScreen({ navigation }: Props) {
     )
   }
 
-  if (isLoading)
-    return (
-      <View style={{ justifyContent: 'center' }}>
-        <ActivityIndicator />
-      </View>
-    )
+
 
   return (
     <View style={styles.wrapper}>

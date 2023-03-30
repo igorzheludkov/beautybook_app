@@ -4,11 +4,14 @@ import { ImagePickerResponse, launchCamera, launchImageLibrary } from 'react-nat
 type ImagePickerHookReturnType = [
   ImagePickerResponse['assets'],
   () => void, // handlePickImageFromCamera
-  (selectionLimit?: number) => void // handlePickImagesFromGallery
+  (selectionLimit?: number) => void, // handlePickImagesFromGallery
+  () => void, // resetState
 ]
 
 const useImagePicker = (): ImagePickerHookReturnType => {
   const [images, setImages] = useState<ImagePickerResponse['assets']>([])
+
+  const resetState = () => setImages([])
 
   const handlePickImageFromCamera = () => {
     launchCamera({ mediaType: 'photo' }, (response) => {
@@ -28,8 +31,7 @@ const useImagePicker = (): ImagePickerHookReturnType => {
         mediaType: 'photo',
         selectionLimit: selectionLimit ?? 0, // set to 0 for no limit
         maxWidth: 500,
-        maxHeight: 500,
-
+        maxHeight: 500
       },
       (response) => {
         if (response.didCancel) {
@@ -43,7 +45,7 @@ const useImagePicker = (): ImagePickerHookReturnType => {
     )
   }
 
-  return [images, handlePickImageFromCamera, handlePickImagesFromGallery]
+  return [images, handlePickImageFromCamera, handlePickImagesFromGallery, resetState]
 }
 
 export default useImagePicker

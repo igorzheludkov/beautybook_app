@@ -6,7 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { ProfileStackTypes } from '../models/INavigationStack'
 import ProfileScreen from '../components/screens/ProfileStack/ProfileScreen/ProfileScreen'
 import AdminPanelScreen from '../components/screens/ProfileStack/AdminPanelScreen/AdminPanelScreen'
-import PhotoGalleryScreen from '../components/screens/ProfileStack/PhotoGalleryScreen'
+import PhotoGalleryScreen from '../components/screens/ProfileStack/PhotoGalleryScreen/PhotoGalleryScreen'
 
 const Stack = createNativeStackNavigator<ProfileStackTypes>()
 
