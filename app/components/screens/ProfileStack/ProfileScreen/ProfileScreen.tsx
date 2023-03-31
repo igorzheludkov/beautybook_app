@@ -1,8 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import { View, Text, Button, ActivityIndicator, Image, ScrollView, SafeAreaView } from 'react-native'
 import { useForm, Controller } from 'react-hook-form'
-import { Snackbar, Avatar } from 'react-native-paper'
-import { logout } from '../../../../store/modules/auth/thunks'
+import { Snackbar, Avatar, FAB } from 'react-native-paper'
 
 import styles from './styles'
 import { IProfileForm } from '../../../../models/IProfileForm'
@@ -72,89 +71,85 @@ export default function ProfileScreen({ navigation }: Props) {
   if (isLoading) return <ActivityIndicator />
 
   return (
-    <ScrollView style={styles.wrapper}>
-      <SafeAreaView />
-      <View style={styles.container}>
-        <AdminHeader
-          title='Profile'
-          rightTitle={isLoadingUpdate ? 'Saving ...' : 'Save'}
-          onPressRight={handleSubmit(onSubmit)}
-          leftTitle='Go back'
-          onPressLeft={() => navigation.goBack()}
-        />
-        <Avatar.Image size={150} source={{ uri: data?.avatar }} />
-        <Button title='Select avatar' onPress={() => handlePickImagesFromGallery(1)} />
-        <Controller
-          control={control}
-          name='name'
-          rules={{ required: false }}
-          defaultValue={data?.name || ''}
-          render={({ field: { onChange, value } }) => (
-            <InputCustom onChangeText={onChange} value={value} placeholder='Your name' />
-          )}
-        />
-        {errors.name && <Text>This field is required.</Text>}
-        <Controller
-          control={control}
-          name='phone'
-          rules={{ required: false }}
-          defaultValue={data?.phone || ''}
-          render={({ field: { onChange, value } }) => (
-            <InputCustom onChangeText={onChange} value={value} placeholder='+380' />
-          )}
-        />
-        {errors.phone && <Text>This field is required.</Text>}
-        <Controller
-          control={control}
-          name='city'
-          rules={{ required: false }}
-          defaultValue={data?.city || ''}
-          render={({ field: { onChange, value } }) => (
-            <InputCustom onChangeText={onChange} value={value} placeholder='City' />
-          )}
-        />
-        {errors.city && <Text>This field is required.</Text>}
-        <Controller
-          control={control}
-          name='street'
-          rules={{ required: false }}
-          defaultValue={data?.street || ''}
-          render={({ field: { onChange, value } }) => (
-            <InputCustom onChangeText={onChange} value={value} placeholder='Street' />
-          )}
-        />
-        {errors.street && <Text>This field is required.</Text>}
-        <Controller
-          control={control}
-          name='aboutMe'
-          rules={{ required: false }}
-          defaultValue={data?.aboutMe || ''}
-          render={({ field: { onChange, value } }) => (
-            <InputCustom onChangeText={onChange} value={value} placeholder='Кілька слів про себе' />
-          )}
-        />
-        {errors.aboutMe && <Text>This field is required.</Text>}
-        <Text style={styles.skillsTitle}>Виділіть ваші спеціальності</Text>
-        <ScrollView horizontal>
-          <CheckboxesGroup
-            data={categoryData}
-            onCheckedChange={setCategoriesCheck}
-            checkedItems={data?.skills || []}
+    <>
+      <ScrollView style={styles.wrapper}>
+        <SafeAreaView />
+        <View style={styles.container}>
+          <Avatar.Image size={150} source={{ uri: data?.avatar }} />
+          <Button title='Select avatar' onPress={() => handlePickImagesFromGallery(1)} />
+          <Controller
+            control={control}
+            name='name'
+            rules={{ required: false }}
+            defaultValue={data?.name || ''}
+            render={({ field: { onChange, value } }) => (
+              <InputCustom onChangeText={onChange} value={value} placeholder='Your name' />
+            )}
           />
-        </ScrollView>
-        <Snackbar
-          visible={snackToggle}
-          onDismiss={() => {}}
-          action={{
-            label: '',
-            onPress: () => {
-              // Do something
-            }
-          }}
-        >
-          Successefully saved
-        </Snackbar>
-      </View>
-    </ScrollView>
+          {errors.name && <Text>This field is required.</Text>}
+          <Controller
+            control={control}
+            name='phone'
+            rules={{ required: false }}
+            defaultValue={data?.phone || ''}
+            render={({ field: { onChange, value } }) => (
+              <InputCustom onChangeText={onChange} value={value} placeholder='+380' />
+            )}
+          />
+          {errors.phone && <Text>This field is required.</Text>}
+          <Controller
+            control={control}
+            name='city'
+            rules={{ required: false }}
+            defaultValue={data?.city || ''}
+            render={({ field: { onChange, value } }) => (
+              <InputCustom onChangeText={onChange} value={value} placeholder='City' />
+            )}
+          />
+          {errors.city && <Text>This field is required.</Text>}
+          <Controller
+            control={control}
+            name='street'
+            rules={{ required: false }}
+            defaultValue={data?.street || ''}
+            render={({ field: { onChange, value } }) => (
+              <InputCustom onChangeText={onChange} value={value} placeholder='Street' />
+            )}
+          />
+          {errors.street && <Text>This field is required.</Text>}
+          <Controller
+            control={control}
+            name='aboutMe'
+            rules={{ required: false }}
+            defaultValue={data?.aboutMe || ''}
+            render={({ field: { onChange, value } }) => (
+              <InputCustom onChangeText={onChange} value={value} placeholder='Кілька слів про себе' />
+            )}
+          />
+          {errors.aboutMe && <Text>This field is required.</Text>}
+          <Text style={styles.skillsTitle}>Виділіть ваші спеціальності</Text>
+          <ScrollView horizontal>
+            <CheckboxesGroup
+              data={categoryData}
+              onCheckedChange={setCategoriesCheck}
+              checkedItems={data?.skills || []}
+            />
+          </ScrollView>
+          <Snackbar
+            visible={snackToggle}
+            onDismiss={() => {}}
+            action={{
+              label: '',
+              onPress: () => {
+                // Do something
+              }
+            }}
+          >
+            Successefully saved
+          </Snackbar>
+        </View>
+      </ScrollView>
+      <FAB icon='content-save-outline' style={styles.fab} onPress={handleSubmit(onSubmit)} />
+    </>
   )
 }

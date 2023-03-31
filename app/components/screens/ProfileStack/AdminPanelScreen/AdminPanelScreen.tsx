@@ -1,18 +1,13 @@
 import React from 'react'
 import { View, ActivityIndicator, SafeAreaView, Pressable, StyleSheet } from 'react-native'
 import { useProfileDataQuery } from '../../../../store/modules/api/userData/userDataSlice'
-import { logout } from '../../../../store/modules/auth/thunks'
 import { useAppDispatch } from '../../../../store/hooks'
-import AdminHeader from '../../../atoms/AdminHeader'
 import NewUserBlock from './blocks/NewUserBlock'
 import AdminPanelPage from '../../../pages/adminPage/AdminPanelPage'
 import colors from '../../../../config/colors'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { ProfileStackTypes } from '../../../../models/INavigationStack'
 
-type Props = NativeStackScreenProps<ProfileStackTypes, 'AdminPaneScreen'>
 
-export default function AdminPanelScreen({ navigation }: Props) {
+export default function AdminPanelScreen({ navigation }: any) {
   const dispatch = useAppDispatch()
   const { data, error, isLoading, refetch: fetchProfile } = useProfileDataQuery({})
   
@@ -27,14 +22,6 @@ export default function AdminPanelScreen({ navigation }: Props) {
     navigation.navigate('ProfileScreen')
     return (
       <View style={styles.wrapper}>
-        <SafeAreaView />
-        <AdminHeader
-          title='Admin panel'
-          rightTitle='Edit profile'
-          onPressRight={() => navigation.navigate('ProfileScreen')}
-          leftTitle='Logout'
-          onPressLeft={() => dispatch(logout())}
-        />
         <Pressable onPress={() => navigation.navigate('ProfileScreen')}>
           <NewUserBlock />
         </Pressable>

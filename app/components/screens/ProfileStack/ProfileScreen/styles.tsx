@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     height: '100%',
     alignItems: 'center',
     width: '100%',
+    paddingBottom: 100,
   },
   buttonContainer: {
     height: 50,
@@ -19,7 +20,13 @@ const styles = StyleSheet.create({
   skillsTitle: {
     padding: 10,
     fontSize: 18
-  }
+  },
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
+  },
 })
 
 export default styles

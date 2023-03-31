@@ -20,7 +20,7 @@ export const photoGalleryApi = apiSlice.injectEndpoints({
       queryFn: async ({ userId, page }) => {
         const getPhotos = await getPhotoGallery(userId || '', page, folder, subFolder)
 
-        if (getPhotos?.length) {
+        if (getPhotos && getPhotos?.length >= 0) {
           return { data: getPhotos }
         } else {
           return { error: { data: 'photos loading failed', status: 400 } }

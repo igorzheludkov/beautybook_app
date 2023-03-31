@@ -1,13 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { View, StyleSheet } from 'react-native'
-import colors from '../../../../config/colors'
-import AdminHeader from '../../../atoms/AdminHeader'
-import { ProfileStackTypes } from '../../../../models/INavigationStack'
-import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { logout } from '../../../../store/modules/auth/thunks'
 import { useAppDispatch } from '../../../../store/hooks'
-import { IProfileForm } from '../../../../models/IProfileForm'
-import { ActivityIndicator, Button } from 'react-native-paper'
+import { ActivityIndicator, Button, FAB } from 'react-native-paper'
 import useImagePicker from '../../../../hooks/useImagesPicker'
 import {
   useGetPhotosQuery,
@@ -38,8 +32,8 @@ export default function PhotoGalleryScreen() {
 
   return (
     <View style={styles.wrapper}>
-      <Button onPress={() => handlePickImagesFromGallery(1)}>Додати фото</Button>
       <PhotoGallery data={photos || []} onRemove={(id) => removePhoto({ photoId: id })} />
+      <FAB icon='plus' style={styles.fab} onPress={() => handlePickImagesFromGallery(1)} />
     </View>
   )
 }
@@ -47,5 +41,11 @@ export default function PhotoGalleryScreen() {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1
-  }
+  },
+  fab: {
+    position: 'absolute',
+    margin: 16,
+    right: 0,
+    bottom: 0,
+  },
 })
