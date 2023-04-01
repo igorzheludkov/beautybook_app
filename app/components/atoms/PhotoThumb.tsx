@@ -22,7 +22,7 @@ export default function PhotoThumb({ url, id, onRemove }: Props) {
 
 const styles = StyleSheet.create({
   wrapper: { flexDirection: 'row', alignItems: 'center', margin: 4, position: 'relative' },
-  image: { width: 180, height: 180, borderRadius: 5 },
+  image: { width: 165, height: 165, borderRadius: 5 },
   removeIcon: {
     position: 'absolute',
     right: 5,

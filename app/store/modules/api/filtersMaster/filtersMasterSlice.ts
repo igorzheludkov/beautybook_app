@@ -12,11 +12,19 @@ export const filtersMasterApi = apiSlice.injectEndpoints({
     getFilteredMasters: builder.query({
       queryFn: async (arg) => {
         const searchResults: IProfileForm[] = []
-        await firestore()
-          .collection(collectionName)
-          .where('skills', 'array-contains-any', arg)
-          .get()
-          .then((data) => data.docs.forEach((item) => searchResults.push(item.data() as IProfileForm)))
+        if (arg.length) {
+          await firestore()
+            .collection(collectionName)
+            .where('skills', 'array-contains-any', arg)
+            .get()
+            .then((data) => data.docs.forEach((item) => searchResults.push(item.data() as IProfileForm)))
+        } else {
+          await firestore()
+            .collection(collectionName)
+            // .where('skills', 'array-contains-any', arg)
+            .get()
+            .then((data) => data.docs.forEach((item) => searchResults.push(item.data() as IProfileForm)))
+        }
 
         if (searchResults.length) {
           return { data: searchResults }

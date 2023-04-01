@@ -15,7 +15,6 @@ export default function PhotoGallery({ data, onRemove }: Props) {
           {data.map((element) => {
             return <PhotoThumb key={element.id} url={element.url} onRemove={onRemove} id={element.id} />
           })}
-          {data.length % 2 !== 0 && <View style={{ flex: 1, padding: 2 }} />}
         </View>
       </View>
     </ScrollView>
@@ -23,12 +22,13 @@ export default function PhotoGallery({ data, onRemove }: Props) {
 }
 
 const styles = StyleSheet.create({
-  wrapper: { flex: 1 },
+  wrapper: { flex: 1, alignItems: 'center' },
   container: {
+    width: '96.5%',
     flexDirection: 'row',
-    alignItems: 'center',
-    padding: 7,
-    justifyContent: 'center',
+    // alignItems: 'flex-start',
+    // padding: 5,
+    justifyContent: 'flex-start',
     flexWrap: 'wrap'
   }
 })

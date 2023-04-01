@@ -30,19 +30,24 @@ export default function ProfileStack({ navigation }: any) {
             component={AdminPanelScreen}
             options={{
               headerShown: true,
-              headerLeft: () => <Button onPress={() => dispatch(logout)}>Вийти</Button>,
+              headerLeft: () => <Button onPress={() => dispatch(logout())}>Вийти</Button>,
               headerRight: () => (
                 <Button onPress={() => navigation.navigate('ProfileScreen')}>Профіль</Button>
               ),
-              headerTitle: 'Кабінет'
+              headerTitle: 'Кабінет',
+              headerTitleAlign: 'center'
             }}
           />
           <Stack.Screen
             name='PhotoGalleryScreen'
             component={PhotoGalleryScreen}
-            options={{ headerShown: true, headerTitle: 'Фотогалерея' }}
+            options={{ headerShown: true, headerTitle: 'Фотогалерея', headerTitleAlign: 'center' }}
           />
-          <Stack.Screen name='ProfileScreen' component={ProfileScreen} options={{ headerShown: true }} />
+          <Stack.Screen
+            name='ProfileScreen'
+            component={ProfileScreen}
+            options={{ headerShown: true, headerTitleAlign: 'center', headerTitle: 'Профіль' }}
+          />
         </Stack.Navigator>
       )}
     </>

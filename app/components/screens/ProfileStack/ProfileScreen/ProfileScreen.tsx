@@ -1,11 +1,9 @@
 import React, { useEffect, useState, useMemo } from 'react'
-import { View, Text, Button, ActivityIndicator, Image, ScrollView, SafeAreaView } from 'react-native'
-import { useForm, Controller } from 'react-hook-form'
+import { View, Text, Button, ActivityIndicator, ScrollView, SafeAreaView } from 'react-native'
+import { useForm } from 'react-hook-form'
 import { Snackbar, Avatar, FAB } from 'react-native-paper'
 
 import styles from './styles'
-import { IProfileForm } from '../../../../models/IProfileForm'
-import InputCustom from '../../../atoms/TextInputCustom'
 import {
   useProfileDataQuery,
   useUpdateProfileDataMutation,
@@ -15,16 +13,14 @@ import {
 import { useGetServiceCategoriesQuery } from '../../../../store/modules/api/servicesCategories/servicesCategoriesSlice'
 
 import useImagePicker from '../../../../hooks/useImagesPicker'
-import AdminHeader from '../../../atoms/AdminHeader'
-import { useAppDispatch } from '../../../../store/hooks'
-import CheckboxesGroup from '../../../blocks/CheckboxesGroup'
+import CategoriesFilter from '../../../blocks/CategoriesFilter'
 import { ProfileStackTypes } from '../../../../models/INavigationStack'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import ProfileForm from './blocks/ProfileForm'
 
 type Props = NativeStackScreenProps<ProfileStackTypes, 'ProfileScreen'>
 
 export default function ProfileScreen({ navigation }: Props) {
-  const dispatch = useAppDispatch()
   const [snackToggle, setSnackToggle] = useState(false)
 
   const { data, error, isLoading, refetch: fetchProfile } = useProfileDataQuery({})
@@ -37,17 +33,17 @@ export default function ProfileScreen({ navigation }: Props) {
 
   const [images, handlePickImageFromCamera, handlePickImagesFromGallery] = useImagePicker()
 
-  const [categoriesCheck, setCategoriesCheck] = useState<{ skills: string[] }>()
+  const [categoriesCheck, setCategoriesCheck] = useState<string[]>()
 
   const {
     control,
     handleSubmit,
     formState: { errors }
-  } = useForm<IProfileForm>()
+  } = useForm()
 
-  function onSubmit(form: IProfileForm) {
+  function onSubmit(form: any) {
     console.log('form ', form)
-    updateProfileData({ data: { ...form, skills: categoriesCheck?.skills || data?.skills || [] } })
+    updateProfileData({ data: { ...form, skills: categoriesCheck || data?.skills || [] } })
   }
 
   useEffect(() => {
@@ -76,80 +72,20 @@ export default function ProfileScreen({ navigation }: Props) {
         <SafeAreaView />
         <View style={styles.container}>
           <Avatar.Image size={150} source={{ uri: data?.avatar }} />
-          <Button title='Select avatar' onPress={() => handlePickImagesFromGallery(1)} />
-          <Controller
-            control={control}
-            name='name'
-            rules={{ required: false }}
-            defaultValue={data?.name || ''}
-            render={({ field: { onChange, value } }) => (
-              <InputCustom onChangeText={onChange} value={value} placeholder='Your name' />
-            )}
+          <Button title='Вибрати аватар' onPress={() => handlePickImagesFromGallery(1)} />
+          <ProfileForm control={control} data={data} errors={errors} />
+          <Text style={styles.skillsTitle}>Виділіть ваші навики</Text>
+          <CategoriesFilter
+            data={categoryData}
+            onCheckedChange={setCategoriesCheck}
+            checkedItems={data?.skills || []}
           />
-          {errors.name && <Text>This field is required.</Text>}
-          <Controller
-            control={control}
-            name='phone'
-            rules={{ required: false }}
-            defaultValue={data?.phone || ''}
-            render={({ field: { onChange, value } }) => (
-              <InputCustom onChangeText={onChange} value={value} placeholder='+380' />
-            )}
-          />
-          {errors.phone && <Text>This field is required.</Text>}
-          <Controller
-            control={control}
-            name='city'
-            rules={{ required: false }}
-            defaultValue={data?.city || ''}
-            render={({ field: { onChange, value } }) => (
-              <InputCustom onChangeText={onChange} value={value} placeholder='City' />
-            )}
-          />
-          {errors.city && <Text>This field is required.</Text>}
-          <Controller
-            control={control}
-            name='street'
-            rules={{ required: false }}
-            defaultValue={data?.street || ''}
-            render={({ field: { onChange, value } }) => (
-              <InputCustom onChangeText={onChange} value={value} placeholder='Street' />
-            )}
-          />
-          {errors.street && <Text>This field is required.</Text>}
-          <Controller
-            control={control}
-            name='aboutMe'
-            rules={{ required: false }}
-            defaultValue={data?.aboutMe || ''}
-            render={({ field: { onChange, value } }) => (
-              <InputCustom onChangeText={onChange} value={value} placeholder='Кілька слів про себе' />
-            )}
-          />
-          {errors.aboutMe && <Text>This field is required.</Text>}
-          <Text style={styles.skillsTitle}>Виділіть ваші спеціальності</Text>
-          <ScrollView horizontal>
-            <CheckboxesGroup
-              data={categoryData}
-              onCheckedChange={setCategoriesCheck}
-              checkedItems={data?.skills || []}
-            />
-          </ScrollView>
-          <Snackbar
-            visible={snackToggle}
-            onDismiss={() => {}}
-            action={{
-              label: '',
-              onPress: () => {
-                // Do something
-              }
-            }}
-          >
-            Successefully saved
-          </Snackbar>
         </View>
       </ScrollView>
       <FAB icon='content-save-outline' style={styles.fab} onPress={handleSubmit(onSubmit)} />
+      <Snackbar visible={snackToggle} onDismiss={() => {}}>
+        Successefully saved
+      </Snackbar>
     </>
   )
 }
