@@ -6,7 +6,7 @@ import { Avatar, Button } from 'react-native-paper'
 import colors from '../../config/colors'
 
 interface IProps {
-  onPress: (arg: string[]) => void
+  onPress: (arg: { root?: string; sub_1?: string }) => void
   data: IServicesCategories[]
 }
 
@@ -17,7 +17,7 @@ const CategoryBlock = ({ data, onPress }: IProps) => {
         <View key={id} style={styles.cardContainer}>
           <Avatar.Image size={100} source={{ uri: image }} />
           <View style={styles.cardContent}>
-            <Pressable onPress={() => onPress([id])}>
+            <Pressable onPress={() => onPress({ root: id })}>
               <Text style={styles.title}>{title}</Text>
             </Pressable>
             <View style={styles.subCat}>
@@ -26,7 +26,7 @@ const CategoryBlock = ({ data, onPress }: IProps) => {
                   style={styles.subCatBtn}
                   labelStyle={styles.subCatBtnLabel}
                   key={subCat.id}
-                  onPress={() => onPress([id, subCat.id])}
+                  onPress={() => onPress({ root: id, sub_1: subCat.id })}
                   mode='outlined'
                 >
                   {subCat.title}

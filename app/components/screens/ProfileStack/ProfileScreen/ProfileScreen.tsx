@@ -13,7 +13,7 @@ import {
 import { useGetServiceCategoriesQuery } from '../../../../store/modules/api/servicesCategories/servicesCategoriesSlice'
 
 import useImagePicker from '../../../../hooks/useImagesPicker'
-import CategoriesFilter from '../../../blocks/CategoriesFilter'
+import ProfileCategoriesSelector from '../../../blocks/ProfileCategoriesSelector'
 import { ProfileStackTypes } from '../../../../models/INavigationStack'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import ProfileForm from './blocks/ProfileForm'
@@ -75,7 +75,7 @@ export default function ProfileScreen({ navigation }: Props) {
           <Button title='Вибрати аватар' onPress={() => handlePickImagesFromGallery(1)} />
           <ProfileForm control={control} data={data} errors={errors} />
           <Text style={styles.skillsTitle}>Виділіть ваші навики</Text>
-          <CategoriesFilter
+          <ProfileCategoriesSelector
             data={categoryData}
             onCheckedChange={setCategoriesCheck}
             checkedItems={data?.skills || []}

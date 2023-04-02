@@ -19,13 +19,12 @@ interface Category {
   subCategories: Category[]
 }
 
-const CategoriesFilter = ({ data, onCheckedChange, checkedItems }: IProps) => {
+const ProfileCategoriesSelector = ({ data, onCheckedChange, checkedItems }: IProps) => {
   const [checkedIds, setCheckedIds] = useState<string[]>([])
   console.log('~~~~~~~~~~~~~~ checkedIds', checkedIds)
 
   useEffect(() => {
     checkedItems.length && setCheckedIds(checkedItems)
-    // onCheckedChange({ skills: checkedItems })
   }, [checkedItems])
 
   const handleCheckedChange = (id: string) => {
@@ -87,4 +86,4 @@ const styles = StyleSheet.create({
   level_3: { marginLeft: 20 }
 })
 
-export default CategoriesFilter
+export default ProfileCategoriesSelector

@@ -21,7 +21,6 @@ export const filtersMasterApi = apiSlice.injectEndpoints({
         } else {
           await firestore()
             .collection(collectionName)
-            // .where('skills', 'array-contains-any', arg)
             .get()
             .then((data) => data.docs.forEach((item) => searchResults.push(item.data() as IProfileForm)))
         }

@@ -29,7 +29,7 @@ const FilteredUsersBlock = ({ data, onPress }: IProps) => {
 }
 
 const styles = StyleSheet.create({
-  wrapper: { flex: 1 },
+  wrapper: { flex: 1, paddingHorizontal: 5 },
   cardContainer: { flexDirection: 'row', marginVertical: 10 },
   cardContent: { marginLeft: 10, flex: 1, marginRight: 10 },
   title: { fontSize: 20, paddingBottom: 10 }

@@ -17,7 +17,7 @@ export default function StartScreen({ navigation }: Props) {
 
   const onChangeSearch = (query: string) => setSearchQuery(query)
 
-  function onCategoryPress(data: string[]) {
+  function onCategoryPress(data: { root?: string; sub_1?: string }) {
     navigation.navigate('CategoryScreen', data)
   }
 
