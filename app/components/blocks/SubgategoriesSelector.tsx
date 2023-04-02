@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { ScrollView, StyleSheet, View } from 'react-native'
+import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import Checkbox from '../atoms/Checkbox'
-import { ActivityIndicator } from 'react-native-paper'
+import CheckboxSub from '../atoms/CheckboxSub'
 
-const SubgategoriesSelector = ({ data, onCheckedChange, checkedItem }: IProps) => {
-  const [checkedId, setCheckedId] = useState<string>('')
-  console.log('~~~~~~~~~~~~~~ checkedIds', checkedId)
+const SubgategoriesSelector = ({ data, onCheckedChange, checkedItem, subId }: IProps) => {
+  const [checkedId, setCheckedId] = useState<string | null>(null)
+  useEffect(() => {
+    data && setCheckedId(null)
+  }, [data])
 
   useEffect(() => {
     checkedItem && setCheckedId(checkedItem)
@@ -16,19 +18,26 @@ const SubgategoriesSelector = ({ data, onCheckedChange, checkedItem }: IProps) =
     onCheckedChange(id)
   }
 
-  if (!data) return <ActivityIndicator />
-
   return (
     <ScrollView horizontal>
       <View style={styles.wrapper}>
         {data?.map(({ id, title }: Category) => (
           <View style={styles.item} key={id}>
-            <Checkbox
-              key={`checkbox-${id}`}
-              label={title}
-              checked={checkedId === id}
-              onPress={() => handleCheckedChange(id)}
-            />
+            {subId === 'sub_1' ? (
+              <Checkbox
+                key={`checkbox-${id}`}
+                label={title}
+                checked={checkedId === id}
+                onPress={() => handleCheckedChange(id)}
+              />
+            ) : (
+              <CheckboxSub
+                key={`checkbox-${id}`}
+                label={title}
+                checked={checkedId === id}
+                onPress={() => handleCheckedChange(id)}
+              />
+            )}
           </View>
         ))}
       </View>
@@ -38,10 +47,11 @@ const SubgategoriesSelector = ({ data, onCheckedChange, checkedItem }: IProps) =
 
 const styles = StyleSheet.create({
   wrapper: { flexDirection: 'row' },
-  item: { padding: 2 }
+  item: { padding: 2 },
 })
 
 interface IProps {
+  subId: 'sub_1' | 'sub_2'
   data: any
   onCheckedChange: (arg0: string) => void
   checkedItem: string | undefined

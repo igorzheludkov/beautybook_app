@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, ScrollView } from 'react-native'
 import colors from '../../../config/colors'
 import { useGetFilteredMastersQuery } from '../../../store/modules/api/filtersMaster/filtersMasterSlice'
 import FilteredUsersBlock from '../../blocks/FilteredUsers'
@@ -16,23 +16,26 @@ export default function CategoryScreen({ navigation, route }: Props) {
   const [categoriesCheck, setCategoriesCheck] = useState<{
     root?: string
     sub_1?: string
+    sub_2?: string
   }>(route.params)
 
-  const { data = [], error } = useGetFilteredMastersQuery([categoriesCheck.root, categoriesCheck.sub_1])
+  const { data = [], error } = useGetFilteredMastersQuery([
+    categoriesCheck.sub_2 || categoriesCheck.sub_1 || categoriesCheck.root
+  ])
 
   function onMasterPress(data: string) {
     navigation.navigate('MasterScreen', { id: data })
   }
 
   return (
-    <View style={style.wrapper}>
+    <ScrollView style={style.wrapper}>
       <CategoryFilters
         data={categoryData || []}
         checkedItems={categoriesCheck}
         onSelectFilters={setCategoriesCheck}
       />
       <FilteredUsersBlock data={error ? [] : data} onPress={onMasterPress} />
-    </View>
+    </ScrollView>
   )
 }
 
