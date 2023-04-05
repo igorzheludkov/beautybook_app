@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { IServicesCategories } from '../../../../models/IServicesCategories'
+import { useAppDispatch, useAppSelector } from '../../../../store/hooks'
 import RootCategories from './blocks/RootCategories'
 import SubgategoriesSelector from './blocks/SubgategoriesSelector'
 import CitySelector from './blocks/CitySelector'
+import { setCityReducer } from '../../../../store/modules/app/slice'
 
 export default function CategoryFilters({ data, cities, checkedItems, onSelectFilters }: Props) {
+  const dispatch = useAppDispatch()
   const [filters, setFilters] = useState<IFilters>(checkedItems)
   const [filtersLocal, setFiltersLocal] = useState<IFilters>(checkedItems)
+
+  const selectedCity = useAppSelector((state) => state.appSlice.city)
 
   useEffect(() => {
     onSelectFilters(filters)
@@ -30,10 +35,10 @@ export default function CategoryFilters({ data, cities, checkedItems, onSelectFi
         <CitySelector
           data={cities}
           onPress={(i) => {
-            setFilters({ root: i })
-            setFiltersLocal((prev) => ({ ...prev, root: i }))
+            dispatch(setCityReducer(i))
+            setFiltersLocal((prev) => ({ ...prev, city: i }))
           }}
-          checkedItems={filters}
+          checkedItems={selectedCity}
         />
       </View>
 

@@ -11,10 +11,12 @@ import {
   useGetServiceCategoriesQuery
 } from '../../../store/modules/api/filterCategories/filterCategoriesSlice'
 import CategoryFilters from './components/CategoryFilters'
+import { useAppSelector } from '../../../store/hooks'
 
 type Props = NativeStackScreenProps<CatalogStackTypes, 'CategoryScreen'>
 
 export default function CategoryScreen({ navigation, route }: Props) {
+  // Categories
   const { data: categoryData } = useGetServiceCategoriesQuery({})
   const { data: categoryCities } = useGetCitiesQuery({})
   const [categoriesCheck, setCategoriesCheck] = useState<{
@@ -23,9 +25,11 @@ export default function CategoryScreen({ navigation, route }: Props) {
     sub_2?: string
   }>(route.params)
 
-  const { data = [], error } = useGetFilteredMastersQuery([
-    categoriesCheck.sub_2 || categoriesCheck.sub_1 || categoriesCheck.root
-  ])
+  const category = [categoriesCheck.sub_2 || categoriesCheck.sub_1 || categoriesCheck.root]
+  const selectedCity = useAppSelector((state) => state.appSlice.city)
+
+  // Filter query
+  const { data = [], error } = useGetFilteredMastersQuery({ category, city: selectedCity?.id })
 
   function onMasterPress(data: string) {
     navigation.navigate('MasterScreen', { id: data })

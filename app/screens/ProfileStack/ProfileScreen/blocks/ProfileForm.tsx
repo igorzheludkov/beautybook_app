@@ -29,16 +29,6 @@ export default function ProfileForm({ control, data, errors }: ProfileFormProps)
       {errors.phone && <Text>This field is required.</Text>}
       <Controller
         control={control}
-        name='city'
-        rules={{ required: false }}
-        defaultValue={data?.city || ''}
-        render={({ field: { onChange, value } }) => (
-          <TextInputCustom onChangeText={onChange} value={value} placeholder='City' />
-        )}
-      />
-      {errors.city && <Text>This field is required.</Text>}
-      <Controller
-        control={control}
         name='street'
         rules={{ required: false }}
         defaultValue={data?.street || ''}

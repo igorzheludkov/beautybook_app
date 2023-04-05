@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Menu } from 'react-native-paper'
-import RotateSquareAnimation from '../../../../../utils/RotateSquareAnimation'
-import { CitiesDataTypes } from '../../../../../models/ICities'
-import CityIcon from '../../../../../assets/icons/CityIcon'
+import RotateSquareAnimation from '../../../../utils/RotateSquareAnimation'
+import { CitiesDataTypes } from '../../../../models/ICities'
+import CityIcon from '../../../../assets/icons/CityIcon'
 import CitiesList from '../atoms/CitilesList'
 import SelectCityButton from '../atoms/SelectCityButton'
 

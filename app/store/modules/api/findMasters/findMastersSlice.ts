@@ -10,17 +10,17 @@ export const findMastersApi = apiSlice.injectEndpoints({
   overrideExisting: true,
   endpoints: (builder) => ({
     getFilteredMasters: builder.query({
-      queryFn: async (arg) => {
+      queryFn: async ({ category, city }) => {
+        const filterRef = firestore().collection(collectionName)
         const searchResults: IProfileForm[] = []
-        if (arg.length) {
-          await firestore()
-            .collection(collectionName)
-            .where('skills', 'array-contains-any', arg)
+        if (category.length) {
+          await filterRef
+            .where('skills', 'array-contains-any', category)
+            .where('city.id', '==', city || '')
             .get()
             .then((data) => data.docs.forEach((item) => searchResults.push(item.data() as IProfileForm)))
         } else {
-          await firestore()
-            .collection(collectionName)
+          await filterRef
             .get()
             .then((data) => data.docs.forEach((item) => searchResults.push(item.data() as IProfileForm)))
         }

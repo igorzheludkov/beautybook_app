@@ -10,13 +10,18 @@ import {
   useUpdateAvatarMutation
 } from '../../../store/modules/api/userData/userDataSlice'
 
-import { useGetServiceCategoriesQuery } from '../../../store/modules/api/filterCategories/filterCategoriesSlice'
+import {
+  useGetCitiesQuery,
+  useGetServiceCategoriesQuery
+} from '../../../store/modules/api/filterCategories/filterCategoriesSlice'
 
 import useImagePicker from '../../../hooks/useImagesPicker'
 import ProfileCategoriesSelector from './blocks/ProfileCategoriesSelector'
 import { ProfileStackTypes } from '../../../models/INavigationStack'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import ProfileForm from './blocks/ProfileForm'
+import CitySelector from './blocks/CitySelector'
+import { CitiesDataTypes } from '../../../models/ICities'
 
 type Props = NativeStackScreenProps<ProfileStackTypes, 'ProfileScreen'>
 
@@ -25,6 +30,8 @@ export default function ProfileScreen({ navigation }: Props) {
 
   const { data, error, isLoading, refetch: fetchProfile } = useProfileDataQuery({})
   const { data: categoryData } = useGetServiceCategoriesQuery({})
+  const { data: categoryCities } = useGetCitiesQuery({})
+  console.log('~~~~~~~~~~~~~~ data city ', data?.city)
 
   const [updateProfileData, { isLoading: isLoadingUpdate, error: updateError, isSuccess: isProfileUpdated }] =
     useUpdateProfileDataMutation()
@@ -72,6 +79,13 @@ export default function ProfileScreen({ navigation }: Props) {
         <SafeAreaView />
         <View style={styles.container}>
           <Avatar.Image size={150} source={{ uri: data?.avatar }} />
+          <CitySelector
+            data={categoryCities || []}
+            onPress={(i) => {
+              updateProfileData({ data: { city: i } || {} })
+            }}
+            checkedItems={data?.city}
+          />
           <Button title='Вибрати аватар' onPress={() => handlePickImagesFromGallery(1)} />
           <ProfileForm control={control} data={data} errors={errors} />
           <Text style={styles.skillsTitle}>Виділіть ваші навики</Text>
