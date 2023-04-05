@@ -1,14 +1,14 @@
 import React from 'react'
-import AuthScreen from '../components/screens/ProfileStack/AuthScreen'
+import AuthScreen from '../screens/ProfileStack/AuthScreen/AuthScreen'
 import { SafeAreaView } from 'react-native'
 import { useAppSelector } from '../store/hooks'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { ProfileStackTypes } from '../models/INavigationStack'
 import { logout } from '../store/modules/auth/thunks'
 import { useAppDispatch } from '../store/hooks'
-import ProfileScreen from '../components/screens/ProfileStack/ProfileScreen/ProfileScreen'
-import AdminPanelScreen from '../components/screens/ProfileStack/AdminPanelScreen/AdminPanelScreen'
-import PhotoGalleryScreen from '../components/screens/ProfileStack/PhotoGalleryScreen/PhotoGalleryScreen'
+import ProfileScreen from '../screens/ProfileStack/ProfileScreen/ProfileScreen'
+import AdminPanelScreen from '../screens/ProfileStack/AdminPanelScreen/AdminPanelEntry'
+import PhotoGalleryScreen from '../screens/ProfileStack/PhotoGalleryScreen/PhotoGalleryScreen'
 import { Button } from 'react-native-paper'
 
 const Stack = createNativeStackNavigator<ProfileStackTypes>()

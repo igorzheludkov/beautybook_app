@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import ProfileStack from './ProfileStack'
 import CatalogStack from './CatalogStack'
 import { MainBottomTabs } from '../models/INavigationStack'
-import FavoritesScreen from '../components/screens/FavoritesStack/FavoritesScreen'
+import FavoritesScreen from '../screens/FavoritesStack/FavoritesScreen'
 
 const Tab = createBottomTabNavigator<MainBottomTabs>()
 
@@ -21,7 +21,8 @@ export default function Tabs() {
         name='FavoritesStack'
         component={FavoritesScreen}
         options={{
-          tabBarLabel: 'Закладки'
+          tabBarLabel: 'Закладки',
+          headerShown: true
         }}
       />
       <Tab.Screen

@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, Text, View, Pressable, LayoutAnimation } from 'react-native'
-import colors from '../../config/colors'
+import colors from '../../constants/colors'
 
 interface IProps {
   title: string

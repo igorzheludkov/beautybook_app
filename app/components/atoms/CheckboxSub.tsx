@@ -1,7 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { Chip } from 'react-native-paper'
 import React from 'react'
-import colors from '../../config/colors'
+import colors from '../../constants/colors'
 
 interface Props {
   label: string
@@ -20,5 +20,5 @@ export default function CheckboxSub({ label, checked, onPress }: Props) {
 }
 
 const styles = StyleSheet.create({
-  chip: {backgroundColor: colors.palette.white}
+  chip: { backgroundColor: colors.palette.white }
 })
