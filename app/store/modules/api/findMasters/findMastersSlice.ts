@@ -13,10 +13,15 @@ export const findMastersApi = apiSlice.injectEndpoints({
       queryFn: async ({ category, city }) => {
         const filterRef = firestore().collection(collectionName)
         const searchResults: IProfileForm[] = []
-        if (category.length) {
+        if (category.length && city) {
           await filterRef
             .where('skills', 'array-contains-any', category)
             .where('city.id', '==', city || '')
+            .get()
+            .then((data) => data.docs.forEach((item) => searchResults.push(item.data() as IProfileForm)))
+        } else if (category.length) {
+          await filterRef
+            .where('skills', 'array-contains-any', category)
             .get()
             .then((data) => data.docs.forEach((item) => searchResults.push(item.data() as IProfileForm)))
         } else {

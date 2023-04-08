@@ -1,4 +1,4 @@
-import { View, StyleSheet, ScrollView } from 'react-native'
+import { View, StyleSheet, ScrollView, FlatList } from 'react-native'
 import React from 'react'
 import PhotoThumb from '../../../../components/atoms/PhotoThumb'
 
@@ -10,8 +10,8 @@ interface Props {
 export default function PhotoGallery({ data, onRemove }: Props) {
   return (
     <ScrollView>
-      <View style={styles.wrapper}>
-        <View style={styles.container}>
+      <View style={styles.container}>
+        <View style={styles.flatlistContainer}>
           {data.map((element) => {
             return <PhotoThumb key={element.id} url={element.url} onRemove={onRemove} id={element.id} />
           })}
@@ -22,11 +22,15 @@ export default function PhotoGallery({ data, onRemove }: Props) {
 }
 
 const styles = StyleSheet.create({
-  wrapper: { flex: 1, alignItems: 'center' },
   container: {
-    width: '96.5%',
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  flatlistContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
     flexDirection: 'row',
-    justifyContent: 'flex-start',
     flexWrap: 'wrap'
   }
 })

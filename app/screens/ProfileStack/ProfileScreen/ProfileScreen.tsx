@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useMemo } from 'react'
-import { View, Text, Button, ActivityIndicator, ScrollView, SafeAreaView } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { View, Text, ActivityIndicator, ScrollView } from 'react-native'
 import { useForm } from 'react-hook-form'
-import { Snackbar, Avatar, FAB } from 'react-native-paper'
+import { Snackbar, Avatar, FAB, Button } from 'react-native-paper'
 
 import styles from './styles'
 import {
@@ -21,7 +21,6 @@ import { ProfileStackTypes } from '../../../models/INavigationStack'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import ProfileForm from './blocks/ProfileForm'
 import CitySelector from './blocks/CitySelector'
-import { CitiesDataTypes } from '../../../models/ICities'
 
 type Props = NativeStackScreenProps<ProfileStackTypes, 'ProfileScreen'>
 
@@ -31,7 +30,6 @@ export default function ProfileScreen({ navigation }: Props) {
   const { data, error, isLoading, refetch: fetchProfile } = useProfileDataQuery({})
   const { data: categoryData } = useGetServiceCategoriesQuery({})
   const { data: categoryCities } = useGetCitiesQuery({})
-  console.log('~~~~~~~~~~~~~~ data city ', data?.city)
 
   const [updateProfileData, { isLoading: isLoadingUpdate, error: updateError, isSuccess: isProfileUpdated }] =
     useUpdateProfileDataMutation()
@@ -45,8 +43,8 @@ export default function ProfileScreen({ navigation }: Props) {
   const {
     control,
     handleSubmit,
-    formState: { errors }
-  } = useForm()
+    formState: { errors, isDirty }
+  } = useForm({ defaultValues: data })
 
   function onSubmit(form: any) {
     console.log('form ', form)
@@ -67,28 +65,33 @@ export default function ProfileScreen({ navigation }: Props) {
     images?.length && updateAvatar({ image: images })
   }, [images])
 
-  useEffect(() => {
-    fetchProfile()
-  }, [])
-
   if (isLoading) return <ActivityIndicator />
 
   return (
     <>
       <ScrollView style={styles.wrapper}>
-        <SafeAreaView />
         <View style={styles.container}>
-          <Avatar.Image size={150} source={{ uri: data?.avatar }} />
-          <CitySelector
-            data={categoryCities || []}
-            onPress={(i) => {
-              updateProfileData({ data: { city: i } || {} })
-            }}
-            checkedItems={data?.city}
-          />
-          <Button title='Вибрати аватар' onPress={() => handlePickImagesFromGallery(1)} />
+          <View style={styles.avatarWrapper}>
+            <Avatar.Image size={150} source={{ uri: data?.avatar }} />
+          </View>
+          <View style={styles.buttonsBlock}>
+            <Button icon='camera' mode='outlined' onPress={() => handlePickImagesFromGallery(1)}>
+              Змінити аватар
+            </Button>
+            <CitySelector
+              data={categoryCities || []}
+              onPress={(i) => {
+                updateProfileData({ data: { city: i } || {} })
+              }}
+              checkedItems={data?.city}
+            />
+          </View>
           <ProfileForm control={control} data={data} errors={errors} />
           <Text style={styles.skillsTitle}>Виділіть ваші навики</Text>
+          <Text style={styles.skillsSubTitle}>
+            Виділіть галочкою ваші професійні вміння. Кожен виділений навик стане доступним для пошуку в
+            загальному каталозі у відповідному розділі.
+          </Text>
           <ProfileCategoriesSelector
             data={categoryData}
             onCheckedChange={setCategoriesCheck}
@@ -96,7 +99,15 @@ export default function ProfileScreen({ navigation }: Props) {
           />
         </View>
       </ScrollView>
-      <FAB icon='content-save-outline' style={styles.fab} onPress={handleSubmit(onSubmit)} />
+      {isDirty && (
+        <FAB
+          animated
+          loading={isLoadingUpdate}
+          style={styles.fab}
+          icon='content-save-outline'
+          onPress={handleSubmit(onSubmit)}
+        />
+      )}
       <Snackbar visible={snackToggle} onDismiss={() => {}}>
         Successefully saved
       </Snackbar>

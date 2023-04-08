@@ -7,12 +7,13 @@ interface Props {
   label: string
   checked: boolean
   onPress: () => void
+  containerStyle?: any
 }
 
-export default function Checkbox({ label, checked, onPress }: Props) {
+export default function Checkbox({ label, checked, containerStyle, onPress }: Props) {
   return (
     <View style={{ flexDirection: 'row', alignItems: 'center', padding: 2 }}>
-      <Chip style={styles.chip} mode='flat' selected={checked} onPress={onPress}>
+      <Chip style={[styles.chip, containerStyle]} mode='flat' selected={checked} onPress={onPress}>
         {label}
       </Chip>
     </View>
@@ -20,5 +21,5 @@ export default function Checkbox({ label, checked, onPress }: Props) {
 }
 
 const styles = StyleSheet.create({
-  chip: { paddingVertical: 10 }
+  chip: { paddingVertical: 10,  }
 })

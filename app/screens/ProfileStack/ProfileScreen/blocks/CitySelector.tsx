@@ -40,8 +40,8 @@ export default function CitySelector({ data, onPress, checkedItems }: IProps) {
 }
 
 const styles = StyleSheet.create({
-  wrapper: { paddingHorizontal: 10, paddingBottom: 10 },
-  rootCategory: { flexDirection: 'row', alignItems: 'center' },
+  wrapper: {},
+  rootCategory: { flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' },
   menu: {
     marginTop: 50,
     width: '70%'

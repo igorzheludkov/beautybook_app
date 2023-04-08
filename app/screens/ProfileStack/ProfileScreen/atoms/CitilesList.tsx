@@ -1,4 +1,4 @@
-import { Pressable, Text, StyleSheet, View } from 'react-native'
+import { Pressable, Text, StyleSheet, View, ScrollView } from 'react-native'
 import { CitiesDataTypes } from '../../../../models/ICities'
 import { useState } from 'react'
 import ArrowRightIcon from '../../../../assets/icons/ArrowRight'
@@ -12,7 +12,7 @@ export default function CitiesList({ data, closeMenu }: IProps) {
   const [renderLevel, setRenderLevel] = useState<CitiesDataTypes[] | undefined>(data)
 
   return (
-    <>
+    <ScrollView style={{ maxHeight: 400 }}>
       {renderLevel?.map((item) => (
         <View key={item.id} style={styles.wrapper}>
           {item?.cities ? (
@@ -31,7 +31,7 @@ export default function CitiesList({ data, closeMenu }: IProps) {
           )}
         </View>
       ))}
-    </>
+    </ScrollView>
   )
 }
 
@@ -43,5 +43,5 @@ const styles = StyleSheet.create({
   },
   item: { flex: 1, paddingVertical: 14, paddingHorizontal: 10 },
   text: {},
-  icon: {marginRight: 10}
+  icon: { marginRight: 10 }
 })
