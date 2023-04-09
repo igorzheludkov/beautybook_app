@@ -11,6 +11,12 @@ export interface CatalogStackTypes extends ParamListBase {
   CategoryScreen: { root?: string | undefined; sub_1?: string | undefined }
   MasterScreen: { id: string }
 }
+
+export interface FavoritesStackTypes extends ParamListBase {
+  FavoritesScreen: undefined
+  MasterScreen: { id: string }
+}
+
 export interface ProfileStackTypes extends ParamListBase {
   AdminPanelScreen: undefined
   AuthScreen: undefined

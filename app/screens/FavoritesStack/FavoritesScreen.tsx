@@ -1,17 +1,29 @@
 import React from 'react'
-import { View, StyleSheet, SafeAreaView } from 'react-native'
+import { StyleSheet, ScrollView} from 'react-native'
 import colors from '../../constants/colors'
-import { Button } from 'react-native-paper'
-import { useUpdateCitiesMutation } from '../../store/modules/api/filterCategories/filterCategoriesSlice'
-import { cities } from '../../store/modules/api/filterCategories/cities'
+import { useGetBookmarksQuery } from '../../store/modules/api/bookmarks/bookmarksSlice'
+import UserCard from './blocks/UserCard'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { FavoritesStackTypes } from '../../models/INavigationStack'
+import { IProfileForm } from '../../models/IProfileForm'
 
-export default function FavoritesScreen() {
-  const [updateCities] = useUpdateCitiesMutation()
+type Props = NativeStackScreenProps<FavoritesStackTypes, 'FavoritesScreen'>
+
+export default function FavoritesScreen({ navigation }: Props) {
+  const { data, isLoading } = useGetBookmarksQuery({ subCollection: 'services' })
+
+  function onMasterPress(data: string) {
+    navigation.navigate('MasterScreen', { id: data })
+  }
+
+  console.log('~~~~~~~~~~~~~~ data', data)
 
   return (
-    <View style={style.wrapper}>
-      <Button onPress={() => updateCities({ data: cities })}>Update cities</Button>
-    </View>
+    <ScrollView style={style.wrapper}>
+      {data?.map((item: IProfileForm) => (
+        <UserCard key={item.id} user={item} onPress={onMasterPress} />
+      ))}
+    </ScrollView>
   )
 }
 

@@ -13,7 +13,7 @@ import { Button } from 'react-native-paper'
 
 const Stack = createNativeStackNavigator<ProfileStackTypes>()
 
-export default function ProfileStack({ navigation }: any) {
+export default function ProfileNavigator({ navigation }: any) {
   const dispatch = useAppDispatch()
   const isAuthorized = useAppSelector((state) => state.authSlice.isAuthorized)
   return (

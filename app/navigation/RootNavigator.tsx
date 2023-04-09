@@ -1,9 +1,9 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import ProfileStack from './ProfileStack'
-import CatalogStack from './CatalogStack'
 import { MainBottomTabs } from '../models/INavigationStack'
-import FavoritesScreen from '../screens/FavoritesStack/FavoritesScreen'
+import ProfileNavigator from './ProfileStack'
+import CatalogNavigator from './CatalogStack'
+import FavoritesNavigator from './FavoritesStack'
 
 const Tab = createBottomTabNavigator<MainBottomTabs>()
 
@@ -12,22 +12,21 @@ export default function Tabs() {
     <Tab.Navigator screenOptions={{ headerShown: false }}>
       <Tab.Screen
         name='CatalogStack'
-        component={CatalogStack}
+        component={CatalogNavigator}
         options={{
           tabBarLabel: 'Каталог'
         }}
       />
       <Tab.Screen
         name='FavoritesStack'
-        component={FavoritesScreen}
+        component={FavoritesNavigator}
         options={{
           tabBarLabel: 'Закладки',
-          headerShown: true
         }}
       />
       <Tab.Screen
         name='ProfileStack'
-        component={ProfileStack}
+        component={ProfileNavigator}
         options={{
           tabBarLabel: 'Профіль'
         }}

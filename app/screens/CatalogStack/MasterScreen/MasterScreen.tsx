@@ -1,23 +1,17 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import colors from '../../../constants/colors'
 
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { CatalogStackTypes } from '../../../models/INavigationStack'
-import { useMasterDataQuery } from '../../../store/modules/api/masterData/masterDataSlice'
-import { ActivityIndicator, Avatar } from 'react-native-paper'
+import { CatalogStackTypes, FavoritesStackTypes } from '../../../models/INavigationStack'
 import MasterPage from './components/MasterPage'
 
-type Props = NativeStackScreenProps<CatalogStackTypes, 'MasterScreen'>
+type Props = NativeStackScreenProps<CatalogStackTypes | FavoritesStackTypes, 'MasterScreen'>
 
 export default function MasterScreen({ route }: Props) {
-  const { data } = useMasterDataQuery(route.params.id)
-
-  if (!data) return <ActivityIndicator />
-
   return (
     <View style={styles.wrapper}>
-      <MasterPage data={data} />
+      <MasterPage id={route.params.id} />
     </View>
   )
 }

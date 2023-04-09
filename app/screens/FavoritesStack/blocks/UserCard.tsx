@@ -1,8 +1,8 @@
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
-import { IProfileForm } from '../../../../../models/IProfileForm'
+import { IProfileForm } from '../../../models/IProfileForm'
 import { Avatar, Button, Modal, Portal } from 'react-native-paper'
-import Location from '../../../../../assets/icons/Location'
-import { useGetPhotosQuery } from '../../../../../store/modules/api/photoGallery/photoGallerySlice'
+import Location from '../../../assets/icons/Location'
+import { useGetPhotosQuery } from '../../../store/modules/api/photoGallery/photoGallerySlice'
 import { useState } from 'react'
 
 interface IProps {
