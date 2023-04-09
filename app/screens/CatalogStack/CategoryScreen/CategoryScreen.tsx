@@ -12,6 +12,7 @@ import {
 } from '../../../store/modules/api/filterCategories/filterCategoriesSlice'
 import CategoryFilters from './components/CategoryFilters'
 import { useAppSelector } from '../../../store/hooks'
+import { useGetPhotosQuery } from '../../../store/modules/api/photoGallery/photoGallerySlice'
 
 type Props = NativeStackScreenProps<CatalogStackTypes, 'CategoryScreen'>
 

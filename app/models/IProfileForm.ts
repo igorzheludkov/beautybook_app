@@ -7,6 +7,7 @@ export interface IProfileForm {
   street?: string
   skills?: string[]
   avatar?: string
+  aboutMe?: string
   description?: string
   id?: string
   instagram?: string

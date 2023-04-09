@@ -21,6 +21,7 @@ import { ProfileStackTypes } from '../../../models/INavigationStack'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import ProfileForm from './blocks/ProfileForm'
 import CitySelector from './blocks/CitySelector'
+import { IProfileForm } from '../../../models/IProfileForm'
 
 type Props = NativeStackScreenProps<ProfileStackTypes, 'ProfileScreen'>
 
@@ -47,8 +48,15 @@ export default function ProfileScreen({ navigation }: Props) {
   } = useForm({ defaultValues: data })
 
   function onSubmit(form: any) {
+    const notEmtyFields: IProfileForm = Object.assign(
+      {},
+      ...Object.entries(form)
+        .filter(([_, value]) => value !== undefined)
+        .map(([key, value]) => ({ [key]: value }))
+    )
     console.log('form ', form)
-    updateProfileData({ data: { ...form, skills: categoriesCheck || data?.skills || [] } })
+    console.log('notEmtyFields ', notEmtyFields)
+    updateProfileData({ data: { ...notEmtyFields, skills: categoriesCheck || data?.skills || [] } })
   }
 
   useEffect(() => {
@@ -99,15 +107,17 @@ export default function ProfileScreen({ navigation }: Props) {
           />
         </View>
       </ScrollView>
-      {isDirty && (
-        <FAB
-          animated
-          loading={isLoadingUpdate}
-          style={styles.fab}
-          icon='content-save-outline'
-          onPress={handleSubmit(onSubmit)}
-        />
-      )}
+
+      {/* Кнопка не реагує на внесення змін до розділу навиків */}
+      {/* {isDirty && ( */}
+      <FAB
+        animated
+        loading={isLoadingUpdate}
+        style={styles.fab}
+        icon='content-save-outline'
+        onPress={handleSubmit(onSubmit)}
+      />
+      {/* )} */}
       <Snackbar visible={snackToggle} onDismiss={() => {}}>
         Successefully saved
       </Snackbar>

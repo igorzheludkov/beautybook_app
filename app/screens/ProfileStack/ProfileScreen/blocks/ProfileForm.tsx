@@ -44,6 +44,19 @@ export default function ProfileForm({ control, data, errors }: ProfileFormProps)
       {errors.street && <Text>This field is required.</Text>}
       <Controller
         control={control}
+        name='aboutMe'
+        rules={{ required: false }}
+        render={({ field: { onChange, value } }) => (
+          <TextInputCustom
+            multiline
+            onChangeText={onChange}
+            value={value}
+            label='Одним реченням про себе'
+          />
+        )}
+      />
+      <Controller
+        control={control}
         name='description'
         rules={{ required: false }}
         render={({ field: { onChange, value } }) => (
@@ -51,7 +64,7 @@ export default function ProfileForm({ control, data, errors }: ProfileFormProps)
             multiline
             onChangeText={onChange}
             value={value}
-            label='Поле для інформації про себе, режим роботи, орієнтири та іншої інформації. Можна ввести багато тексту.'
+            label='Поле для інформації: режим роботи, орієнтири та іншої інформації. Можна ввести багато тексту.'
           />
         )}
       />
@@ -96,7 +109,7 @@ export default function ProfileForm({ control, data, errors }: ProfileFormProps)
       />
       <Controller
         control={control}
-        name='TikTok'
+        name='tiktok'
         rules={{ required: false }}
         render={({ field: { onChange, value } }) => (
           <TextInputCustom
