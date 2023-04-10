@@ -5,17 +5,24 @@ import { IServicesCategories } from '../../../../../models/IServicesCategories'
 import RotateSquareAnimation from '../../../../../utils/RotateSquareAnimation'
 import TriangleRightIcon from '../../../../../assets/icons/TriangleRightIcon'
 import colors from '../../../../../constants/colors'
+import { IFilters } from '../../types'
+
+interface IProps {
+  data: IServicesCategories[]
+  checkedItems: IFilters
+  onPress: (arg0: IServicesCategories) => void
+}
 
 export default function RootCategories({ data, onPress, checkedItems }: IProps) {
   const [menuVisible, setMenuVisible] = useState(false)
-  const [selectedItem, setSelectedItem] = useState(data.find((i) => i.id === checkedItems.root)?.title)
+  const [selectedItem, setSelectedItem] = useState(data.find((i) => i.id === checkedItems.root?.id)?.title)
 
   const openMenu = () => setMenuVisible(true)
 
   const closeMenu = (i: IServicesCategories) => {
     setMenuVisible(false)
     setSelectedItem(i.title)
-    onPress(i.id)
+    onPress(i)
   }
 
   return (
@@ -64,12 +71,3 @@ const styles = StyleSheet.create({
     borderRadius: 4
   }
 })
-
-interface IProps {
-  data: IServicesCategories[]
-  checkedItems: {
-    root?: string
-    sub_1?: string
-  }
-  onPress: (arg0: string) => void
-}

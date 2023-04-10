@@ -22,6 +22,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import ProfileForm from './blocks/ProfileForm'
 import CitySelector from './blocks/CitySelector'
 import { IProfileForm } from '../../../models/IProfileForm'
+import { ISkillsItem } from '../../../models/IProfileForm'
 
 type Props = NativeStackScreenProps<ProfileStackTypes, 'ProfileScreen'>
 
@@ -39,7 +40,10 @@ export default function ProfileScreen({ navigation }: Props) {
 
   const [images, handlePickImageFromCamera, handlePickImagesFromGallery] = useImagePicker()
 
-  const [categoriesCheck, setCategoriesCheck] = useState<string[]>()
+  const [skillsProfile, setSkillsProfile] = useState<ISkillsItem[] | []>([])
+
+  console.log('~~~~~~~~~~~~~~ skillsProfile', skillsProfile)
+
 
   const {
     control,
@@ -56,7 +60,7 @@ export default function ProfileScreen({ navigation }: Props) {
     )
     console.log('form ', form)
     console.log('notEmtyFields ', notEmtyFields)
-    updateProfileData({ data: { ...notEmtyFields, skills: categoriesCheck || data?.skills || [] } })
+    updateProfileData({ data: { ...notEmtyFields, skills: skillsProfile || data?.skills || [] } })
   }
 
   useEffect(() => {
@@ -102,7 +106,7 @@ export default function ProfileScreen({ navigation }: Props) {
           </Text>
           <ProfileCategoriesSelector
             data={categoryData}
-            onCheckedChange={setCategoriesCheck}
+            onCheckedChange={setSkillsProfile}
             checkedItems={data?.skills || []}
           />
         </View>

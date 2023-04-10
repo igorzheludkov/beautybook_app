@@ -1,8 +1,8 @@
 import { IProfileForm } from '../../../../models/IProfileForm'
 
 export interface IError {
-    data: string
-    status: number
+  data: string
+  status: number
 }
 
 export interface IBookmarkQuery {
@@ -10,3 +10,7 @@ export interface IBookmarkQuery {
   subCollection: 'services' | 'goods'
 }
 
+export interface IRemoveBookmark {
+  id: string
+  subCollection: 'services' | 'goods'
+}

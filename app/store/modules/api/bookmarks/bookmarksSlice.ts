@@ -5,7 +5,7 @@ import firestore from '@react-native-firebase/firestore'
 import { AuthState } from '../../auth/slice'
 
 import { IProfileForm } from '../../../../models/IProfileForm'
-import { IBookmarkQuery } from './types'
+import { IBookmarkQuery, IRemoveBookmark } from './types'
 
 const collectionName = 'bookmarks'
 
@@ -24,8 +24,10 @@ export const bookmarksApi = apiSlice.injectEndpoints({
 
         if (subCollection) {
           try {
-            const array: IProfileForm[] = [] 
-            const documents = (await collectionRef.get()).docs.forEach((doc) => array.push(doc.data()))
+            const array: { data: IProfileForm; id: string }[] = []
+            const documents = (await collectionRef.get()).docs.forEach((doc) =>
+              array.push({ data: doc.data(), id: doc.id })
+            )
 
             return { data: array }
           } catch (error: any) {
@@ -49,6 +51,28 @@ export const bookmarksApi = apiSlice.injectEndpoints({
         if (data && subCollection) {
           try {
             await collectionRef.add(data)
+
+            return { data: 'bookmark saved' }
+          } catch (error: any) {
+            return { error: { data: error.message, status: 500 } }
+          }
+        } else {
+          return { error: { data: 'bookmark saving failed', status: 400 } }
+        }
+      }
+    }),
+    removeBookmark: builder.mutation({
+      invalidatesTags: ['bookmarksList'],
+      queryFn: async ({ id, subCollection }: IRemoveBookmark, thunkAPI) => {
+        const { authSlice } = thunkAPI.getState() as { authSlice: AuthState }
+        const collectionRef = firestore()
+          .collection(collectionName)
+          .doc(authSlice.user?.uid)
+          .collection(subCollection)
+
+        if (id && subCollection) {
+          try {
+            // await collectionRef.add(data)
 
             return { data: 'bookmark saved' }
           } catch (error: any) {

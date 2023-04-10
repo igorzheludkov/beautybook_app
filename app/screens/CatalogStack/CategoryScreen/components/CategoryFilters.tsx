@@ -6,6 +6,7 @@ import RootCategories from './blocks/RootCategories'
 import SubgategoriesSelector from './blocks/SubgategoriesSelector'
 import CitySelector from './blocks/CitySelector'
 import { setCityReducer } from '../../../../store/modules/app/slice'
+import { IFilters } from '../types'
 
 export default function CategoryFilters({ data, cities, checkedItems, onSelectFilters }: Props) {
   const dispatch = useAppDispatch()
@@ -18,8 +19,8 @@ export default function CategoryFilters({ data, cities, checkedItems, onSelectFi
     onSelectFilters(filters)
   }, [filters])
 
-  const subData_1 = data.find((i) => i.id === filtersLocal.root)?.subCategories
-  const subData_2 = subData_1?.find((i) => i.id === filtersLocal.sub_1)?.subCategories
+  const subData_1 = data.find((i) => i.id === filtersLocal.root?.id)?.subCategories
+  const subData_2 = subData_1?.find((i) => i.id === filtersLocal.sub_1?.id)?.subCategories
 
   return (
     <View style={styles.wrapper}>
@@ -27,7 +28,7 @@ export default function CategoryFilters({ data, cities, checkedItems, onSelectFi
         <RootCategories
           data={data}
           onPress={(i) => {
-            setFilters({ root: i })
+            setFilters({ root: { id: i.id, title: i.title } })
             setFiltersLocal((prev) => ({ ...prev, root: i }))
           }}
           checkedItems={filters}
@@ -46,7 +47,7 @@ export default function CategoryFilters({ data, cities, checkedItems, onSelectFi
         subId='sub_1'
         data={subData_1}
         onCheckedChange={(i) => {
-          setFilters({ sub_1: i })
+          setFilters({ sub_1: { id: i.id, title: i.title } })
           setFiltersLocal((prev) => ({ ...prev, sub_1: i }))
         }}
         checkedItem={filters.sub_1}
@@ -55,7 +56,7 @@ export default function CategoryFilters({ data, cities, checkedItems, onSelectFi
         subId='sub_2'
         data={subData_2}
         onCheckedChange={(i) => {
-          setFilters({ sub_2: i })
+          setFilters({ sub_2: { id: i.id, title: i.title } })
           setFiltersLocal((prev) => ({ ...prev, sub_2: i }))
         }}
         checkedItem={filters.sub_2}
@@ -68,12 +69,6 @@ const styles = StyleSheet.create({
   wrapper: { marginTop: 10, marginBottom: 10 },
   topCategories: { flexDirection: 'row', justifyContent: 'space-between' }
 })
-
-interface IFilters {
-  root?: string
-  sub_1?: string
-  sub_2?: string
-}
 
 interface Props {
   data: IServicesCategories[]

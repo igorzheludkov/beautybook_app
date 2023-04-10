@@ -8,6 +8,7 @@ import colors from '../../../constants/colors'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { CatalogStackTypes } from '../../../models/INavigationStack'
 import Logo from '../../../components/atoms/Logo'
+import { IFilters } from '../CategoryScreen/types'
 
 type Props = NativeStackScreenProps<CatalogStackTypes, 'StartScreen'>
 
@@ -17,7 +18,7 @@ export default function StartScreen({ navigation }: Props) {
 
   const onChangeSearch = (query: string) => setSearchQuery(query)
 
-  function onCategoryPress(data: { root?: string; sub_1?: string }) {
+  function onCategoryPress(data: IFilters) {
     navigation.navigate('CategoryScreen', data)
   }
 

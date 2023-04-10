@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, ScrollView } from 'react-native'
+import { StyleSheet, ScrollView } from 'react-native'
 import colors from '../../../constants/colors'
 import { useGetFilteredMastersQuery } from '../../../store/modules/api/findMasters/findMastersSlice'
 import FilteredUsersBlock from './components/FilteredUsers'
@@ -12,7 +12,7 @@ import {
 } from '../../../store/modules/api/filterCategories/filterCategoriesSlice'
 import CategoryFilters from './components/CategoryFilters'
 import { useAppSelector } from '../../../store/hooks'
-import { useGetPhotosQuery } from '../../../store/modules/api/photoGallery/photoGallerySlice'
+import { IFilters } from './types'
 
 type Props = NativeStackScreenProps<CatalogStackTypes, 'CategoryScreen'>
 
@@ -20,11 +20,7 @@ export default function CategoryScreen({ navigation, route }: Props) {
   // Categories
   const { data: categoryData } = useGetServiceCategoriesQuery({})
   const { data: categoryCities } = useGetCitiesQuery({})
-  const [categoriesCheck, setCategoriesCheck] = useState<{
-    root?: string
-    sub_1?: string
-    sub_2?: string
-  }>(route.params)
+  const [categoriesCheck, setCategoriesCheck] = useState<IFilters>(route.params)
 
   const category = [categoriesCheck.sub_2 || categoriesCheck.sub_1 || categoriesCheck.root]
   const selectedCity = useAppSelector((state) => state.appSlice.city)

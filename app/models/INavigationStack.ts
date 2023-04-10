@@ -1,4 +1,5 @@
 import { ParamListBase } from '@react-navigation/native'
+import { IFilters } from '../screens/CatalogStack/CategoryScreen/types'
 
 export type MainBottomTabs = {
   CatalogStack: undefined
@@ -8,7 +9,7 @@ export type MainBottomTabs = {
 
 export interface CatalogStackTypes extends ParamListBase {
   StartScreen: undefined
-  CategoryScreen: { root?: string | undefined; sub_1?: string | undefined }
+  CategoryScreen: IFilters
   MasterScreen: { id: string }
 }
 

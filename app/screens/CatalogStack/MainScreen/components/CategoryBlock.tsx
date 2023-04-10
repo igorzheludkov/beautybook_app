@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Text, Pressable } from 'react-native'
-import Checkbox from '../../../../components/atoms/Checkbox'
 import { IServicesCategories } from '../../../../models/IServicesCategories'
 import { Avatar, Button } from 'react-native-paper'
 import colors from '../../../../constants/colors'
+import { IFilters } from '../../CategoryScreen/types'
 
 interface IProps {
-  onPress: (arg: { root?: string; sub_1?: string }) => void
+  onPress: (arg: IFilters) => void
   data: IServicesCategories[]
 }
 
@@ -17,7 +17,7 @@ const CategoryBlock = ({ data, onPress }: IProps) => {
         <View key={id} style={styles.cardContainer}>
           <Avatar.Image size={100} source={{ uri: image }} />
           <View style={styles.cardContent}>
-            <Pressable onPress={() => onPress({ root: id })}>
+            <Pressable onPress={() => onPress({ root: { id, title } })}>
               <Text style={styles.title}>{title}</Text>
             </Pressable>
             <View style={styles.subCat}>
@@ -26,7 +26,9 @@ const CategoryBlock = ({ data, onPress }: IProps) => {
                   style={styles.subCatBtn}
                   labelStyle={styles.subCatBtnLabel}
                   key={subCat.id}
-                  onPress={() => onPress({ root: id, sub_1: subCat.id })}
+                  onPress={() =>
+                    onPress({ root: { id, title }, sub_1: { id: subCat.id, title: subCat.title } })
+                  }
                   mode='outlined'
                 >
                   {subCat.title}

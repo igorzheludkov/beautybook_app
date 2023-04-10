@@ -5,7 +5,7 @@ export interface IProfileForm {
   phone?: string
   city?: CitiesDataTypes
   street?: string
-  skills?: string[]
+  skills?: ISkillsItem[]
   avatar?: string
   aboutMe?: string
   description?: string
@@ -15,3 +15,9 @@ export interface IProfileForm {
   tiktok?: string
   facebook?: string
 }
+
+export interface ISkillsItem {
+  id: string
+  title: string
+}
+

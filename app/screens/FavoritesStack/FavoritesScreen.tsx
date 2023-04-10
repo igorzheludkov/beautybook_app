@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, ScrollView} from 'react-native'
+import { StyleSheet, ScrollView } from 'react-native'
 import colors from '../../constants/colors'
 import { useGetBookmarksQuery } from '../../store/modules/api/bookmarks/bookmarksSlice'
 import UserCard from './blocks/UserCard'
@@ -20,8 +20,8 @@ export default function FavoritesScreen({ navigation }: Props) {
 
   return (
     <ScrollView style={style.wrapper}>
-      {data?.map((item: IProfileForm) => (
-        <UserCard key={item.id} user={item} onPress={onMasterPress} />
+      {data?.map((item: { data: IProfileForm, id: string }) => (
+        <UserCard key={item.data.id} user={item.data} onPress={onMasterPress}/>
       ))}
     </ScrollView>
   )
