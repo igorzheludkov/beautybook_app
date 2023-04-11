@@ -37,7 +37,7 @@ export default function AdminPanelEntry({ navigation }: any) {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    padding: 10,
+    paddingHorizontal: 10,
     backgroundColor: colors.defaultContainerColor
   }
 })

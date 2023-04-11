@@ -4,10 +4,16 @@ import { Menu } from 'react-native-paper'
 import RotateSquareAnimation from '../../../../utils/RotateSquareAnimation'
 import { CitiesDataTypes } from '../../../../models/ICities'
 import CityIcon from '../../../../assets/icons/CityIcon'
-import CitiesList from '../atoms/CitilesList'
+import CitiesList from '../atoms/CitiesList'
 import SelectCityButton from '../atoms/SelectCityButton'
 
-export default function CitySelector({ data, onPress, checkedItems }: IProps) {
+interface IProps {
+  data: CitiesDataTypes[]
+  checkedItems: CitiesDataTypes | undefined
+  onPress: (arg0: CitiesDataTypes) => void
+}
+
+export default function CitiesSelector({ data, onPress, checkedItems }: IProps) {
   data = Object.values(data).flat()
   const [menuVisible, setMenuVisible] = useState(false)
   const [selectedItem, setSelectedItem] = useState(checkedItems)
@@ -47,9 +53,3 @@ const styles = StyleSheet.create({
     width: '70%'
   }
 })
-
-interface IProps {
-  data: CitiesDataTypes[]
-  checkedItems: CitiesDataTypes | undefined
-  onPress: (arg0: CitiesDataTypes) => void
-}

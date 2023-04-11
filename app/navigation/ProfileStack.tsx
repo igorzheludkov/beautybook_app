@@ -10,6 +10,9 @@ import ProfileScreen from '../screens/ProfileStack/ProfileScreen/ProfileScreen'
 import AdminPanelScreen from '../screens/ProfileStack/AdminPanelScreen/AdminPanelEntry'
 import PhotoGalleryScreen from '../screens/ProfileStack/PhotoGalleryScreen/PhotoGalleryScreen'
 import { Button } from 'react-native-paper'
+import GoodsScreen from '../screens/ProfileStack/GoodsScreen/GoodsScreen'
+import ServicesScreen from '../screens/ProfileStack/ServicesScreen/ServicesScreen'
+import ServiceAddScreen from '../screens/ProfileStack/ServiceAddScreen/ServiceAddScreen'
 
 const Stack = createNativeStackNavigator<ProfileStackTypes>()
 
@@ -42,6 +45,21 @@ export default function ProfileNavigator({ navigation }: any) {
             name='PhotoGalleryScreen'
             component={PhotoGalleryScreen}
             options={{ headerShown: true, headerTitle: 'Фотогалерея', headerTitleAlign: 'center' }}
+          />
+          <Stack.Screen
+            name='GoodsScreen'
+            component={GoodsScreen}
+            options={{ headerShown: true, headerTitle: 'Товари', headerTitleAlign: 'center' }}
+          />
+          <Stack.Screen
+            name='ServicesScreen'
+            component={ServicesScreen}
+            options={{ headerShown: true, headerTitle: 'Послуги', headerTitleAlign: 'center' }}
+          />
+          <Stack.Screen
+            name='ServiceAddScreen'
+            component={ServiceAddScreen}
+            options={{ headerShown: true, headerTitle: 'Додати послугу', headerTitleAlign: 'center' }}
           />
           <Stack.Screen
             name='ProfileScreen'

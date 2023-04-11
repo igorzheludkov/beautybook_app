@@ -10,12 +10,12 @@ export type MainBottomTabs = {
 export interface CatalogStackTypes extends ParamListBase {
   StartScreen: undefined
   CategoryScreen: IFilters
-  MasterScreen: {masterId: string, bookmarkId?: string}
+  MasterScreen: { masterId: string; bookmarkId?: string }
 }
 
 export interface FavoritesStackTypes extends ParamListBase {
   FavoritesScreen: undefined
-  MasterScreen: {masterId: string, bookmarkId?: string}
+  MasterScreen: { masterId: string; bookmarkId?: string }
 }
 
 export interface ProfileStackTypes extends ParamListBase {
@@ -23,4 +23,7 @@ export interface ProfileStackTypes extends ParamListBase {
   AuthScreen: undefined
   PhotoGalleryScreen: undefined
   ProfileScreen: undefined
+  GoodsScreen: undefined
+  ServicesScreen: undefined
+  AddServiceScreen: undefined
 }

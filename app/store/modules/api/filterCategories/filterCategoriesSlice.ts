@@ -21,7 +21,7 @@ export const filterCategories = apiSlice.injectEndpoints({
         data.forEach((item) => extractedArray.push(item.data() as IServicesCategories))
 
         if (extractedArray.length) {
-          return { data: extractedArray }
+          return { data: extractedArray as IServicesCategories[]}
         } else {
           return { error: { data: 'collection does not exist or empty', status: 404 } as FetchBaseQueryError }
         }

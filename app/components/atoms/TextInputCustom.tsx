@@ -1,11 +1,13 @@
-import React from 'react'
-import { TextInput, Text, StyleSheet, Platform } from 'react-native'
+import React, { useState } from 'react'
+import { TextInput, Text, StyleSheet, Platform, View } from 'react-native'
 import colors from '../../constants/colors'
 
 interface IProps {
   value: string
+  errorText?: string
   placeholder?: string
   onChangeText: () => void
+  containerStyle?: any
   style?: any
   label?: string
   secureTextEntry?: boolean
@@ -14,12 +16,19 @@ interface IProps {
 
 export default function TextInputCustom({ style, label, ...props }: IProps) {
   const styles = getStyles(props)
+  const [isFocused, setIsFocused] = useState(false)
 
   return (
-    <>
+    <View style={props.containerStyle}>
       {label && <Text style={styles.label}>{label}</Text>}
-      <TextInput style={[styles.input, style]} {...props} />
-    </>
+      <TextInput
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setIsFocused(false)}
+        style={[styles.input, style, isFocused ? styles.focused : {}]}
+        {...props}
+      />
+      {props.errorText && <Text>{props.errorText}</Text>}
+    </View>
   )
 }
 
@@ -39,6 +48,9 @@ function getStyles(params: any) {
     },
     label: {
       marginTop: 25
+    },
+    focused: {
+      borderBottomColor: colors.palette.pink
     }
   })
 }

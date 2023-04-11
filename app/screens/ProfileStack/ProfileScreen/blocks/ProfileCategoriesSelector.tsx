@@ -15,8 +15,6 @@ interface IProps {
 const ProfileCategoriesSelector = ({ data, onCheckedChange, checkedItems }: IProps) => {
   const [checkedSkills, setCheckedSkills] = useState<ISkillsItem[] | []>([])
 
-  console.log('~~~~~~~~~~~~~~ checkedSkills', checkedSkills)
-
   useEffect(() => {
     checkedItems.length && setCheckedSkills(checkedItems)
   }, [checkedItems])

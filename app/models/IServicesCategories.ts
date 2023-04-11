@@ -1,10 +1,10 @@
-type Item = {
-  id: string
-  title: string
-  description: string
-  image: string
-  parent?: string
-}
+// type Item = {
+//   id: string
+//   title: string
+//   description: string
+//   image: string
+//   parent?: string
+// }
 
 type SubCategory = {
   parent?: string
@@ -12,7 +12,7 @@ type SubCategory = {
   title: string
   description: string
   image: string
-  subCategories: Item[] | []
+  subCategories: SubCategory[] | []
 }
 
 export interface IServicesCategories {

@@ -20,9 +20,10 @@ import ProfileCategoriesSelector from './blocks/ProfileCategoriesSelector'
 import { ProfileStackTypes } from '../../../models/INavigationStack'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import ProfileForm from './blocks/ProfileForm'
-import CitySelector from './blocks/CitySelector'
+import CitySelector from './blocks/CitiesSelector'
 import { IProfileForm } from '../../../models/IProfileForm'
 import { ISkillsItem } from '../../../models/IProfileForm'
+import definedValuesFilter from '../../../utils/definedValuesFilter'
 
 type Props = NativeStackScreenProps<ProfileStackTypes, 'ProfileScreen'>
 
@@ -42,9 +43,6 @@ export default function ProfileScreen({ navigation }: Props) {
 
   const [skillsProfile, setSkillsProfile] = useState<ISkillsItem[] | []>([])
 
-  console.log('~~~~~~~~~~~~~~ skillsProfile', skillsProfile)
-
-
   const {
     control,
     handleSubmit,
@@ -52,14 +50,8 @@ export default function ProfileScreen({ navigation }: Props) {
   } = useForm({ defaultValues: data })
 
   function onSubmit(form: any) {
-    const notEmtyFields: IProfileForm = Object.assign(
-      {},
-      ...Object.entries(form)
-        .filter(([_, value]) => value !== undefined)
-        .map(([key, value]) => ({ [key]: value }))
-    )
-    console.log('form ', form)
-    console.log('notEmtyFields ', notEmtyFields)
+    const notEmtyFields: IProfileForm = definedValuesFilter(form)
+
     updateProfileData({ data: { ...notEmtyFields, skills: skillsProfile || data?.skills || [] } })
   }
 

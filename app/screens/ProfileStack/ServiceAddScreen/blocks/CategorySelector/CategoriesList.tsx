@@ -1,31 +1,31 @@
 import { Pressable, Text, StyleSheet, View, ScrollView } from 'react-native'
-import { CitiesDataTypes } from '../../../../models/ICities'
 import { useState } from 'react'
-import ArrowRightIcon from '../../../../assets/icons/ArrowRight'
+import ArrowRightIcon from '../../../../../assets/icons/ArrowRight'
+import { IServicesCategories } from '../../../../../models/IServicesCategories'
 
 interface IProps {
-  data: CitiesDataTypes[]
-  closeMenu: (i: CitiesDataTypes) => void
+  data: IServicesCategories[]
+  closeMenu: (i: IServicesCategories) => void
 }
 
-export default function CitiesList({ data, closeMenu }: IProps) {
-  const [renderLevel, setRenderLevel] = useState<CitiesDataTypes[] | undefined>(data)
+export default function CategoriesList({ data, closeMenu }: IProps) {
+  const [renderLevel, setRenderLevel] = useState<IServicesCategories[] | undefined>(data)
 
   return (
     <ScrollView style={{ maxHeight: 400 }}>
       {renderLevel?.map((item) => (
         <View key={item.id} style={styles.wrapper}>
-          {item?.cities ? (
-            <Pressable style={styles.item} onPress={() => setRenderLevel(item.cities)}>
-              <Text style={styles.text}>{item.name_uk}</Text>
+          {item?.subCategories ? (
+            <Pressable style={styles.item} onPress={() => setRenderLevel(item.subCategories)}>
+              <Text style={styles.text}>{item.title}</Text>
             </Pressable>
           ) : (
             <Pressable style={styles.item} onPress={() => closeMenu(item)}>
-              <Text style={styles.text}>{item.name_uk}</Text>
+              <Text style={styles.text}>{item.title}</Text>
             </Pressable>
           )}
-          {item?.cities && (
-            <Pressable style={styles.icon} onPress={() => setRenderLevel(item.cities)}>
+          {item?.subCategories && (
+            <Pressable style={styles.icon} onPress={() => setRenderLevel(item.subCategories)}>
               <ArrowRightIcon />
             </Pressable>
           )}
