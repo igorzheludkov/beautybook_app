@@ -21,6 +21,7 @@ const Bio = (props: IProps) => {
         <View style={styles.cardContent}>
           <View>
             <Text style={styles.title}>{data?.name}</Text>
+            <Text style={styles.aboutMe}>{data?.aboutMe}</Text>
           </View>
           <View style={styles.contacts}>
             {data?.instagram && <InstagramIcon style={styles.marginRight} />}
@@ -42,7 +43,8 @@ const styles = StyleSheet.create({
   cardContent: { marginLeft: 10, flex: 1, marginRight: 10, justifyContent: 'space-between' },
   title: { fontSize: 24, paddingBottom: 10 },
   contacts: { flexDirection: 'row' },
-  marginRight: { marginRight: 10 }
+  marginRight: { marginRight: 10 },
+  aboutMe: {}
 })
 
 export default Bio

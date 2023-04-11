@@ -3,23 +3,40 @@ import { ActivityIndicator, StyleSheet, View } from 'react-native'
 import Bio from './blocks/Bio'
 import { Button } from 'react-native-paper'
 import { useMasterDataQuery } from '../../../../store/modules/api/masterData/masterDataSlice'
-import { useSaveBookmarkMutation } from '../../../../store/modules/api/bookmarks/bookmarksSlice'
+import {
+  useGetBookmarksQuery,
+  useRemoveBookmarkMutation,
+  useSaveBookmarkMutation
+} from '../../../../store/modules/api/bookmarks/bookmarksSlice'
 
 interface IProps {
-  id: string
+  masterId: string
 }
 
-const MasterPage = ({ id }: IProps) => {
-  const { data } = useMasterDataQuery(id)
+const MasterPage = ({ masterId }: IProps) => {
+  const { data } = useMasterDataQuery(masterId)
+  const { data: bookmarks } = useGetBookmarksQuery({ subCollection: 'services' })
+
+  const masterBookmarkId = bookmarks?.find((item) => item.data.id === masterId)
+
   const [saveBookmark, { isLoading, isSuccess, isError }] = useSaveBookmarkMutation()
+
+  const [removeBookmark, removeBookmarkStatus] = useRemoveBookmarkMutation()
+  const { isLoading: removeLoad, isSuccess: removeOk, isError: removeErr } = removeBookmarkStatus
 
   if (!data) return <ActivityIndicator />
 
   return (
     <View style={styles.wrapper}>
-      <Button onPress={() => saveBookmark({ subCollection: 'services', data: data })}>
-        Додати в закладки
-      </Button>
+      {masterBookmarkId ? (
+        <Button onPress={() => removeBookmark({ subCollection: 'services', id: masterBookmarkId.id })}>
+          Відписатись
+        </Button>
+      ) : (
+        <Button onPress={() => saveBookmark({ subCollection: 'services', data: data })}>
+          Підписатись
+        </Button>
+      )}
       <Bio data={data} />
     </View>
   )

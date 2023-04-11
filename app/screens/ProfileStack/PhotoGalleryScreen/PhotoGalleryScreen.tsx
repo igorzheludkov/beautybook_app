@@ -15,9 +15,14 @@ export default function PhotoGalleryScreen() {
   const dispatch = useAppDispatch()
   const { data: userData, isLoading: userDataLoading } = useProfileDataQuery({})
 
-  if (userDataLoading) return <ActivityIndicator />
+  if (!userData) return <ActivityIndicator />
 
-  const { data: photos } = useGetPhotosQuery({ userId: userData?.id, page: 0 })
+  const { data: photos } = useGetPhotosQuery({
+    userId: userData?.id,
+    page: 0,
+    rootFolder: 'user',
+    groupFolder: 'gallery'
+  })
   const [images, handlePickImageFromCamera, handlePickImagesFromGallery, resetState] = useImagePicker()
   const [uploadPhotos, { isLoading, error, isSuccess }] = useUploadPhotosMutation()
   const [removePhoto, { isLoading: isRemoving, error: removeError, isSuccess: removeSuccess }] =
@@ -25,14 +30,19 @@ export default function PhotoGalleryScreen() {
 
   useEffect(() => {
     if (images?.length) {
-      uploadPhotos({ image: images })
+      uploadPhotos({ userId: userData?.id, images, rootFolder: 'user', groupFolder: 'gallery' })
       resetState()
     }
   }, [images])
 
   return (
     <View style={styles.wrapper}>
-      <PhotoGallery data={photos || []} onRemove={(id) => removePhoto({ photoId: id })} />
+      <PhotoGallery
+        data={photos || []}
+        onRemove={(id) =>
+          removePhoto({ userId: userData?.id, photoId: id, rootFolder: 'user', groupFolder: 'gallery' })
+        }
+      />
       <FAB icon='plus' style={styles.fab} onPress={() => handlePickImagesFromGallery(1)} />
     </View>
   )

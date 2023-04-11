@@ -65,16 +65,15 @@ export const bookmarksApi = apiSlice.injectEndpoints({
       invalidatesTags: ['bookmarksList'],
       queryFn: async ({ id, subCollection }: IRemoveBookmark, thunkAPI) => {
         const { authSlice } = thunkAPI.getState() as { authSlice: AuthState }
-        const collectionRef = firestore()
+        const docRef = firestore()
           .collection(collectionName)
           .doc(authSlice.user?.uid)
-          .collection(subCollection)
+          .collection(subCollection).doc(id)
 
         if (id && subCollection) {
           try {
-            // await collectionRef.add(data)
-
-            return { data: 'bookmark saved' }
+            await docRef.delete()
+            return { data: 'bookmark removed' }
           } catch (error: any) {
             return { error: { data: error.message, status: 500 } }
           }
@@ -88,4 +87,4 @@ export const bookmarksApi = apiSlice.injectEndpoints({
 
 export default bookmarksApi
 
-export const { useSaveBookmarkMutation, useGetBookmarksQuery } = bookmarksApi
+export const { useSaveBookmarkMutation, useGetBookmarksQuery, useRemoveBookmarkMutation } = bookmarksApi

@@ -11,7 +11,7 @@ type Props = NativeStackScreenProps<CatalogStackTypes | FavoritesStackTypes, 'Ma
 export default function MasterScreen({ route }: Props) {
   return (
     <View style={styles.wrapper}>
-      <MasterPage id={route.params.id} />
+      <MasterPage masterId={route.params.masterId} bookmarkId={route.params.bookmarkId} />
     </View>
   )
 }

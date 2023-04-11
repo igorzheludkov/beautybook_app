@@ -1,24 +1,17 @@
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query/react'
 import apiSlice from '../apiSlice'
 
-import firestore from '@react-native-firebase/firestore'
 import storage from '@react-native-firebase/storage'
-import { AuthState } from '../../auth/slice'
 
-import { IProfileForm } from '../../../../models/IProfileForm'
-import { IQuery, IUploadPhoto } from './types'
+import { IGetPhotosQuery, IRemovePhotosQuery, IUploadPhotosQuery } from './types'
 import getPhotoGallery from './firebaseFunctions/getPhotoGallery'
-
-const folder = 'user'
-const subFolder = 'gallery'
 
 export const photoGalleryApi = apiSlice.injectEndpoints({
   overrideExisting: true,
   endpoints: (builder) => ({
     getPhotos: builder.query({
       providesTags: ['photoGallery'],
-      queryFn: async ({ userId, page }) => {
-        const getPhotos = await getPhotoGallery(userId || '', page, folder, subFolder)
+      queryFn: async (arg: IGetPhotosQuery) => {
+        const getPhotos = await getPhotoGallery(arg)
 
         if (getPhotos && getPhotos?.length >= 0) {
           return { data: getPhotos }
@@ -29,14 +22,14 @@ export const photoGalleryApi = apiSlice.injectEndpoints({
     }),
     removePhoto: builder.mutation({
       invalidatesTags: ['photoGallery'],
-      queryFn: async ({ photoId }, thunkAPI) => {
-        const { authSlice } = thunkAPI.getState() as { authSlice: AuthState }
-
-        const removePhotosRef = storage().ref(`${folder}/${authSlice.user?.uid}/${subFolder}/${photoId}`)
+      queryFn: async (arg: IRemovePhotosQuery, thunkAPI) => {
+        const removePhotosRef = storage().ref(
+          `${arg.rootFolder}/${arg.userId}/${arg.groupFolder}/${arg.photoId}`
+        )
 
         try {
           await removePhotosRef.delete()
-          return { data: `photo id: ${photoId} removed` }
+          return { data: `photo id: ${arg.photoId} removed` }
         } catch (e: any) {
           return { error: { data: `photos removing failed, error ${e.message}`, status: 400 } }
         }
@@ -44,15 +37,14 @@ export const photoGalleryApi = apiSlice.injectEndpoints({
     }),
     uploadPhotos: builder.mutation({
       invalidatesTags: ['photoGallery'],
-      queryFn: async ({ image }: IUploadPhoto, thunkAPI) => {
-        const { authSlice } = thunkAPI.getState() as { authSlice: AuthState }
-        // const photoRef = firestore().collection(collectionName).doc(authSlice.user?.uid)
-
-        if (image && image[0]?.uri) {
-          const avatarRef = storage().ref(`user/${authSlice.user?.uid}/gallery/${image[0].fileName}`)
+      queryFn: async (arg: IUploadPhotosQuery, thunkAPI) => {
+        if (arg.images && arg.images[0]?.uri) {
+          const avatarRef = storage().ref(
+            `${arg.rootFolder}/${arg.userId}/${arg.groupFolder}/${arg.images[0].fileName}`
+          )
           try {
             await avatarRef
-              .putFile(image[0].uri as string)
+              .putFile(arg.images[0].uri as string)
               .then((task) => console.log('~~~~~~~~~~~~~~ task.state', task.state))
 
             return { data: 'photo uploaded' }

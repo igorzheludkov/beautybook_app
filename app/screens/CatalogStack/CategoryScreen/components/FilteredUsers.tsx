@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Text, Pressable } from 'react-native'
 import { IProfileForm } from '../../../../models/IProfileForm'
-import UserCard from './blocks/UserCard'
+import UserCard from './atoms/UserCard'
 
 interface IProps {
   onPress: (arg0: string) => void

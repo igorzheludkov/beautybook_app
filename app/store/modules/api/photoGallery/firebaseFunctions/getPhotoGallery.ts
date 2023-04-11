@@ -1,17 +1,14 @@
 import storage from '@react-native-firebase/storage'
 import { IPhotoGallery } from '../../../../../models/IPhotoGallery'
+import { IGetPhotosQuery } from '../types'
 
-export default async function getPhotoGallery(
-  userId: string,
-  page: string,
-  folder: string,
-  subFolder: string
-) {
+export default async function getPhotoGallery(params: IGetPhotosQuery) {
+  const { userId, page, rootFolder, groupFolder, itemFolder = '' } = params
   if (!userId) return null
 
   const toTimestamp = (time: string) => new Date(time).getTime()
 
-  const photosRef = storage().ref(`${folder}/${userId}/${subFolder}`)
+  const photosRef = storage().ref(`${rootFolder}/${userId}/${groupFolder}/${itemFolder}`)
 
   let photosArray: IPhotoGallery[] = []
 

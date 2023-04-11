@@ -12,16 +12,14 @@ type Props = NativeStackScreenProps<FavoritesStackTypes, 'FavoritesScreen'>
 export default function FavoritesScreen({ navigation }: Props) {
   const { data, isLoading } = useGetBookmarksQuery({ subCollection: 'services' })
 
-  function onMasterPress(data: string) {
-    navigation.navigate('MasterScreen', { id: data })
+  function onMasterPress(data: { masterId: string }) {
+    navigation.navigate('MasterScreen', { masterId: data.masterId })
   }
-
-  console.log('~~~~~~~~~~~~~~ data', data)
 
   return (
     <ScrollView style={style.wrapper}>
-      {data?.map((item: { data: IProfileForm, id: string }) => (
-        <UserCard key={item.data.id} user={item.data} onPress={onMasterPress}/>
+      {data?.map((item: { data: IProfileForm; id: string }) => (
+        <UserCard key={item.data.id} user={item.data} onPress={onMasterPress} />
       ))}
     </ScrollView>
   )
