@@ -6,12 +6,17 @@ type ImagePickerHookReturnType = [
   () => void, // handlePickImageFromCamera
   (selectionLimit?: number) => void, // handlePickImagesFromGallery
   () => void, // resetState
+  (id: string | undefined) => void // remove Element
 ]
 
 const useImagePicker = (): ImagePickerHookReturnType => {
   const [images, setImages] = useState<ImagePickerResponse['assets']>([])
 
   const resetState = () => setImages([])
+
+  const removeTempImage = (id: string | undefined) => {
+    id && setImages(images?.filter((item) => item.fileName !== id))
+  }
 
   const handlePickImageFromCamera = () => {
     launchCamera({ mediaType: 'photo' }, (response) => {
@@ -20,7 +25,8 @@ const useImagePicker = (): ImagePickerHookReturnType => {
       } else if (response.errorCode) {
         console.log(`ImagePicker Error: ${response.errorCode}`)
       } else {
-        setImages(response?.assets)
+        // @ts-ignore
+        setImages((prev) => [...prev, ...response?.assets])
       }
     })
   }
@@ -39,13 +45,13 @@ const useImagePicker = (): ImagePickerHookReturnType => {
         } else if (response.errorCode) {
           console.log(`ImagePicker Error: ${response.errorCode}`)
         } else {
-          setImages(response?.assets)
+          setImages((prev) => [...prev, ...response?.assets])
         }
       }
     )
   }
 
-  return [images, handlePickImageFromCamera, handlePickImagesFromGallery, resetState]
+  return [images, handlePickImageFromCamera, handlePickImagesFromGallery, resetState, removeTempImage]
 }
 
 export default useImagePicker

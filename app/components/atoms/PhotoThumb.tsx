@@ -4,9 +4,9 @@ import { Button } from 'react-native-paper'
 import RemoveIcon from '../../assets/icons/RemoveIcon'
 
 interface Props {
-  id: string
-  url: string
-  onRemove: (arg0: string) => void
+  id: string | undefined
+  url: string | undefined
+  onRemove: (arg0: string | undefined) => void
 }
 
 export default function PhotoThumb({ url, id, onRemove }: Props) {

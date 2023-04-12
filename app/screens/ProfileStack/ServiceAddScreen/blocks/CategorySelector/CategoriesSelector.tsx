@@ -36,5 +36,5 @@ export default function CategoriesSelector({ data, onPress }: IProps) {
 }
 
 const styles = StyleSheet.create({
-  menu: { width: '90%', paddingTop: 10, marginLeft: '2%' }
+  menu: { width: '90%', paddingTop: 40, marginLeft: '2%' }
 })

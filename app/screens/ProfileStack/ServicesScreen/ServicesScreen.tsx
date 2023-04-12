@@ -3,18 +3,26 @@ import { FAB } from 'react-native-paper'
 import colors from '../../../constants/colors'
 import { ProfileStackTypes } from '../../../models/INavigationStack'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { useGetItemsQuery } from '../../../store/modules/api/goodsAndServices/goodsAndServicesSlice'
+import ServiceItem from './blocks/ServiceItem'
+import { IUserServiceDocument } from '../../../store/modules/api/goodsAndServices/types'
 
 type Props = NativeStackScreenProps<ProfileStackTypes, 'ServicesScreen'>
 
 export default function ServicesScreen({ navigation }: Props) {
+  const { data } = useGetItemsQuery({})
+
+  function onServicePress(data: IUserServiceDocument) {
+    navigation.navigate('ServiceAddScreen', { item: data })
+  }
   return (
     <>
-      <FAB
-        animated
-        style={styles.fab}
-        icon='plus'
-        onPress={() => navigation.navigate('ServiceAddScreen')}
-      />
+      <ScrollView style={styles.wrapper}>
+        {data?.map((item) => (
+          <ServiceItem key={item.id} item={item} onPress={onServicePress} />
+        ))}
+      </ScrollView>
+      <FAB animated style={styles.fab} icon='plus' onPress={() => navigation.navigate('ServiceAddScreen')} />
     </>
   )
 }

@@ -9,7 +9,9 @@ export const apiSlice = createApi({
     'servicesCategoriesData',
     'masterData',
     'photoGallery',
-    'bookmarksList'
+    'bookmarksList',
+    'userServices',
+    'userServiceOne',
   ],
   endpoints: () => ({})
 })

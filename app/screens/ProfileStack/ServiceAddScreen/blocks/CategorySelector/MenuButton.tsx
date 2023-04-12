@@ -12,11 +12,13 @@ interface IProps {
 
 export default function MenuButton({ selectedItem, openMenu, menuVisible }: IProps) {
   return (
-    <TouchableOpacity style={styles.menuButtonWrapper} onPress={openMenu}>
-      <RotateSquareAnimation size={30} degree={menuVisible ? 90 : 0}>
-        <GoodsIcon />
-      </RotateSquareAnimation>
-
+    <TouchableOpacity
+      style={[
+        styles.menuButtonWrapper,
+        menuVisible ? { backgroundColor: 'blue' } : { backgroundColor: 'white' }
+      ]}
+      onPress={openMenu}
+    >
       <Text style={styles.menuButton}>{selectedItem ? selectedItem : 'Вибрати категорію'}</Text>
     </TouchableOpacity>
   )
@@ -28,7 +30,8 @@ const styles = StyleSheet.create({
     position: 'relative',
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 30
+    paddingVertical: 15,
+    paddingHorizontal: 50
   },
-  menuButton: { fontSize: 16, marginLeft: 10, paddingTop: 10 }
+  menuButton: { fontSize: 16}
 })

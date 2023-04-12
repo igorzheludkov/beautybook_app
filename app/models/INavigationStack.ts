@@ -1,5 +1,6 @@
 import { ParamListBase } from '@react-navigation/native'
 import { IFilters } from '../screens/CatalogStack/CategoryScreen/types'
+import { IUserServiceDocument } from '../store/modules/api/goodsAndServices/types'
 
 export type MainBottomTabs = {
   CatalogStack: undefined
@@ -25,5 +26,5 @@ export interface ProfileStackTypes extends ParamListBase {
   ProfileScreen: undefined
   GoodsScreen: undefined
   ServicesScreen: undefined
-  AddServiceScreen: undefined
+  ServiceAddScreen: { item: IUserServiceDocument } | undefined
 }

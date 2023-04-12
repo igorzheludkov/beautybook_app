@@ -24,7 +24,6 @@ export default function Form({ control, errors }: Props) {
             value={value}
             label='Назва послуги'
             errorText={errors.title ? 'Це поле має бути заповненим' : ''}
-
           />
         )}
       />
@@ -32,7 +31,7 @@ export default function Form({ control, errors }: Props) {
         <Controller
           control={control}
           name='price'
-          rules={{ required: true }}
+          rules={{ required: false }}
           render={({ field: { onChange, value } }) => (
             <TextInputCustom
               containerStyle={styles.price}
@@ -41,14 +40,13 @@ export default function Form({ control, errors }: Props) {
               label='Ціна'
               placeholder='грн'
               errorText={errors.price ? 'Це поле має бути заповненим' : ''}
-
             />
           )}
         />
         <Controller
           control={control}
           name='duration'
-          rules={{ required: true }}
+          rules={{ required: false }}
           render={({ field: { onChange, value } }) => (
             <TextInputCustom
               containerStyle={styles.duration}
@@ -67,6 +65,7 @@ export default function Form({ control, errors }: Props) {
         rules={{ required: false }}
         render={({ field: { onChange, value } }) => (
           <TextInputCustom
+            multiline
             containerStyle={styles.description}
             onChangeText={onChange}
             value={value}

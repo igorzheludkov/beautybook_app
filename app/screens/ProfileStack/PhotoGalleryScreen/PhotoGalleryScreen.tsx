@@ -21,7 +21,8 @@ export default function PhotoGalleryScreen() {
     userId: userData?.id,
     page: 0,
     rootFolder: 'user',
-    groupFolder: 'gallery'
+    groupFolder: 'gallery',
+    itemFolder: ''
   })
   const [images, handlePickImageFromCamera, handlePickImagesFromGallery, resetState] = useImagePicker()
   const [uploadPhotos, { isLoading, error, isSuccess }] = useUploadPhotosMutation()
@@ -30,7 +31,13 @@ export default function PhotoGalleryScreen() {
 
   useEffect(() => {
     if (images?.length) {
-      uploadPhotos({ userId: userData?.id, images, rootFolder: 'user', groupFolder: 'gallery' })
+      uploadPhotos({
+        userId: userData?.id,
+        images,
+        rootFolder: 'user',
+        groupFolder: 'gallery',
+        itemFolder: ''
+      })
       resetState()
     }
   }, [images])
@@ -40,7 +47,13 @@ export default function PhotoGalleryScreen() {
       <PhotoGallery
         data={photos || []}
         onRemove={(id) =>
-          removePhoto({ userId: userData?.id, photoId: id, rootFolder: 'user', groupFolder: 'gallery' })
+          removePhoto({
+            userId: userData?.id,
+            photoId: id,
+            rootFolder: 'user',
+            groupFolder: 'gallery',
+            itemFolder: ''
+          })
         }
       />
       <FAB icon='plus' style={styles.fab} onPress={() => handlePickImagesFromGallery(1)} />

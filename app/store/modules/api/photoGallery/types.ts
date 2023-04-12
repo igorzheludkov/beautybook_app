@@ -12,19 +12,19 @@ export interface IGetPhotosQuery {
   page: number | undefined
   rootFolder: StorageRootFolders
   groupFolder: StorageGroupFolders
-  itemFolder?: string //folder for some item files
+  itemFolder: string | undefined //folder for some item files
 }
 export interface IRemovePhotosQuery {
   userId: string | undefined
   photoId: string | undefined
   rootFolder: StorageRootFolders
   groupFolder: StorageGroupFolders
-  itemFolder?: string //folder for some item files
+  itemFolder: string | undefined//folder for some item files
 }
 export interface IUploadPhotosQuery {
   userId: string | undefined
   images: ImagePickerResponse['assets'] | undefined
   rootFolder: StorageRootFolders
   groupFolder: StorageGroupFolders
-  itemFolder?: string //folder for some item files
+  itemFolder: string | undefined //folder for some item files
 }

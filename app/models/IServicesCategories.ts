@@ -1,11 +1,3 @@
-// type Item = {
-//   id: string
-//   title: string
-//   description: string
-//   image: string
-//   parent?: string
-// }
-
 type SubCategory = {
   parent?: string
   id: string
