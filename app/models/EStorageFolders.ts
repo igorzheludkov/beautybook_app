@@ -1,3 +1,3 @@
 export type StorageRootFolders = 'user' | 'servicesCategories'
 
-export type StorageGroupFolders = 'gallery' | 'services'
+export type StorageGroupFolders = 'gallery' | 'services' | 'experience' | 'feedback' | 'goods'

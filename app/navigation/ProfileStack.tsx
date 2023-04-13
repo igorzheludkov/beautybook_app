@@ -7,12 +7,14 @@ import { ProfileStackTypes } from '../models/INavigationStack'
 import { logout } from '../store/modules/auth/thunks'
 import { useAppDispatch } from '../store/hooks'
 import ProfileScreen from '../screens/ProfileStack/ProfileScreen/ProfileScreen'
-import AdminPanelScreen from '../screens/ProfileStack/AdminPanelScreen/AdminPanelEntry'
+import AdminPanelScreen from '../screens/ProfileStack/AdminPanelScreen/AdminPanelRootEntry'
 import PhotoGalleryScreen from '../screens/ProfileStack/PhotoGalleryScreen/PhotoGalleryScreen'
 import { Button } from 'react-native-paper'
 import GoodsScreen from '../screens/ProfileStack/GoodsScreen/GoodsScreen'
-import ServicesScreen from '../screens/ProfileStack/ServicesScreen/ServicesScreen'
-import ServiceAddScreen from '../screens/ProfileStack/ServiceAddScreen/ServiceAddScreen'
+import ServicesScreen from '../screens/ProfileStack/Services/ServicesScreen/ServicesScreen'
+import ServiceAddScreen from '../screens/ProfileStack/Services/ServiceAddScreen/ServiceAddScreen'
+import FeedbackScreen from '../screens/ProfileStack/FeedbackScreen/FeedbackScreen'
+import ExperienceScreen from '../screens/ProfileStack/ExperienceScreen/ExperienceScreen'
 
 const Stack = createNativeStackNavigator<ProfileStackTypes>()
 
@@ -47,9 +49,14 @@ export default function ProfileNavigator({ navigation }: any) {
             options={{ headerShown: true, headerTitle: 'Фотогалерея', headerTitleAlign: 'center' }}
           />
           <Stack.Screen
-            name='GoodsScreen'
-            component={GoodsScreen}
-            options={{ headerShown: true, headerTitle: 'Товари', headerTitleAlign: 'center' }}
+            name='FeedbackScreen'
+            component={FeedbackScreen}
+            options={{ headerShown: true, headerTitle: 'Відгуки', headerTitleAlign: 'center' }}
+          />
+          <Stack.Screen
+            name='ExperienceScreen'
+            component={ExperienceScreen}
+            options={{ headerShown: true, headerTitle: 'Досвід та сертифікати', headerTitleAlign: 'center' }}
           />
           <Stack.Screen
             name='ServicesScreen'

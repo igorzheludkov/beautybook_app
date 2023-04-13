@@ -1,8 +1,8 @@
 import React from 'react'
 import { View, ActivityIndicator, SafeAreaView, Pressable, StyleSheet } from 'react-native'
 import { useProfileDataQuery } from '../../../store/modules/api/userData/userDataSlice'
-import NewUserBlock from './components/blocks/NewUserBlock'
-import AdminPanelPage from './components/AdminPanelMain'
+import NewUserBlock from './blocks/NewUserBlock'
+import AdminPanelPage from './AdminPanelScreen'
 import colors from '../../../constants/colors'
 
 export default function AdminPanelEntry({ navigation }: any) {
@@ -28,7 +28,6 @@ export default function AdminPanelEntry({ navigation }: any) {
 
   return (
     <View style={styles.wrapper}>
-      <SafeAreaView />
       <AdminPanelPage data={data} navigation={navigation} />
     </View>
   )

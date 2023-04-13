@@ -1,6 +1,6 @@
 import { View, StyleSheet, ScrollView, FlatList } from 'react-native'
 import React from 'react'
-import PhotoThumb from '../../../../components/atoms/PhotoThumb'
+import PhotoThumb from '../../../../../components/atoms/PhotoThumb'
 
 interface Props {
   data: Array<{ id: string | undefined; timeUpdated?: number; url: string | undefined }>
@@ -13,7 +13,15 @@ export default function PhotoGallery({ data, onRemove }: Props) {
       <View style={styles.container}>
         <View style={styles.flatlistContainer}>
           {data.map((element) => {
-            return <PhotoThumb key={element.url} size={150} url={element.url} onRemove={onRemove} id={element.id} />
+            return (
+              <PhotoThumb
+                key={element.url}
+                size={150}
+                url={element.url}
+                onRemove={onRemove}
+                id={element.id}
+              />
+            )
           })}
         </View>
       </View>

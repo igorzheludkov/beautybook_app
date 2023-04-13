@@ -1,7 +1,7 @@
 import { Pressable, Text, StyleSheet, View, ScrollView } from 'react-native'
 import { useState } from 'react'
-import ArrowRightIcon from '../../../../../assets/icons/ArrowRight'
-import { IServicesCategories } from '../../../../../models/IServicesCategories'
+import ArrowRightIcon from '../../../../../../assets/icons/ArrowRight'
+import { IServicesCategories } from '../../../../../../models/IServicesCategories'
 
 interface IProps {
   data: IServicesCategories[]

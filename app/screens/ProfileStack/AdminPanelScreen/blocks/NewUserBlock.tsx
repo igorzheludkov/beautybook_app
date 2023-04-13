@@ -6,7 +6,7 @@ export default function NewUserBlock() {
   return (
     <View style={styles.wrapper}>
       <View style={styles.cardContainer}>
-        <Avatar.Image size={150} source={require('../../../../../assets/images/avatar.png')} />
+        <Avatar.Image size={150} source={require('../../../../assets/images/avatar.png')} />
         <View style={styles.cardContent}>
           <Text style={styles.title}>Заповнити профіль</Text>
         </View>

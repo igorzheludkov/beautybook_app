@@ -23,6 +23,8 @@ export interface ProfileStackTypes extends ParamListBase {
   AdminPanelScreen: undefined
   AuthScreen: undefined
   PhotoGalleryScreen: undefined
+  FeedbackScreen: undefined
+  ExperienceScreen: undefined
   ProfileScreen: undefined
   GoodsScreen: undefined
   ServicesScreen: undefined

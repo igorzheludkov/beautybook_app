@@ -20,7 +20,7 @@ export const photoGalleryApi = apiSlice.injectEndpoints({
       }
     }),
     removePhoto: builder.mutation({
-      invalidatesTags: ['photoGallery', ],
+      invalidatesTags: ['photoGallery', 'personalData'],
       queryFn: async (arg: IRemovePhotosQuery, thunkAPI) => {
         const removePhotosRef = storage().ref(
           arg.itemFolder
@@ -37,7 +37,7 @@ export const photoGalleryApi = apiSlice.injectEndpoints({
       }
     }),
     uploadPhotos: builder.mutation({
-      invalidatesTags: ['photoGallery'],
+      invalidatesTags: ['photoGallery', 'personalData'],
       queryFn: async (arg: IUploadPhotosQuery, thunkAPI) => {
         if (arg.images && arg.images[0]?.uri) {
           try {

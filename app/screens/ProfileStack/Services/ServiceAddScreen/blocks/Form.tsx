@@ -1,9 +1,9 @@
 import React from 'react'
 import { Control, Controller, FieldErrors } from 'react-hook-form'
 import { StyleSheet, Text, View } from 'react-native'
-import TextInputCustom from '../../../../components/atoms/TextInputCustom'
-import colors from '../../../../constants/colors'
-import { IUserServiceData } from '../../../../models/IGoodsAndService'
+import TextInputCustom from '../../../../../components/atoms/TextInputCustom'
+import colors from '../../../../../constants/colors'
+import { IUserServiceData } from '../../../../../models/IGoodsAndService'
 
 interface Props {
   control: Control<IUserServiceData>

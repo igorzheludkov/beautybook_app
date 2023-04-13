@@ -1,4 +1,5 @@
 import { CitiesDataTypes } from './ICities'
+import { IPhotoGallery } from './IPhotoGallery'
 
 export interface IProfileForm {
   name?: string
@@ -14,6 +15,10 @@ export interface IProfileForm {
   telegram?: string
   tiktok?: string
   facebook?: string
+  highlight?: Highlight
+  galleryPhotos?: IPhotoGallery[]
+  galleryExperience?: IPhotoGallery[]
+  galleryFeedback?: IPhotoGallery[]
 }
 
 export interface ISkillsItem {
@@ -21,3 +26,4 @@ export interface ISkillsItem {
   title: string
 }
 
+export type Highlight = { title?: string; description?: string }

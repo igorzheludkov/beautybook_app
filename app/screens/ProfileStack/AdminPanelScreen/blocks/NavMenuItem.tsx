@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Text, Pressable } from 'react-native'
 import { Button } from 'react-native-paper'
-import ArrowRightIcon from '../../../../../assets/icons/ArrowRight'
+import ArrowRightIcon from '../../../../assets/icons/ArrowRight'
 
 interface IProps {
   icon: React.ReactNode

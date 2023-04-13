@@ -1,5 +1,5 @@
 import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
-import { IUserServiceDocument } from '../../../../store/modules/api/goodsAndServices/types'
+import { IUserServiceDocument } from '../../../../../store/modules/api/goodsAndServices/types'
 
 interface IProps {
   item: IUserServiceDocument

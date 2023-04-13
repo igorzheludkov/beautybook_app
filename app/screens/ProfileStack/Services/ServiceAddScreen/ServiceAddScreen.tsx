@@ -1,29 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import { ScrollView, StyleSheet, View } from 'react-native'
-import colors from '../../../constants/colors'
+import colors from '../../../../constants/colors'
 import { useForm } from 'react-hook-form'
-import { IUserServiceData } from '../../../models/IGoodsAndService'
+import { IUserServiceData } from '../../../../models/IGoodsAndService'
 import Form from './blocks/Form'
 import { Button, FAB } from 'react-native-paper'
-import { ProfileStackTypes } from '../../../models/INavigationStack'
+import { ProfileStackTypes } from '../../../../models/INavigationStack'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import definedValuesFilter from '../../../utils/definedValuesFilter'
+import definedValuesFilter from '../../../../utils/definedValuesFilter'
 import CategoriesSelector from './blocks/CategorySelector/CategoriesSelector'
-import { useGetServiceCategoriesQuery } from '../../../store/modules/api/filterCategories/filterCategoriesSlice'
-import { IServicesCategories } from '../../../models/IServicesCategories'
+import { useGetServiceCategoriesQuery } from '../../../../store/modules/api/filterCategories/filterCategoriesSlice'
+import { IServicesCategories } from '../../../../models/IServicesCategories'
 import {
   useAddItemMutation,
   useGetOneItemQuery,
   useRemoveItemMutation,
   useUpdateItemMutation
-} from '../../../store/modules/api/goodsAndServices/goodsAndServicesSlice'
-import useImagePicker from '../../../hooks/useImagesPicker'
+} from '../../../../store/modules/api/goodsAndServices/goodsAndServicesSlice'
+import useImagePicker from '../../../../hooks/useImagesPicker'
 import {
   useGetPhotosQuery,
   useRemovePhotoMutation,
   useUploadPhotosMutation
-} from '../../../store/modules/api/photoGallery/photoGallerySlice'
-import { useProfileDataQuery } from '../../../store/modules/api/userData/userDataSlice'
+} from '../../../../store/modules/api/photoGallery/photoGallerySlice'
+import { useProfileDataQuery } from '../../../../store/modules/api/userData/userDataSlice'
 import PhotoGallery from './blocks/PhotoGallery'
 
 type Props = NativeStackScreenProps<ProfileStackTypes, 'ServiceAddScreen'>
@@ -141,9 +141,9 @@ export default function ServiceAddScreen({ navigation, route }: Props) {
         <View style={{ height: 10 }} />
         {Boolean(itemId) && <Button onPress={() => removeItem({ id: item?.id })}>Видалити послугу</Button>}
       </ScrollView>
-      {isDirty && selectedCategory && (
-        <FAB animated style={styles.fab} icon='content-save-outline' onPress={handleSubmit(onSaveItem)} />
-      )}
+      {/* {isDirty && selectedCategory && ( */}
+      <FAB animated style={styles.fab} icon='content-save-outline' onPress={handleSubmit(onSaveItem)} />
+      {/* )} */}
     </>
   )
 }

@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native'
 import { Menu } from 'react-native-paper'
 import CategoriesList from './CategoriesList'
 import MenuButton from './MenuButton'
-import { IServicesCategories } from '../../../../../models/IServicesCategories'
+import { IServicesCategories } from '../../../../../../models/IServicesCategories'
 
 interface IProps {
   data: IServicesCategories[]

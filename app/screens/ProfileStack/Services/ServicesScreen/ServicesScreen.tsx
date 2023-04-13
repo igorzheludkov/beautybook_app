@@ -1,11 +1,11 @@
 import { ScrollView, StyleSheet } from 'react-native'
 import { FAB } from 'react-native-paper'
-import colors from '../../../constants/colors'
-import { ProfileStackTypes } from '../../../models/INavigationStack'
+import colors from '../../../../constants/colors'
+import { ProfileStackTypes } from '../../../../models/INavigationStack'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
-import { useGetItemsQuery } from '../../../store/modules/api/goodsAndServices/goodsAndServicesSlice'
+import { useGetItemsQuery } from '../../../../store/modules/api/goodsAndServices/goodsAndServicesSlice'
 import ServiceItem from './blocks/ServiceItem'
-import { IUserServiceDocument } from '../../../store/modules/api/goodsAndServices/types'
+import { IUserServiceDocument } from '../../../../store/modules/api/goodsAndServices/types'
 
 type Props = NativeStackScreenProps<ProfileStackTypes, 'ServicesScreen'>
 

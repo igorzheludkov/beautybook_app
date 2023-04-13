@@ -56,7 +56,7 @@ export const userDataApi = apiSlice.injectEndpoints({
       }
     }),
     updateAvatar: builder.mutation({
-      invalidatesTags: ['personalData', 'masterData', 'personalData'],
+      invalidatesTags: ['personalData', 'masterData'],
       queryFn: async ({ image }: IAvatar, thunkAPI) => {
         const { authSlice } = thunkAPI.getState() as { authSlice: AuthState }
         const profileRef = firestore().collection(collectionName).doc(authSlice.user?.uid)
