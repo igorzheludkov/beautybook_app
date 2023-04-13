@@ -13,7 +13,7 @@ export default function PhotoGallery({ data, onRemove }: Props) {
       <View style={styles.container}>
         <View style={styles.flatlistContainer}>
           {data.map((element) => {
-            return <PhotoThumb key={element.url} url={element.url} onRemove={onRemove} id={element.id} />
+            return <PhotoThumb key={element.url} size={150} url={element.url} onRemove={onRemove} id={element.id} />
           })}
         </View>
       </View>

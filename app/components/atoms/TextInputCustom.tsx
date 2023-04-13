@@ -3,7 +3,7 @@ import { TextInput, Text, StyleSheet, Platform, View } from 'react-native'
 import colors from '../../constants/colors'
 
 interface IProps {
-  value: string
+  value: string | undefined
   errorText?: string
   placeholder?: string
   onChangeText: () => void

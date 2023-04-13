@@ -80,7 +80,8 @@ export default function Form({ control, errors }: Props) {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    backgroundColor: colors.defaultContainerColor
+    backgroundColor: colors.defaultContainerColor,
+    marginBottom: 20
   },
   containerFirst: { flexDirection: 'row', justifyContent: 'space-between' },
   title: {},

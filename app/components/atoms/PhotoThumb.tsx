@@ -7,14 +7,18 @@ interface Props {
   id: string | undefined
   url: string | undefined
   onRemove: (arg0: string | undefined) => void
+  size?: number
 }
 
-export default function PhotoThumb({ url, id, onRemove }: Props) {
+export default function PhotoThumb({ url, id, onRemove, size }: Props) {
   const windowWidth = Dimensions.get('window').width
   const imageWidth = (windowWidth - 20) / 2
   return (
     <View style={styles.wrapper}>
-      <Image style={[styles.image, { width: imageWidth, height: imageWidth }]} source={{ uri: url }} />
+      <Image
+        style={[styles.image, { width: size ?? imageWidth, height: size ?? imageWidth }]}
+        source={{ uri: url }}
+      />
       <Pressable style={styles.removeIcon} onPress={() => onRemove(id)}>
         <RemoveIcon fill={'white'} />
       </Pressable>

@@ -1,8 +1,6 @@
 import React from 'react'
 import { TouchableOpacity, View, Text, StyleSheet, GestureResponderEvent } from 'react-native'
-import colors from '../../../../../constants/colors'
-import GoodsIcon from '../../../../../assets/icons/GoodsIcon'
-import RotateSquareAnimation from '../../../../../utils/RotateSquareAnimation'
+import { Button } from 'react-native-paper'
 
 interface IProps {
   selectedItem?: string
@@ -12,15 +10,18 @@ interface IProps {
 
 export default function MenuButton({ selectedItem, openMenu, menuVisible }: IProps) {
   return (
-    <TouchableOpacity
-      style={[
-        styles.menuButtonWrapper,
-        menuVisible ? { backgroundColor: 'blue' } : { backgroundColor: 'white' }
-      ]}
-      onPress={openMenu}
-    >
-      <Text style={styles.menuButton}>{selectedItem ? selectedItem : 'Вибрати категорію'}</Text>
-    </TouchableOpacity>
+    <Button icon={'newspaper'} mode='contained' onPress={openMenu}>
+      {selectedItem ? selectedItem : 'Вибрати категорію'}
+    </Button>
+    // <TouchableOpacity
+    //   style={[
+    //     styles.menuButtonWrapper,
+    //     menuVisible ? { backgroundColor: 'blue' } : { backgroundColor: 'white' }
+    //   ]}
+    //   onPress={openMenu}
+    // >
+    //   <Text style={styles.menuButton}>{selectedItem ? selectedItem : 'Вибрати категорію'}</Text>
+    // </TouchableOpacity>
   )
 }
 
@@ -33,5 +34,5 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 50
   },
-  menuButton: { fontSize: 16}
+  menuButton: { fontSize: 16 }
 })

@@ -34,7 +34,7 @@ export default function ServiceAddScreen({ navigation, route }: Props) {
   const { data: userData, isLoading: userDataLoading } = useProfileDataQuery({})
   const { data: categoryData } = useGetServiceCategoriesQuery({})
   const [itemId, setItemId] = useState<string | undefined>(item?.id)
-  const { data: itemData, refetch } = useGetOneItemQuery({ id: itemId })
+  const { data: itemData } = useGetOneItemQuery({ id: itemId })
 
   const [addItem, { data: itemCreated, isSuccess: addItemSuccess }] = useAddItemMutation()
   const [updateItem, { data: itemUpdated, isSuccess: updateItemSuccess }] = useUpdateItemMutation()
@@ -87,13 +87,13 @@ export default function ServiceAddScreen({ navigation, route }: Props) {
         groupFolder: 'services',
         itemFolder: itemId
       })
-      resetState()
     }
   }, [itemId, images])
 
   useEffect(() => {
     if (itemId && itemPhotos) {
       onSaveItem({ images: itemPhotos })
+      resetState()
     }
   }, [itemPhotos?.length])
 
@@ -123,21 +123,25 @@ export default function ServiceAddScreen({ navigation, route }: Props) {
   return (
     <>
       <ScrollView style={styles.wrapper}>
-        <View style={{ height: 20 }} />
-        <CategoriesSelector data={categoryData || []} onPress={(cat) => setSelectedCategory(cat)} />
-        <View style={{ height: 10 }} />
         <View style={styles.container}>
           <Form control={control} errors={errors} />
+          <CategoriesSelector
+            data={categoryData || []}
+            defaultCategory={itemData?.data.categoryData}
+            onPress={(cat) => setSelectedCategory(cat)}
+          />
         </View>
 
         <PhotoGallery
           data={itemData?.data?.images || tempImages || []}
           onRemove={(id) => onRemovePhoto(id)}
         />
+        <View style={{ height: 10 }} />
         {<Button onPress={() => handlePickImagesFromGallery(10)}>Додати фото</Button>}
+        <View style={{ height: 10 }} />
         {Boolean(itemId) && <Button onPress={() => removeItem({ id: item?.id })}>Видалити послугу</Button>}
       </ScrollView>
-      {isDirty && (
+      {isDirty && selectedCategory && (
         <FAB animated style={styles.fab} icon='content-save-outline' onPress={handleSubmit(onSaveItem)} />
       )}
     </>
@@ -150,7 +154,8 @@ const styles = StyleSheet.create({
     backgroundColor: colors.defaultContainerColor
   },
   container: {
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    marginBottom: 10
   },
   fab: {
     position: 'absolute',
