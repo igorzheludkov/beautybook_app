@@ -1,10 +1,10 @@
 import { View, StyleSheet, ScrollView, FlatList } from 'react-native'
 import React from 'react'
-import PhotoThumb from '../../../../../../components/atoms/PhotoThumb'
+import PhotoThumb from './PhotoThumb'
 
 interface Props {
   data: Array<{ id: string; timeUpdated: number; url: string }>
-  onRemove: (arg0: string | undefined) => void
+  onRemove?: (arg0: string | undefined) => void
 }
 
 export default function PhotoGallery({ data, onRemove }: Props) {

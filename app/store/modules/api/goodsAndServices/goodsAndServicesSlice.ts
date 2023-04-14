@@ -21,14 +21,14 @@ const subCollectionName = 'services'
 export const userServicesApi = apiSlice.injectEndpoints({
   overrideExisting: true,
   endpoints: (builder) => ({
-    getItems: builder.query<IUserServiceDocument[], any>({
+    getItems: builder.query<IUserServiceDocument[], { userId: string | undefined}>({
       providesTags: ['userServices'],
-      queryFn: async ({}, thunkAPI) => {
+      queryFn: async ({ userId }, thunkAPI) => {
         const { authSlice } = thunkAPI.getState() as { authSlice: AuthState }
 
         const collectionRef = firestore()
           .collection(collectionName)
-          .doc(authSlice.user?.uid)
+          .doc(userId)
           .collection(subCollectionName)
 
         try {

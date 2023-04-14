@@ -5,16 +5,25 @@ import CategoryScreen from '../screens/CatalogStack/CategoryScreen/CategoryScree
 import MasterScreen from '../screens/CatalogStack/MasterScreen/MasterScreen'
 
 import { CatalogStackTypes } from '../models/INavigationStack'
-import MasterNavigator from './MasterStack'
+import MasterServScreen from '../screens/CatalogStack/MasterScreen/SubScreens/MasterServices/ServicesScreen/MasterServicesScreen'
+import MasterPhotoGalleryScreen from '../screens/CatalogStack/MasterScreen/SubScreens/MasterPhotoGalleryScreen/MasterPhotoGalleryScreen'
+import MasterFeedbackScreen from '../screens/CatalogStack/MasterScreen/SubScreens/MasterFeedbackScreen/MasterFeedbackScreen'
+import MasterExperienceScreen from '../screens/CatalogStack/MasterScreen/SubScreens/MasterExperienceScreen/MasterExperienceScreen'
+import ServiceInfoScreen from '../screens/CatalogStack/MasterScreen/SubScreens/MasterServices/ServiceInfoScreen/ServiceInfoScreen'
 
 const Stack = createNativeStackNavigator<CatalogStackTypes>()
 
 export default function CatalogNavigator() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName='StartScreen'>
-      <Stack.Screen name='StartScreen' component={StartScreen} />
-      <Stack.Screen name='CategoryScreen' component={CategoryScreen} options={{ headerShown: true }} />
-      <Stack.Screen name='MasterNavigator' component={MasterNavigator} options={{ headerShown: true }} />
+    <Stack.Navigator screenOptions={{ headerShown: true }} initialRouteName='StartScreen'>
+      <Stack.Screen name='StartScreen' component={StartScreen} options={{headerShown: false}}/>
+      <Stack.Screen name='CategoryScreen' component={CategoryScreen} />
+      <Stack.Screen name='MasterScreen' component={MasterScreen} />
+      <Stack.Screen name='MasterServScreen' component={MasterServScreen} />
+      <Stack.Screen name='ServiceInfoScreen' component={ServiceInfoScreen} />
+      <Stack.Screen name='MasterPhotoGalleryScreen' component={MasterPhotoGalleryScreen} />
+      <Stack.Screen name='MasterFeedbackScreen' component={MasterFeedbackScreen} />
+      <Stack.Screen name='MasterExperienceScreen' component={MasterExperienceScreen} />
     </Stack.Navigator>
   )
 }

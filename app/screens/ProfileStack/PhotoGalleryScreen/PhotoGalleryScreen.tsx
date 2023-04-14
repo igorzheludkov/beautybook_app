@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { View, StyleSheet } from 'react-native'
-import { useAppDispatch } from '../../../store/hooks'
 import { ActivityIndicator, Button, FAB } from 'react-native-paper'
 import useImagePicker from '../../../hooks/useImagesPicker'
 import {
@@ -8,21 +7,28 @@ import {
   useRemovePhotoMutation,
   useUploadPhotosMutation
 } from '../../../store/modules/api/photoGallery/photoGallerySlice'
-import { useProfileDataQuery } from '../../../store/modules/api/userData/userDataSlice'
+import { useProfileDataQuery, useUpdateProfileDataMutation } from '../../../store/modules/api/userData/userDataSlice'
 import PhotoGallery from './components/PhotoGallery'
+import definedValuesFilter from '../../../utils/definedValuesFilter'
+import { IProfileForm } from '../../../models/IProfileForm'
 
 export default function PhotoGalleryScreen() {
-  const dispatch = useAppDispatch()
+  const rootFolder = 'user'
+  const groupFolder = 'gallery'
+  const itemFolder = ''
+
   const { data: userData, isLoading: userDataLoading } = useProfileDataQuery({})
+  const [updateProfileData, { isLoading: isLoadingUpdate, error: updateError, isSuccess: isProfileUpdated }] =
+  useUpdateProfileDataMutation()
 
   if (!userData) return <ActivityIndicator />
 
   const { data: photos } = useGetPhotosQuery({
     userId: userData?.id,
     page: 0,
-    rootFolder: 'user',
-    groupFolder: 'gallery',
-    itemFolder: ''
+    rootFolder,
+    groupFolder,
+    itemFolder,
   })
   const [images, handlePickImageFromCamera, handlePickImagesFromGallery, resetState] = useImagePicker()
   const [uploadPhotos, { isLoading, error, isSuccess }] = useUploadPhotosMutation()
@@ -34,18 +40,27 @@ export default function PhotoGalleryScreen() {
       uploadPhotos({
         userId: userData?.id,
         images,
-        rootFolder: 'user',
-        groupFolder: 'gallery',
-        itemFolder: ''
+        rootFolder,
+        groupFolder,
+        itemFolder,
       })
       resetState()
     }
   }, [images])
 
+  useEffect(() => {
+    photos && onUpdateProfile({ galleryPhotos: photos })
+  }, [photos?.length])
+
+  function onUpdateProfile(data: IProfileForm) {
+    const notEmtyFields: IProfileForm = definedValuesFilter(data)
+    updateProfileData({ data: notEmtyFields })
+  }
+
   return (
     <View style={styles.wrapper}>
       <PhotoGallery
-        data={photos || []}
+        data={userData.galleryPhotos || []}
         onRemove={(id) =>
           removePhoto({
             userId: userData?.id,

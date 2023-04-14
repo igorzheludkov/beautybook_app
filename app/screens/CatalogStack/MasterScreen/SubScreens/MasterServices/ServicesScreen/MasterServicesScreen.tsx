@@ -1,19 +1,19 @@
 import { ScrollView, StyleSheet } from 'react-native'
 import { FAB } from 'react-native-paper'
 import colors from '../../../../../../constants/colors'
-import { ProfileStackTypes } from '../../../../../../models/INavigationStack'
+import { CatalogStackTypes, ProfileStackTypes } from '../../../../../../models/INavigationStack'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { useGetItemsQuery } from '../../../../../../store/modules/api/goodsAndServices/goodsAndServicesSlice'
 import ServiceItem from './blocks/ServiceItem'
 import { IUserServiceDocument } from '../../../../../../store/modules/api/goodsAndServices/types'
 
-type Props = NativeStackScreenProps<ProfileStackTypes, 'ServicesScreen'>
+type Props = NativeStackScreenProps<CatalogStackTypes, 'MasterServScreen'>
 
-export default function MasterServScreen({ navigation }: Props) {
-  const { data } = useGetItemsQuery({})
+export default function MasterServScreen({ navigation, route }: Props) {
+  const { data } = useGetItemsQuery({ userId: route.params.masterId })
 
   function onServicePress(data: IUserServiceDocument) {
-    navigation.navigate('ServiceAddScreen', { item: data })
+    navigation.navigate('ServiceInfoScreen', { item: data })
   }
   return (
     <>

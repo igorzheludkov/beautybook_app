@@ -8,5 +8,8 @@ export default function objectEqualityCheck(obj1: any, obj2: any) {
       return true
     }
   }
+  if (obj1 === undefined || obj2 === undefined) {
+    return true
+  }
   return false
 }

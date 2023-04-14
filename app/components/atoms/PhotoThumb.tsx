@@ -1,12 +1,11 @@
 import { View, Image, Text, TouchableOpacity, StyleSheet, Pressable, Dimensions } from 'react-native'
 import React from 'react'
-import { Button } from 'react-native-paper'
 import RemoveIcon from '../../assets/icons/RemoveIcon'
 
 interface Props {
   id: string | undefined
   url: string | undefined
-  onRemove: (arg0: string | undefined) => void
+  onRemove?: ((arg0: string | undefined) => void)
   size?: number
 }
 
@@ -19,9 +18,11 @@ export default function PhotoThumb({ url, id, onRemove, size }: Props) {
         style={[styles.image, { width: size ?? imageWidth, height: size ?? imageWidth }]}
         source={{ uri: url }}
       />
-      <Pressable style={styles.removeIcon} onPress={() => onRemove(id)}>
-        <RemoveIcon fill={'white'} />
-      </Pressable>
+      {onRemove && (
+        <Pressable style={styles.removeIcon} onPress={() => onRemove(id)}>
+          <RemoveIcon fill={'white'} />
+        </Pressable>
+      )}
     </View>
   )
 }

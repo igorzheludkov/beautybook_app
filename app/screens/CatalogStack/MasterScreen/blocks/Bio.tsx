@@ -1,12 +1,12 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import { Avatar } from 'react-native-paper'
-import InstagramIcon from '../../../../../assets/icons/instagram'
-import PhoneIcon from '../../../../../assets/icons/phone'
-import TelegramIcon from '../../../../../assets/icons/telegram'
-import { IProfileForm } from '../../../../../models/IProfileForm'
-import FacebookIcon from '../../../../../assets/icons/facebook'
-import TikTokIcon from '../../../../../assets/icons/tiktok'
+import InstagramIcon from '../../../../assets/icons/instagram'
+import PhoneIcon from '../../../../assets/icons/phone'
+import TelegramIcon from '../../../../assets/icons/telegram'
+import { IProfileForm } from '../../../../models/IProfileForm'
+import FacebookIcon from '../../../../assets/icons/facebook'
+import TikTokIcon from '../../../../assets/icons/tiktok'
 
 interface IProps {
   data: IProfileForm
@@ -36,9 +36,7 @@ const Bio = (props: IProps) => {
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1
-  },
+  wrapper: { marginBottom: 20, paddingHorizontal: 10 },
   cardContainer: { flexDirection: 'row', marginVertical: 10 },
   cardContent: { marginLeft: 10, flex: 1, marginRight: 10, justifyContent: 'space-between' },
   title: { fontSize: 24, paddingBottom: 10 },

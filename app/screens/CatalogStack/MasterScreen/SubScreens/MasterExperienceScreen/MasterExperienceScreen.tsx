@@ -1,82 +1,21 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { useAppDispatch } from '../../../../../store/hooks'
-import { ActivityIndicator, Button, FAB } from 'react-native-paper'
-import useImagePicker from '../../../../../hooks/useImagesPicker'
-import {
-  useGetPhotosQuery,
-  useRemovePhotoMutation,
-  useUploadPhotosMutation
-} from '../../../../../store/modules/api/photoGallery/photoGallerySlice'
-import {
-  useProfileDataQuery,
-  useUpdateProfileDataMutation
-} from '../../../../../store/modules/api/userData/userDataSlice'
-import PhotoGallery from './components/PhotoGallery'
-import definedValuesFilter from '../../../../../utils/definedValuesFilter'
-import { IProfileForm } from '../../../../../models/IProfileForm'
+import { ActivityIndicator } from 'react-native-paper'
+import PhotoGallery from '../../../../../components/atoms/PhotoGallery'
+import { CatalogStackTypes } from '../../../../../models/INavigationStack'
+import { NativeStackScreenProps } from '@react-navigation/native-stack'
+import { useMasterDataQuery } from '../../../../../store/modules/api/masterData/masterDataSlice'
 
-export default function MasterExperienceScreen() {
-  const rootFolder = 'user'
-  const groupFolder = 'experience'
-  const itemFolder = 'photos'
+type Props = NativeStackScreenProps<CatalogStackTypes, 'MasterExperienceScreen'>
 
-  const dispatch = useAppDispatch()
-  const { data: userData, isLoading: userDataLoading } = useProfileDataQuery({})
-  const [updateProfileData, { isLoading: isLoadingUpdate, error: updateError, isSuccess: isProfileUpdated }] =
-    useUpdateProfileDataMutation()
+export default function MasterExperienceScreen({ route }: Props) {
+  const { data } = useMasterDataQuery(route.params.masterId)
 
-  if (!userData) return <ActivityIndicator />
-
-  const { data: photos } = useGetPhotosQuery({
-    userId: userData?.id,
-    page: 0,
-    rootFolder,
-    groupFolder,
-    itemFolder
-  })
-  const [images, handlePickImageFromCamera, handlePickImagesFromGallery, resetState] = useImagePicker()
-  const [uploadPhotos, { isLoading, error, isSuccess: addSuccess }] = useUploadPhotosMutation()
-  const [removePhoto, { isLoading: isRemoving, error: removeError, isSuccess: removeSuccess }] =
-    useRemovePhotoMutation()
-
-  useEffect(() => {
-    if (images?.length) {
-      uploadPhotos({
-        userId: userData?.id,
-        images,
-        rootFolder,
-        groupFolder,
-        itemFolder
-      })
-      resetState()
-    }
-  }, [images])
-
-  useEffect(() => {
-    photos && onUpdateProfile({ galleryExperience: photos })
-  }, [photos?.length])
-
-  function onUpdateProfile(data: IProfileForm) {
-    const notEmtyFields: IProfileForm = definedValuesFilter(data)
-    updateProfileData({ data: notEmtyFields })
-  }
+  if (!data) return <ActivityIndicator />
 
   return (
     <View style={styles.wrapper}>
-      <PhotoGallery
-        data={photos || []}
-        onRemove={(id) =>
-          removePhoto({
-            userId: userData?.id,
-            photoId: id,
-            rootFolder,
-            groupFolder,
-            itemFolder
-          })
-        }
-      />
-      <FAB icon='plus' style={styles.fab} onPress={() => handlePickImagesFromGallery(10)} />
+      <PhotoGallery data={data.galleryExperience || []} />
     </View>
   )
 }
@@ -84,11 +23,5 @@ export default function MasterExperienceScreen() {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1
-  },
-  fab: {
-    position: 'absolute',
-    margin: 16,
-    right: 0,
-    bottom: 0
   }
 })
