@@ -15,6 +15,7 @@ import ServicesScreen from '../screens/ProfileStack/Services/ServicesScreen/Serv
 import ServiceAddScreen from '../screens/ProfileStack/Services/ServiceAddScreen/ServiceAddScreen'
 import FeedbackScreen from '../screens/ProfileStack/FeedbackScreen/FeedbackScreen'
 import ExperienceScreen from '../screens/ProfileStack/ExperienceScreen/ExperienceScreen'
+import MasterScreen from '../screens/CatalogStack/MasterScreen/MasterScreen'
 
 const Stack = createNativeStackNavigator<ProfileStackTypes>()
 
@@ -71,6 +72,11 @@ export default function ProfileNavigator({ navigation }: any) {
           <Stack.Screen
             name='ProfileScreen'
             component={ProfileScreen}
+            options={{ headerShown: true, headerTitleAlign: 'center', headerTitle: 'Профіль' }}
+          />
+          <Stack.Screen
+            name='MasterScreen'
+            component={MasterScreen}
             options={{ headerShown: true, headerTitleAlign: 'center', headerTitle: 'Профіль' }}
           />
         </Stack.Navigator>

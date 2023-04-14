@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
-import { Avatar } from 'react-native-paper'
+import { Avatar, Button } from 'react-native-paper'
 import { IProfileForm } from '../../../../models/IProfileForm'
 
 interface IProps {

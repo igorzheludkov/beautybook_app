@@ -19,6 +19,7 @@ import {
   useUpdateProfileDataMutation
 } from '../../../store/modules/api/userData/userDataSlice'
 import definedValuesFilter from '../../../utils/definedValuesFilter'
+import { useNavigation } from '@react-navigation/native'
 
 type NavProps = NativeStackScreenProps<ProfileStackTypes, 'AdminPaneScreen'>
 
@@ -38,11 +39,12 @@ export default function AdminPanelMain({ data, navigation }: Props) {
     updateProfileData({ data: { highlight: notEmtyFields } })
   }
 
-  console.log('~~~~~~~~~~~~~~ userData highlight', userData?.highlight)
-
   return (
     <ScrollView style={styles.wrapper}>
       <HeaderBlock data={data} />
+      <Button onPress={() => navigation.navigate('MasterScreen', { masterId: userData?.id })}>
+        Переглянути заповнену сторінку
+      </Button>
       <View style={{ height: 20 }} />
       <Hightlight
         values={userData?.highlight}

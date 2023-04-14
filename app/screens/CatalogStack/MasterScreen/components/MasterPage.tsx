@@ -10,7 +10,7 @@ import {
 } from '../../../../store/modules/api/bookmarks/bookmarksSlice'
 
 interface IProps {
-  masterId: string
+  masterId: string | undefined
 }
 
 const MasterPage = ({ masterId }: IProps) => {

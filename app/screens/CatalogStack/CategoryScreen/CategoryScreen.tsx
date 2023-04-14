@@ -29,7 +29,7 @@ export default function CategoryScreen({ navigation, route }: Props) {
   const { data = [], error } = useGetFilteredMastersQuery({ category, city: selectedCity?.id })
 
   function onMasterPress(data: string) {
-    navigation.navigate('MasterScreen', { masterId: data })
+    navigation.navigate('MasterNavigator', { screen: 'MasterScreen', params: { masterId: data } })
   }
 
   return (

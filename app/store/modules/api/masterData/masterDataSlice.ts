@@ -12,14 +12,17 @@ export const masterDataApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     masterData: builder.query({
       providesTags: ['masterData'],
-      queryFn: async (masterId: string) => {
+      queryFn: async (masterId: string | undefined) => {
+        if (masterId) {
+          const data = await firestore().collection(collectionName).doc(masterId).get()
 
-        const data = await firestore().collection(collectionName).doc(masterId).get()
-
-        if (data.exists) {
-          return { data: data.data() as IProfileForm }
+          if (data.exists) {
+            return { data: data.data() as IProfileForm }
+          } else {
+            return { error: { data: 'document does not exist', status: 404 } as FetchBaseQueryError }
+          }
         } else {
-          return { error: { data: 'document does not exist', status: 404 } as FetchBaseQueryError }
+          return { error: { data: 'provide masterId', status: 404 } as FetchBaseQueryError }
         }
       }
     })
