@@ -90,6 +90,9 @@ export default function ProfileScreen({ navigation }: Props) {
               checkedItems={data?.city}
             />
           </View>
+          <Button onPress={() => navigation.navigate('MasterScreen', { masterId: data?.id })}>
+            Переглянути заповнену сторінку
+          </Button>
           <ProfileForm control={control} data={data} errors={errors} />
           <Text style={styles.skillsTitle}>Виділіть ваші навики</Text>
           <Text style={styles.skillsSubTitle}>

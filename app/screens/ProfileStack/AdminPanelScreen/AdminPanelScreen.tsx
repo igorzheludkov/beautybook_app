@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, ScrollView } from 'react-native'
+import { View, StyleSheet, ScrollView, Text } from 'react-native'
 import HeaderBlock from './blocks/HeaderBlock'
 import { ProfileStackTypes } from '../../../models/INavigationStack'
 import { NativeStackScreenProps } from '@react-navigation/native-stack'
@@ -14,10 +14,7 @@ import ServicesIcon from '../../../assets/icons/ServicesIcon'
 import FeedbackIcon from '../../../assets/icons/FeedbackIcon'
 import ExperienceIcon from '../../../assets/icons/ExperienceIcon'
 import Hightlight from './blocks/Highlight'
-import {
-  useProfileDataQuery,
-  useUpdateProfileDataMutation
-} from '../../../store/modules/user/userSlice'
+import { useProfileDataQuery, useUpdateProfileDataMutation } from '../../../store/modules/user/userSlice'
 import definedValuesFilter from '../../../utils/definedValuesFilter'
 import { useNavigation } from '@react-navigation/native'
 
@@ -42,27 +39,25 @@ export default function AdminPanelMain({ data, navigation }: Props) {
   return (
     <ScrollView style={styles.wrapper}>
       <HeaderBlock data={data} />
-      <Button onPress={() => navigation.navigate('MasterScreen', { masterId: userData?.id })}>
-        Переглянути заповнену сторінку
-      </Button>
       <View style={{ height: 20 }} />
+      <Text>Даний блок буде показаний на сторінці профіля</Text>
+      <View style={{ height: 10 }} />
       <Hightlight
         values={userData?.highlight}
         onUpdateHighlight={onUpdateProfile}
         isLoadingUpdate={isLoadingUpdate}
       />
       <View style={{ height: 20 }} />
-
+      <NavMenuItem
+        icon={<ServicesIcon />}
+        name='Послуги'
+        onPress={() => navigation.navigate('ServicesScreen', { masterId: userData?.id })}
+      />
+      <View style={{ height: 10 }} />
       <NavMenuItem
         icon={<PhotoGallery />}
         name='Фотогалерея'
         onPress={() => navigation.navigate('PhotoGalleryScreen')}
-      />
-      <View style={{ height: 10 }} />
-      <NavMenuItem
-        icon={<ServicesIcon />}
-        name='Послуги'
-        onPress={() => navigation.navigate('ServicesScreen')}
       />
       <View style={{ height: 10 }} />
       <NavMenuItem

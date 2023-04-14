@@ -32,7 +32,7 @@ export interface ProfileStackTypes extends ParamListBase {
   ExperienceScreen: undefined
   ProfileScreen: undefined
   GoodsScreen: undefined
-  ServicesScreen: undefined
+  ServicesScreen: { masterId?: string }
   ServiceAddScreen: { item: IUserServiceDocument } | undefined
   MasterScreen: { masterId?: string }
 }

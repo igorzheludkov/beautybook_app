@@ -11,7 +11,7 @@ export default function HeaderBlock({ data }: IProps) {
   return (
     <View style={styles.wrapper}>
       <View style={styles.cardContainer}>
-        <Avatar.Image size={150} source={{ uri: data?.avatar }} />
+        <Avatar.Image size={100} source={{ uri: data?.avatar }} />
         <View style={styles.cardContent}>
           <View>
             <Text style={styles.title}>{data?.name}</Text>

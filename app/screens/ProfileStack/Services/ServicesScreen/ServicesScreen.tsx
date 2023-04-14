@@ -9,8 +9,8 @@ import { IUserServiceDocument } from '../../../../store/modules/api/goodsAndServ
 
 type Props = NativeStackScreenProps<ProfileStackTypes, 'ServicesScreen'>
 
-export default function ServicesScreen({ navigation }: Props) {
-  const { data } = useGetItemsQuery({})
+export default function ServicesScreen({ navigation, route }: Props) {
+  const { data } = useGetItemsQuery({ userId: route.params.masterId })
 
   function onServicePress(data: IUserServiceDocument) {
     navigation.navigate('ServiceAddScreen', { item: data })
