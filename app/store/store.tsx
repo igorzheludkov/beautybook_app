@@ -13,11 +13,14 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import reducer from './reducers'
 import apiSlice from './modules/api/apiSlice'
+import userSliceApi from './modules/user/userSlice'
+import { authSlice } from './modules/auth/slice'
+import listenerMiddleware from './modules/middleware/listenerMiddleware'
 
 const persistConfig = {
   key: 'root',
   storage: AsyncStorage,
-  blacklist: [apiSlice.reducerPath]
+  blacklist: [apiSlice.reducerPath, userSliceApi.reducerPath]
   // whitelist: ['apiSlice.authSlice', 'apiSlice.userDataApi']
 }
 
@@ -30,8 +33,8 @@ const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [
-          'auth/login/fulfilled',
-          'auth/signUp/fulfilled',
+          'authLogin/fulfilled',
+          'authSignUp/fulfilled',
           FLUSH,
           REHYDRATE,
           PAUSE,
@@ -41,7 +44,10 @@ const store = configureStore({
         ],
         ignoredPaths: ['authSlice.user']
       }
-    }).concat(apiSlice.middleware)
+    })
+    .prepend(listenerMiddleware.middleware)
+    .concat(apiSlice.middleware)
+    .concat(userSliceApi.middleware)
 })
 
 const persistor = persistStore(store)

@@ -17,7 +17,7 @@ import Hightlight from './blocks/Highlight'
 import {
   useProfileDataQuery,
   useUpdateProfileDataMutation
-} from '../../../store/modules/api/userData/userDataSlice'
+} from '../../../store/modules/user/userSlice'
 import definedValuesFilter from '../../../utils/definedValuesFilter'
 import { useNavigation } from '@react-navigation/native'
 

@@ -1,12 +1,14 @@
 import React from 'react'
 import { View, ActivityIndicator, SafeAreaView, Pressable, StyleSheet } from 'react-native'
-import { useProfileDataQuery } from '../../../store/modules/api/userData/userDataSlice'
+import { useProfileDataQuery } from '../../../store/modules/user/userSlice'
 import NewUserBlock from './blocks/NewUserBlock'
 import AdminPanelPage from './AdminPanelScreen'
 import colors from '../../../constants/colors'
 
 export default function AdminPanelEntry({ navigation }: any) {
   const { data, error, isLoading } = useProfileDataQuery({})
+
+  console.log('~~~~~~~~~~~~~~  data?.galleryPhotos?.length', data?.galleryPhotos?.length)
 
   if (isLoading)
     return (

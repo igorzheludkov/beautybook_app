@@ -1,20 +1,20 @@
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query/react'
-import apiSlice from '../apiSlice'
 
 import firestore from '@react-native-firebase/firestore'
 import storage from '@react-native-firebase/storage'
-import { AuthState } from '../../auth/slice'
+import { AuthState } from '../auth/slice'
 
-import { IProfileForm } from '../../../../models/IProfileForm'
+import { IProfileForm } from '../../../models/IProfileForm'
 import { IAvatar, IQuery } from './types'
 import getLatestAvatar from './firebaseFunctions/getLatestAvatar'
 
 const collectionName = 'users'
-const currentUserSubcategory = 'profile'
-const profileCategory = 'personalData'
 
-export const userDataApi = apiSlice.injectEndpoints({
-  overrideExisting: true,
+export const userSliceApi = createApi({
+  reducerPath: 'userSliceApi',
+  baseQuery: fetchBaseQuery({ baseUrl: 'fake' }),
+  tagTypes: ['personalData'],
   endpoints: (builder) => ({
     profileData: builder.query({
       providesTags: ['personalData'],
@@ -56,7 +56,7 @@ export const userDataApi = apiSlice.injectEndpoints({
       }
     }),
     updateAvatar: builder.mutation({
-      invalidatesTags: ['personalData', 'masterData'],
+      invalidatesTags: ['personalData'],
       queryFn: async ({ image }: IAvatar, thunkAPI) => {
         const { authSlice } = thunkAPI.getState() as { authSlice: AuthState }
         const profileRef = firestore().collection(collectionName).doc(authSlice.user?.uid)
@@ -90,6 +90,6 @@ export const userDataApi = apiSlice.injectEndpoints({
   })
 })
 
-export default userDataApi
+export default userSliceApi
 
-export const { useProfileDataQuery, useUpdateProfileDataMutation, useUpdateAvatarMutation } = userDataApi
+export const { useProfileDataQuery, useUpdateProfileDataMutation, useUpdateAvatarMutation } = userSliceApi

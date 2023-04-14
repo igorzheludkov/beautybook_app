@@ -9,8 +9,6 @@ type Props = NativeStackScreenProps<CatalogStackTypes, 'ServiceInfoScreen'>
 
 export default function ServiceInfoScreen({ navigation, route }: Props) {
 
-  console.log('~~~~~~~~~~~~~~ ServiceInfoScreen route', route)
- 
 
   return (
     <>

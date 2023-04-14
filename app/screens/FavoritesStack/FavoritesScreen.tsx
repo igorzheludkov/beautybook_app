@@ -12,6 +12,7 @@ type Props = NativeStackScreenProps<FavoritesStackTypes, 'FavoritesScreen'>
 export default function FavoritesScreen({ navigation }: Props) {
   const { data, isLoading } = useGetBookmarksQuery({ subCollection: 'services' })
 
+
   function onMasterPress(data: { masterId: string }) {
     navigation.navigate('MasterScreen', { masterId: data.masterId })
   }

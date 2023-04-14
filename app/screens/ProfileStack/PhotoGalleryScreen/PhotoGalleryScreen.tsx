@@ -7,7 +7,7 @@ import {
   useRemovePhotoMutation,
   useUploadPhotosMutation
 } from '../../../store/modules/api/photoGallery/photoGallerySlice'
-import { useProfileDataQuery, useUpdateProfileDataMutation } from '../../../store/modules/api/userData/userDataSlice'
+import { useProfileDataQuery, useUpdateProfileDataMutation } from '../../../store/modules/user/userSlice'
 import PhotoGallery from './components/PhotoGallery'
 import definedValuesFilter from '../../../utils/definedValuesFilter'
 import { IProfileForm } from '../../../models/IProfileForm'

@@ -11,7 +11,7 @@ import {
 import {
   useProfileDataQuery,
   useUpdateProfileDataMutation
-} from '../../../store/modules/api/userData/userDataSlice'
+} from '../../../store/modules/user/userSlice'
 import PhotoGallery from './components/PhotoGallery'
 import definedValuesFilter from '../../../utils/definedValuesFilter'
 import { IProfileForm } from '../../../models/IProfileForm'

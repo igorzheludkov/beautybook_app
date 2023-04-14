@@ -23,7 +23,7 @@ import {
   useRemovePhotoMutation,
   useUploadPhotosMutation
 } from '../../../../store/modules/api/photoGallery/photoGallerySlice'
-import { useProfileDataQuery } from '../../../../store/modules/api/userData/userDataSlice'
+import { useProfileDataQuery } from '../../../../store/modules/user/userSlice'
 import PhotoGallery from './blocks/PhotoGallery'
 
 type Props = NativeStackScreenProps<ProfileStackTypes, 'ServiceAddScreen'>

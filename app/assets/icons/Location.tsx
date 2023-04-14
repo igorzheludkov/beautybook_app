@@ -1,10 +1,13 @@
 import * as React from 'react'
 import Svg, { Path, Circle } from 'react-native-svg'
 
-export default function Location(props: any) {
+interface Props {
+  fill: string
+}
+
+export default function Location(props: Props) {
   return (
     <Svg
-    xmlns="http://www.w3.org/2000/svg"
     width={15}
     height={15}
     viewBox="2 0 18 17"

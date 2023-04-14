@@ -1,5 +1,5 @@
 import { ImagePickerResponse } from 'react-native-image-picker'
-import { IProfileForm } from '../../../../models/IProfileForm'
+import { IProfileForm } from '../../../models/IProfileForm'
 
 export interface IError {
     data: string

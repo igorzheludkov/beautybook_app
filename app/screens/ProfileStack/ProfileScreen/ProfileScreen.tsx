@@ -8,7 +8,7 @@ import {
   useProfileDataQuery,
   useUpdateProfileDataMutation,
   useUpdateAvatarMutation
-} from '../../../store/modules/api/userData/userDataSlice'
+} from '../../../store/modules/user/userSlice'
 
 import {
   useGetCitiesQuery,

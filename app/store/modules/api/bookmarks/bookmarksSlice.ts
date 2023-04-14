@@ -16,13 +16,12 @@ export const bookmarksApi = apiSlice.injectEndpoints({
       providesTags: ['bookmarksList'],
       queryFn: async ({ subCollection }: IBookmarkQuery, thunkAPI) => {
         const { authSlice } = thunkAPI.getState() as { authSlice: AuthState }
-
         const collectionRef = firestore()
           .collection(collectionName)
           .doc(authSlice.user?.uid)
           .collection(subCollection)
 
-        if (subCollection) {
+        if (subCollection && authSlice.user?.uid) {
           try {
             const array: { data: IProfileForm; id: string }[] = []
             const documents = (await collectionRef.get()).docs.forEach((doc) =>
@@ -68,7 +67,8 @@ export const bookmarksApi = apiSlice.injectEndpoints({
         const docRef = firestore()
           .collection(collectionName)
           .doc(authSlice.user?.uid)
-          .collection(subCollection).doc(id)
+          .collection(subCollection)
+          .doc(id)
 
         if (id && subCollection) {
           try {
