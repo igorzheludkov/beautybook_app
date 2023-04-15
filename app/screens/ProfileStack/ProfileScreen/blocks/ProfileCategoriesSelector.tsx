@@ -16,7 +16,10 @@ const ProfileCategoriesSelector = ({ data, onCheckedChange, checkedItems }: IPro
   const [checkedSkills, setCheckedSkills] = useState<ISkillsItem[] | []>([])
 
   useEffect(() => {
-    checkedItems.length && setCheckedSkills(checkedItems)
+    if (checkedItems.length) {
+      setCheckedSkills(checkedItems)
+      onCheckedChange(checkedItems)
+    }
   }, [checkedItems])
 
   const handleCheckedChange = (checkbox: ISkillsItem) => {

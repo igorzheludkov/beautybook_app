@@ -49,10 +49,10 @@ export default function ProfileScreen({ navigation }: Props) {
     formState: { errors, isDirty }
   } = useForm({ defaultValues: data })
 
+
   function onSubmit(form: any) {
     const notEmtyFields: IProfileForm = definedValuesFilter(form)
-
-    updateProfileData({ data: { ...notEmtyFields, skills: skillsProfile || data?.skills || [] } })
+    updateProfileData({ data: { ...notEmtyFields, skills: skillsProfile } })
   }
 
   useEffect(() => {

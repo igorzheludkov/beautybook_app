@@ -17,6 +17,7 @@ import Hightlight from './blocks/Highlight'
 import { useProfileDataQuery, useUpdateProfileDataMutation } from '../../../store/modules/user/userSlice'
 import definedValuesFilter from '../../../utils/definedValuesFilter'
 import { useNavigation } from '@react-navigation/native'
+import colors from '../../../constants/colors'
 
 type NavProps = NativeStackScreenProps<ProfileStackTypes, 'AdminPaneScreen'>
 
@@ -40,13 +41,15 @@ export default function AdminPanelMain({ data, navigation }: Props) {
     <ScrollView style={styles.wrapper}>
       <HeaderBlock data={data} />
       <View style={{ height: 20 }} />
-      <Text>Даний блок буде показаний на сторінці профіля</Text>
-      <View style={{ height: 10 }} />
-      <Hightlight
-        values={userData?.highlight}
-        onUpdateHighlight={onUpdateProfile}
-        isLoadingUpdate={isLoadingUpdate}
-      />
+      <View style={styles.containerHighlight}>
+        <Text>Даний блок буде показаний на сторінці профіля, якщо заповнений</Text>
+        <View style={{ height: 10 }} />
+        <Hightlight
+          values={userData?.highlight}
+          onUpdateHighlight={onUpdateProfile}
+          isLoadingUpdate={isLoadingUpdate}
+        />
+      </View>
       <View style={{ height: 20 }} />
       <NavMenuItem
         icon={<ServicesIcon />}
@@ -79,5 +82,12 @@ export default function AdminPanelMain({ data, navigation }: Props) {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1
+  },
+  containerHighlight: {
+    padding: 5,
+    borderStyle: 'dashed',
+    borderWidth: 2,
+    borderRadius: 10,
+    borderColor: colors.textInputBorder
   }
 })

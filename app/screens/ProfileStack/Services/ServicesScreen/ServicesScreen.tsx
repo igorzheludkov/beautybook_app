@@ -1,4 +1,4 @@
-import { ScrollView, StyleSheet } from 'react-native'
+import { ScrollView, StyleSheet, View, Text } from 'react-native'
 import { FAB } from 'react-native-paper'
 import colors from '../../../../constants/colors'
 import { ProfileStackTypes } from '../../../../models/INavigationStack'
@@ -6,6 +6,7 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack'
 import { useGetItemsQuery } from '../../../../store/modules/api/goodsAndServices/goodsAndServicesSlice'
 import ServiceItem from './blocks/ServiceItem'
 import { IUserServiceDocument } from '../../../../store/modules/api/goodsAndServices/types'
+import TitleHeader from './blocks/TitleHeader'
 
 type Props = NativeStackScreenProps<ProfileStackTypes, 'ServicesScreen'>
 
@@ -18,6 +19,7 @@ export default function ServicesScreen({ navigation, route }: Props) {
   return (
     <>
       <ScrollView style={styles.wrapper}>
+        <TitleHeader />
         {data?.map((item) => (
           <ServiceItem key={item.id} item={item} onPress={onServicePress} />
         ))}

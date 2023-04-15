@@ -13,19 +13,21 @@ import FeedbackIcon from '../../../assets/icons/FeedbackIcon'
 import ExperienceIcon from '../../../assets/icons/ExperienceIcon'
 import HighlightMain from '../../../components/atoms/HighlightMain'
 import Divider from '../../../components/atoms/Divider'
-import Location from '../../../assets/icons/Location'
 import SubscribeBlock from './blocks/SubscribeBlock'
+import { useGetItemsQuery } from '../../../store/modules/api/goodsAndServices/goodsAndServicesSlice'
+import TitleHeader from '../../ProfileStack/Services/ServicesScreen/blocks/TitleHeader'
+import ServiceItem from './SubScreens/MasterServices/ServicesScreen/blocks/ServiceItem'
+import LocationAndSchedule from './blocks/LocationAndSchedule'
+import { Button } from 'react-native-paper'
 
 type Props = NativeStackScreenProps<CatalogStackTypes | FavoritesStackTypes, 'MasterScreen'>
 
-interface IProps {
-  masterId: string | undefined
-}
-
 export default function MasterScreen({ route }: Props) {
-  const { data } = useMasterDataQuery(route.params.masterId)
   const nav = useNavigation<Props['navigation']>()
+  const { data } = useMasterDataQuery(route.params.masterId)
+  const { data: servicesData } = useGetItemsQuery({ userId: route.params.masterId })
 
+  const servicesOnPage = 3
 
   if (!data) return <ActivityIndicator />
 
@@ -39,12 +41,7 @@ export default function MasterScreen({ route }: Props) {
       <SubscribeBlock masterData={data} />
       <Divider height={10} />
       <View style={styles.locationAndTime}>
-        <View style={styles.textBlock}>
-          <Location fill={'gray'} />
-          <Text>
-            {data.city?.name_uk}, {data.street}
-          </Text>
-        </View>
+        <LocationAndSchedule masterData={data} />
       </View>
       <Divider height={20} />
       <View style={styles.subLinks}>
@@ -66,7 +63,24 @@ export default function MasterScreen({ route }: Props) {
         />
       </View>
       <Divider height={15} />
-      {data.highlight && <HighlightMain title={data.highlight?.title} description={data.highlight?.description} />}
+      {data.highlight && (
+        <HighlightMain title={data.highlight?.title} description={data.highlight?.description} />
+      )}
+      <Divider height={15} />
+
+      {Boolean(servicesData?.length) && (
+        <>
+          <View style={styles.servicesContainer}>
+            <TitleHeader />
+            {servicesData?.slice(0, servicesOnPage).map((item) => (
+              <ServiceItem key={item.id} item={item} onPress={() => {}} />
+            ))}
+          </View>
+          <Button style={styles.allServicesButton} mode='contained' onPress={() => navTo('MasterServScreen')}>
+            Дивитись всі послуги
+          </Button>
+        </>
+      )}
     </ScrollView>
   )
 }
@@ -76,7 +90,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.defaultContainerColor
   },
-  locationAndTime: { flexDirection: 'row', justifyContent: 'space-between' },
-  textBlock: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 5 },
-  subLinks: { paddingHorizontal: 5, flexDirection: 'row', justifyContent: 'space-around' }
+  locationAndTime: { flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 10 },
+  subLinks: { paddingHorizontal: 5, flexDirection: 'row', justifyContent: 'space-around' },
+  servicesContainer: { paddingHorizontal: 10 },
+  allServicesButton: { marginHorizontal: 10, marginVertical: 20 }
 })
