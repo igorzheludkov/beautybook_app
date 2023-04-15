@@ -42,7 +42,7 @@ export default function ServiceItem({ item, onPress }: IProps) {
 
 const styles = StyleSheet.create({
   wrapper: {
-    marginVertical: 10,
+    marginVertical: 5,
     backgroundColor: colors.textInputBg,
     borderRadius: 10
   },

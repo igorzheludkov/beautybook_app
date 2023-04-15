@@ -1,5 +1,4 @@
 import { createListenerMiddleware } from '@reduxjs/toolkit'
-import { authSlice } from '../auth/slice'
 import bookmarksApi from '../api/bookmarks/bookmarksSlice'
 
 const listenerMiddleware = createListenerMiddleware()
@@ -11,5 +10,6 @@ listenerMiddleware.startListening({
     listenerApi.dispatch(bookmarksApi.util.invalidateTags(['bookmarksList']))
   }
 })
+
 
 export default listenerMiddleware

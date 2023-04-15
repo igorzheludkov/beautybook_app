@@ -27,7 +27,7 @@ export default function StartScreen({ navigation }: Props) {
       <SafeAreaView />
       <Logo />
       <View style={{ height: 10 }} />
-      <Searchbar placeholder='Пошук' onChangeText={onChangeSearch} value={searchQuery} />
+      {/* <Searchbar placeholder='Пошук' onChangeText={onChangeSearch} value={searchQuery} /> */}
       <View style={{ height: 10 }} />
       <CategoryBlock data={categoryData || []} onPress={onCategoryPress} />
     </View>

@@ -8,6 +8,7 @@ import { AuthState } from '../auth/slice'
 import { IProfileForm } from '../../../models/IProfileForm'
 import { IAvatar, IQuery } from './types'
 import getLatestAvatar from './firebaseFunctions/getLatestAvatar'
+import masterDataApi from '../api/masterData/masterDataSlice'
 
 const collectionName = 'users'
 
@@ -18,6 +19,10 @@ export const userSliceApi = createApi({
   endpoints: (builder) => ({
     profileData: builder.query({
       providesTags: ['personalData'],
+      // refetch data for another api slice
+      onQueryStarted: (args, { dispatch }) => {
+        dispatch(masterDataApi.util.invalidateTags(['masterData']))
+      },
       queryFn: async ({}, thunkAPI) => {
         const { authSlice } = thunkAPI.getState() as { authSlice: AuthState }
 

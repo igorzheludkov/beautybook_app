@@ -10,6 +10,7 @@ import { ILoginForm } from './types'
 import InputCustom from '../../../../../components/atoms/TextInputCustom'
 import AdminHeader from '../../../../../components/atoms/AdminHeader'
 import { useAppSelector } from '../../../../../store/hooks'
+import Divider from '../../../../../components/atoms/Divider'
 
 export default function LoginForm() {
   const dispatch = useAppDispatch()
@@ -27,8 +28,8 @@ export default function LoginForm() {
   return (
     <View style={styles.container}>
       <AdminHeader
-        title='Login'
-        rightTitle='Sign up'
+        title='Увійти'
+        rightTitle='Реєстрація'
         onPressRight={() => dispatch(authActions.isNewUser(true))}
         leftTitle='X'
         onPressLeft={() => {}}
@@ -37,25 +38,26 @@ export default function LoginForm() {
         control={control}
         name='email'
         rules={{ required: true }}
-        defaultValue='500griven@gmail.com'
         render={({ field: { onChange, value } }) => (
           <InputCustom onChangeText={onChange} value={value} placeholder='Email' />
         )}
       />
       {errors.email && <Text>This field is required.</Text>}
+      <Divider height={20} />
 
       <Controller
         control={control}
         name='password'
         rules={{ required: true }}
-        defaultValue='energystar'
         render={({ field: { onChange, value } }) => (
           <InputCustom onChangeText={onChange} value={value} placeholder='Password' secureTextEntry={true} />
         )}
       />
       {errors.password && <Text>This field is required.</Text>}
+      <Divider height={20} />
+
       <View style={styles.buttonContainer}>
-        {isLoading ? <ActivityIndicator /> : <Button title='Login' onPress={handleSubmit(onSubmit)} />}
+        {isLoading ? <ActivityIndicator /> : <Button title='Вхід' onPress={handleSubmit(onSubmit)} />}
       </View>
     </View>
   )

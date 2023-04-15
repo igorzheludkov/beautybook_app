@@ -62,16 +62,24 @@ export default function MasterScreen({ route }: Props) {
           label='Мій досвід'
         />
       </View>
-      <Divider height={15} />
-      {data.highlight && (
-        <HighlightMain title={data.highlight?.title} description={data.highlight?.description} />
+      <Divider height={20} />
+      {data.description && (
+        <View style={styles.description}>
+          <Text>{data.description}</Text>
+        </View>
       )}
-      <Divider height={15} />
+      <Divider height={10} />
+
+      <HighlightMain title={data.highlight?.title} description={data.highlight?.description} />
+
+      <Divider height={10} />
 
       {Boolean(servicesData?.length) && (
         <>
           <View style={styles.servicesContainer}>
             <TitleHeader />
+            <Divider height={10} />
+
             {servicesData?.slice(0, servicesOnPage).map((item) => (
               <ServiceItem key={item.id} item={item} onPress={() => {}} />
             ))}
@@ -89,6 +97,14 @@ const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
     backgroundColor: colors.defaultContainerColor
+  },
+  description: {
+    marginHorizontal: 10,
+    padding: 10,
+    borderRadius: 10,
+    borderStyle: 'dashed',
+    borderWidth: 2,
+    borderColor: colors.textInputBorder
   },
   locationAndTime: { flexDirection: 'row', justifyContent: 'space-between', paddingHorizontal: 10 },
   subLinks: { paddingHorizontal: 5, flexDirection: 'row', justifyContent: 'space-around' },

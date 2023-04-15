@@ -7,6 +7,7 @@ import { useGetItemsQuery } from '../../../../store/modules/api/goodsAndServices
 import ServiceItem from './blocks/ServiceItem'
 import { IUserServiceDocument } from '../../../../store/modules/api/goodsAndServices/types'
 import TitleHeader from './blocks/TitleHeader'
+import Divider from '../../../../components/atoms/Divider'
 
 type Props = NativeStackScreenProps<ProfileStackTypes, 'ServicesScreen'>
 
@@ -20,6 +21,7 @@ export default function ServicesScreen({ navigation, route }: Props) {
     <>
       <ScrollView style={styles.wrapper}>
         <TitleHeader />
+        <Divider height={15} />
         {data?.map((item) => (
           <ServiceItem key={item.id} item={item} onPress={onServicePress} />
         ))}

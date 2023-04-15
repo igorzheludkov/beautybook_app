@@ -19,7 +19,7 @@ export default function TextInputCustom({ style, label, ...props }: IProps) {
   const [isFocused, setIsFocused] = useState(false)
 
   return (
-    <View style={props.containerStyle}>
+    <View style={[styles.container, props.containerStyle]}>
       {label && <Text style={styles.label}>{label}</Text>}
       <TextInput
         onFocus={() => setIsFocused(true)}
@@ -34,6 +34,9 @@ export default function TextInputCustom({ style, label, ...props }: IProps) {
 
 function getStyles(params: any) {
   return StyleSheet.create({
+    container: {
+      width: '100%',
+    },
     input: {
       minHeight: 43,
       width: '100%',

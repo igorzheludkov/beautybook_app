@@ -10,10 +10,14 @@ interface IProps {
 
 export default function HighlightMain(props: IProps) {
   return (
-    <View style={[styles.wrapper, { ...props.styles }]}>
-      <Text style={styles.title}>{props.title}</Text>
-      <Text style={styles.description}>{props.description}</Text>
-    </View>
+    <>
+      {Boolean(props.title || props.description) && (
+        <View style={[styles.wrapper, { ...props.styles }]}>
+          <Text style={styles.title}>{props.title}</Text>
+          <Text style={styles.description}>{props.description}</Text>
+        </View>
+      )}
+    </>
   )
 }
 

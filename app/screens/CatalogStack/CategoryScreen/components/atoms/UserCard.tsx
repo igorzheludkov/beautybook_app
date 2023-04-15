@@ -16,7 +16,8 @@ export default function UserCard({ user, onPress }: IProps) {
     userId: user.id,
     page: 0,
     rootFolder: 'user',
-    groupFolder: 'gallery'
+    groupFolder: 'gallery',
+    itemFolder: ''
   })
   const [showPhoto, setShowPhoto] = useState(false)
   const [photoIndex, setPhotoIndex] = useState(0)

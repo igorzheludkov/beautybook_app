@@ -8,8 +8,6 @@ import colors from '../../../constants/colors'
 export default function AdminPanelEntry({ navigation }: any) {
   const { data, error, isLoading } = useProfileDataQuery({})
 
-  console.log('~~~~~~~~~~~~~~  data?.galleryPhotos?.length', data?.galleryPhotos?.length)
-
   if (isLoading)
     return (
       <View style={{ justifyContent: 'center' }}>
@@ -38,7 +36,6 @@ export default function AdminPanelEntry({ navigation }: any) {
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-    paddingHorizontal: 10,
     backgroundColor: colors.defaultContainerColor
   }
 })

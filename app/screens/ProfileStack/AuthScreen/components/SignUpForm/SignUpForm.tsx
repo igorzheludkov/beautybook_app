@@ -9,6 +9,7 @@ import styles from './styles'
 import { ISignUpForm } from './types'
 import InputCustom from '../../../../../components/atoms/TextInputCustom'
 import AdminHeader from '../../../../../components/atoms/AdminHeader'
+import Divider from '../../../../../components/atoms/Divider'
 
 export default function SignUpForm() {
   const dispatch = useAppDispatch()
@@ -27,8 +28,8 @@ export default function SignUpForm() {
   return (
     <View style={styles.container}>
       <AdminHeader
-        title='Sing up'
-        rightTitle='Login'
+        title='Реєстрація'
+        rightTitle='Вхід'
         onPressRight={() => dispatch(authActions.isNewUser(false))}
         leftTitle='X'
         onPressLeft={() => {}}
@@ -43,6 +44,7 @@ export default function SignUpForm() {
         )}
       />
       {errors.email && <Text>This field is required.</Text>}
+      <Divider height={20} />
       <Controller
         control={control}
         name='password'
@@ -53,8 +55,9 @@ export default function SignUpForm() {
         )}
       />
       {errors.password && <Text>This field is required.</Text>}
+      <Divider height={20} />
       <View style={styles.buttonContainer}>
-        {isLoading ? <ActivityIndicator /> : <Button title='Sign up' onPress={handleSubmit(onSubmit)} />}
+        {isLoading ? <ActivityIndicator /> : <Button title='Зареєструватись' onPress={handleSubmit(onSubmit)} />}
       </View>
     </View>
   )

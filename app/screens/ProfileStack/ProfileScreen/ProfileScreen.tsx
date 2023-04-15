@@ -79,7 +79,7 @@ export default function ProfileScreen({ navigation }: Props) {
             <Avatar.Image size={150} source={{ uri: data?.avatar }} />
           </View>
           <View style={styles.buttonsBlock}>
-            <Button icon='camera' mode='outlined' onPress={() => handlePickImagesFromGallery(1)}>
+            <Button icon='camera'  onPress={() => handlePickImagesFromGallery(1)}>
               Змінити аватар
             </Button>
             <CitySelector
@@ -90,7 +90,7 @@ export default function ProfileScreen({ navigation }: Props) {
               checkedItems={data?.city}
             />
           </View>
-          <Button onPress={() => navigation.navigate('MasterScreen', { masterId: data?.id })}>
+          <Button mode='outlined' onPress={() => navigation.navigate('MasterScreen', { masterId: data?.id })}>
             Переглянути заповнену сторінку
           </Button>
           <ProfileForm control={control} data={data} errors={errors} />

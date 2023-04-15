@@ -51,7 +51,7 @@ export default function ProfileForm({ control, data, errors }: ProfileFormProps)
             multiline
             onChangeText={onChange}
             value={value}
-            label='Одним реченням про себе'
+            label='Поле біля аватарки, вгорі сторінки під імʼям. Видиме в результатах пошуку в каталозі. Можна коротко описати себе або вказати важливу інформацію. '
           />
         )}
       />

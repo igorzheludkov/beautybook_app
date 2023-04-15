@@ -16,8 +16,8 @@ import ExperienceIcon from '../../../assets/icons/ExperienceIcon'
 import Hightlight from './blocks/Highlight'
 import { useProfileDataQuery, useUpdateProfileDataMutation } from '../../../store/modules/user/userSlice'
 import definedValuesFilter from '../../../utils/definedValuesFilter'
-import { useNavigation } from '@react-navigation/native'
 import colors from '../../../constants/colors'
+import { useAppSelector } from '../../../store/hooks'
 
 type NavProps = NativeStackScreenProps<ProfileStackTypes, 'AdminPaneScreen'>
 
@@ -31,6 +31,7 @@ export default function AdminPanelMain({ data, navigation }: Props) {
   const [updateCities] = useUpdateCitiesMutation()
   const [updateProfileData, { isLoading: isLoadingUpdate, error: updateError, isSuccess: isProfileUpdated }] =
     useUpdateProfileDataMutation()
+    const authEmail = useAppSelector(state => state.authSlice.user?.email)
 
   function onUpdateProfile(data: IProfileForm) {
     const notEmtyFields: IProfileForm = definedValuesFilter(data)
@@ -74,14 +75,15 @@ export default function AdminPanelMain({ data, navigation }: Props) {
         name='Досвід та сертифікати'
         onPress={() => navigation.navigate('ExperienceScreen')}
       />
-      <Button onPress={() => updateCities({ data: cities })}>Update cities</Button>
+      {authEmail === '500griven@gmail.com' ? <Button onPress={() => updateCities({ data: cities })}>Update cities</Button> : <></>}
     </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
   wrapper: {
-    flex: 1
+    flex: 1,
+    paddingHorizontal: 10
   },
   containerHighlight: {
     padding: 5,
