@@ -1,5 +1,8 @@
 #import "AppDelegate.h"
 #import <Firebase.h>
+#import <AppCenterReactNative.h>
+#import <AppCenterReactNativeAnalytics.h>
+#import <AppCenterReactNativeCrashes.h>
 
 #import <React/RCTBundleURLProvider.h>
 
@@ -7,6 +10,11 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  
+  [AppCenterReactNative register];
+  [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];
+  [AppCenterReactNativeCrashes registerWithAutomaticProcessing];
+  
   if ([FIRApp defaultApp] == nil) { [FIRApp configure]; } // for Firebase
   self.moduleName = @"beautybook";
   // You can add your custom initial props in the dictionary below.

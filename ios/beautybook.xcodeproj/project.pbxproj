@@ -14,6 +14,7 @@
 		49C615195626447EA4A6EDCC /* Pods_beautybook_beautybookTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC51E7A82CA526073A065EBA /* Pods_beautybook_beautybookTests.framework */; };
 		52DA8C9EA10A548BA8641434 /* Pods_beautybook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF8477C58E0797CBC0EC139D /* Pods_beautybook.framework */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		949DF56129EE9E73005241B0 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 949DF56029EE9E73005241B0 /* AppCenter-Config.plist */; };
 		94D0EC4229CC6261006BE45A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94D0EC4129CC6261006BE45A /* GoogleService-Info.plist */; };
 		94EDE54229CF78C400A2B72D /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 94EDE53229CF78C200A2B72D /* Feather.ttf */; };
 		94EDE54329CF78C400A2B72D /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 94EDE53329CF78C200A2B72D /* FontAwesome5_Solid.ttf */; };
@@ -58,6 +59,7 @@
 		5B7EB9410499542E8C5724F5 /* Pods-beautybook-beautybookTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-beautybook-beautybookTests.debug.xcconfig"; path = "Target Support Files/Pods-beautybook-beautybookTests/Pods-beautybook-beautybookTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = beautybook/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-beautybook-beautybookTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-beautybook-beautybookTests.release.xcconfig"; path = "Target Support Files/Pods-beautybook-beautybookTests/Pods-beautybook-beautybookTests.release.xcconfig"; sourceTree = "<group>"; };
+		949DF56029EE9E73005241B0 /* AppCenter-Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 		94D0EC4129CC6261006BE45A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		94EDE53229CF78C200A2B72D /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Feather.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
 		94EDE53329CF78C200A2B72D /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome5_Solid.ttf; path = "../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				949DF56029EE9E73005241B0 /* AppCenter-Config.plist */,
 			);
 			name = beautybook;
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				94EDE54B29CF78C400A2B72D /* Ionicons.ttf in Resources */,
+				949DF56129EE9E73005241B0 /* AppCenter-Config.plist in Resources */,
 				94EDE54329CF78C400A2B72D /* FontAwesome5_Solid.ttf in Resources */,
 				94EDE54E29CF78C400A2B72D /* FontAwesome5_Regular.ttf in Resources */,
 				94EDE54D29CF78C400A2B72D /* MaterialIcons.ttf in Resources */,
