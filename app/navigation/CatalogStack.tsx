@@ -17,13 +17,13 @@ export default function CatalogNavigator() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: true }} initialRouteName='StartScreen'>
       <Stack.Screen name='StartScreen' component={StartScreen} options={{headerShown: false}}/>
-      <Stack.Screen name='CategoryScreen' component={CategoryScreen} />
-      <Stack.Screen name='MasterScreen' component={MasterScreen} />
-      <Stack.Screen name='MasterServScreen' component={MasterServScreen} />
-      <Stack.Screen name='ServiceInfoScreen' component={ServiceInfoScreen} />
-      <Stack.Screen name='MasterPhotoGalleryScreen' component={MasterPhotoGalleryScreen} />
-      <Stack.Screen name='MasterFeedbackScreen' component={MasterFeedbackScreen} />
-      <Stack.Screen name='MasterExperienceScreen' component={MasterExperienceScreen} />
+      <Stack.Screen name='CategoryScreen' component={CategoryScreen} options={{headerTitle: 'Каталог'}} />
+      <Stack.Screen name='MasterScreen' component={MasterScreen} options={{headerTitle: 'Про майстра'}} />
+      <Stack.Screen name='MasterServScreen' component={MasterServScreen} options={{headerTitle: 'Послуги'}}/>
+      <Stack.Screen name='ServiceInfoScreen' component={ServiceInfoScreen} options={{headerTitle: 'Про послугу'}} />
+      <Stack.Screen name='MasterPhotoGalleryScreen' component={MasterPhotoGalleryScreen} options={{headerTitle: 'Фотогалерея'}}/>
+      <Stack.Screen name='MasterFeedbackScreen' component={MasterFeedbackScreen} options={{headerTitle: 'Відгуки'}}/>
+      <Stack.Screen name='MasterExperienceScreen' component={MasterExperienceScreen} options={{headerTitle: 'Досвід'}}/>
     </Stack.Navigator>
   )
 }

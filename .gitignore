@@ -21,6 +21,7 @@ DerivedData
 *.ipa
 *.xcuserstate
 GoogleService-Info.plist
+AppCenter-Config.plist
 
 # Android/IntelliJ
 #
@@ -31,6 +32,8 @@ local.properties
 *.iml
 *.hprof
 google-services.json
+app-release.aab
+appcenter-config.json
 # debug.keystore
 
 # node.js

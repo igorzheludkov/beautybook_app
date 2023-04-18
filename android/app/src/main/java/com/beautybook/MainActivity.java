@@ -1,4 +1,4 @@
-package com.beautybook;
+package com.beautybookcatalog;
 
 import android.os.Bundle;
 import com.facebook.react.ReactActivity;
