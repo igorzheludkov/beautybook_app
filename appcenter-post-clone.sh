@@ -10,6 +10,6 @@ if [ ! -z "$GOOGLE_SERVICES_PLIST" ]; then
   echo $GOOGLE_SERVICES_PLIST | base64 --decode > "$APPCENTER_SOURCE_DIRECTORY/ios/react-native-starter/GoogleService-Info.plist"
 fi
 
-if [ ! -z "$CODEPUSH_PRODUCTION_KEY" ]; then
-  echo $CODEPUSH_PRODUCTION_KEY | base64 --decode > "$APPCENTER_SOURCE_DIRECTORY/android/app/src/main/res/values/strings.xml"
+if [ ! -z "$ANDROID_STRINGS" ]; then
+  echo $ANDROID_STRINGS | base64 --decode > "$APPCENTER_SOURCE_DIRECTORY/android/app/src/main/res/values/strings.xml"
 fi
