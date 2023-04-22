@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, SafeAreaView } from 'react-native'
+import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native'
 import { useGetServiceCategoriesQuery } from '../../../store/modules/api/filterCategories/filterCategoriesSlice'
 import CategoryBlock from './components/CategoryBlock'
 import { Searchbar, TextInput } from 'react-native-paper'
@@ -23,14 +23,14 @@ export default function StartScreen({ navigation }: Props) {
   }
 
   return (
-    <View style={style.wrapper}>
+    <ScrollView style={style.wrapper}>
       <SafeAreaView />
       <Logo />
       <View style={{ height: 10 }} />
-      {/* <Searchbar placeholder='Пошук' onChangeText={onChangeSearch} value={searchQuery} /> */}
+      <Searchbar placeholder='Пошук' onChangeText={onChangeSearch} value={searchQuery} />
       <View style={{ height: 10 }} />
       <CategoryBlock data={categoryData || []} onPress={onCategoryPress} />
-    </View>
+    </ScrollView>
   )
 }
 
