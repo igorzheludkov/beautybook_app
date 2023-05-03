@@ -7,7 +7,6 @@ import { store, persistor } from './app/store/store'
 import Entrypoint from './app/Entrypoint'
 import codePush from 'react-native-code-push';
 
-
 if (__DEV__) {
   import('./ReactotronConfig').then(() => console.log('Reactotron Configured'))
 }

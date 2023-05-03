@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, SafeAreaView, ScrollView, Dimensions } from 'react-native'
 import { useGetServiceCategoriesQuery } from '../../../store/modules/api/filterCategories/filterCategoriesSlice'
+import MapView from 'react-native-maps'
 import CategoryBlock from './components/CategoryBlock'
 import { Searchbar, TextInput } from 'react-native-paper'
 import colors from '../../../constants/colors'
@@ -30,10 +31,22 @@ export default function StartScreen({ navigation }: Props) {
       <Searchbar placeholder='Пошук' onChangeText={onChangeSearch} value={searchQuery} />
       <View style={{ height: 10 }} />
       <CategoryBlock data={categoryData || []} onPress={onCategoryPress} />
+      <View style={{ height: 200, width: 300 }}>
+        <MapView
+          style={style.map}
+          initialRegion={{
+            latitude: 37.78825,
+            longitude: -122.4324,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421
+          }}
+        />
+      </View>
     </ScrollView>
   )
 }
 
 const style = StyleSheet.create({
-  wrapper: { flex: 1, padding: 10, backgroundColor: colors.defaultContainerColor }
+  wrapper: { flex: 1, padding: 10, backgroundColor: colors.defaultContainerColor },
+  map: {marginBottom: 20, height: 300, width: Dimensions.get('window').width, flex: 1 }
 })
