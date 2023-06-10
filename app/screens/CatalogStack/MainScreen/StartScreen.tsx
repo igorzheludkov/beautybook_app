@@ -35,8 +35,8 @@ export default function StartScreen({ navigation }: Props) {
         <MapView
           style={style.map}
           initialRegion={{
-            latitude: 37.78825,
-            longitude: -122.4324,
+            latitude: 49.2348168,
+            longitude: 28.4872334,
             latitudeDelta: 0.0922,
             longitudeDelta: 0.0421
           }}
